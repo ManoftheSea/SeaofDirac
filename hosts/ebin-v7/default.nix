@@ -83,7 +83,4 @@ in
 
   hardware.enableRedistributableFirmware = true;
 
-  time.timeZone = config.vars.timezone;
-
-  system.stateVersion = "22.05";
 }

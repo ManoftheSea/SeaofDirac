@@ -18,6 +18,4 @@
       openFirewall = false;
     };
   };
-
-  users.users.root.openssh.authorizedKeys.keys = [ config.vars.sshPublicKey ];
 }

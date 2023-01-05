@@ -102,7 +102,7 @@
       displayManager.sddm.enable = true;
       desktopManager.plasma5.enable = true;  
 
-      libinput.enable = true; # touchpad
+#      libinput.enable = true; # touchpad
     };
 
   };
@@ -110,12 +110,7 @@
   # Enable sound.
   sound.enable = true;
 
-
   users.users = {
-    root = {
-      hashedPassword = "$y$j9T$Fxria.3Ik92O6AxG1YKaE/$TA2bgiNBW1Bw2GWmihHzXI/wIKkVX7CIR88yG8HCL3B";
-      home = "/root";
-    };
     localadmin = {
       isNormalUser = true;
       home = "/home/localadmin";
@@ -124,24 +119,27 @@
         firefox
       ];
     };
-    derek = {
-      isNormalUser = true;
-      home = "/home/derek";
-      extraGroups = [ "wheel" "networkmanager" "audio" "dialout" ];
-      packages = with pkgs; [
-        firefox
-      ];
+  };
+
+  environment = {
+    systemPackages = with pkgs; [
+      gptfdisk
+      git
+      minicom
+      wget
+    ];
+    variables = {
+      EDITOR = "nvim";
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    gptfdisk
-    git
-    vim
-    wget
-  ];
-
-  system.stateVersion = "22.11";
+  programs = {
+    neovim = {
+      enable = true;
+      viAlias = true;
+      vimAlias = true;
+    };
+  };
 
 }
 

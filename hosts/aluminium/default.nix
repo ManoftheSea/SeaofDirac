@@ -125,6 +125,7 @@
     systemPackages = with pkgs; [
       gptfdisk
       git
+      home-manager
       minicom
       wget
     ];

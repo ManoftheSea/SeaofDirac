@@ -23,7 +23,7 @@ in
       device = "/dev/disk/by-partlabel/ESP";
       fsType = "vfat";
     };
-# TODO add data partition
+    # TODO add data partition
   };
 
   swapDevices = [
@@ -41,7 +41,7 @@ in
       enable = true;
       allowPing = true;
       trustedInterfaces = [ "br0" ];
-      allowedTCPPorts = [ 
+      allowedTCPPorts = [
         22
       ];
       allowedUDPPorts = [ ];
@@ -60,14 +60,14 @@ in
       };
       wan = {
         matchConfig.Name = "wan";
-        networkConfig = { 
+        networkConfig = {
           DHCP = "yes";
         };
       };
       lan = {
         matchConfig.Name = "lan*";
-        networkConfig = { 
-          Bridge="br0";
+        networkConfig = {
+          Bridge = "br0";
         };
       };
     };

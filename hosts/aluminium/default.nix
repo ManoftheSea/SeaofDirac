@@ -27,15 +27,15 @@
   };
 
   fileSystems = {
-    "/" =
-      { device = "/dev/disk/by-uuid/9ef1549f-25e3-4e22-a60b-cb10ae840130";
-        fsType = "ext4";
-      };
+    "/" = {
+      device = "/dev/disk/by-uuid/9ef1549f-25e3-4e22-a60b-cb10ae840130";
+      fsType = "ext4";
+    };
 
-    "/efi" =
-      { device = "/dev/disk/by-uuid/9E84-0C07";
-        fsType = "vfat";
-      };
+    "/efi" = {
+      device = "/dev/disk/by-uuid/9E84-0C07";
+      fsType = "vfat";
+    };
   };
 
   swapDevices = [ ];
@@ -52,9 +52,9 @@
       enable = true;
       extraPackages = with pkgs; [
         vaapiIntel
-	vaapiVdpau
-	libvdpau-va-gl
-	intel-media-driver
+        vaapiVdpau
+        libvdpau-va-gl
+        intel-media-driver
       ];
     };
 
@@ -69,7 +69,7 @@
   networking = {
     useDHCP = lib.mkDefault true;
     hostName = "aluminium";
-    networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+    networkmanager.enable = true; # Easiest to use and most distros use this by default.
     # firewall = {
     #  allowedTCPPorts = [ ... ];
     #  allowedUDPPorts = [ ... ];
@@ -89,8 +89,8 @@
     tlp = {
       enable = true;
       settings = {
-        CPU_SCALING_GOVERNOR_ON_AC="performance";
-        CPU_SCALING_GOVERNOR_ON_BAT="powersave";
+        CPU_SCALING_GOVERNOR_ON_AC = "performance";
+        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
       };
     };
 
@@ -100,9 +100,9 @@
 
       # Enable the Plasma 5 Desktop Environment.
       displayManager.sddm.enable = true;
-      desktopManager.plasma5.enable = true;  
+      desktopManager.plasma5.enable = true;
 
-#      libinput.enable = true; # touchpad
+      # libinput.enable = true; # touchpad
     };
 
   };

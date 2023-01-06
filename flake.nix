@@ -26,77 +26,79 @@
 
   };
 
-  outputs = { 
-    self, 
-    nixos,
-    nixos-hardware,
-    digga,
-    home-manager,
-    agenix,
-    deploy,
-    nixos-generators
-  } @ inputs:
+  outputs =
+    { self
+    , nixos
+    , nixos-hardware
+    , digga
+    , home-manager
+    , agenix
+    , deploy
+    , nixos-generators
+    } @ inputs:
 
     digga.lib.mkFlake {
       inherit self inputs;
 
       supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
+      formatter.x86_64-linux = nixos.legacyPackages.x86_64-linux.nixpkgs-fmt;
 
       channels.nixos = {
-#        imports = [ (digga.lib.importOverlays ./overlays) ];
-	overlays = [
-#          agenix.overlays.default
-#	  ./pkgs/default.nix
+        # imports = [ (digga.lib.importOverlays ./overlays) ];
+        overlays = [
+          # agenix.overlays.default
+          # ./pkgs/default.nix
         ];
       };
 
       nixos = {
         hostDefaults = {
-	  system = "x86_64-linux";
-	  channelName = "nixos";
-	  imports = [ (digga.lib.importExportableModules ./modules) ];
-	  modules = [
-#	    agenix.nixosModules.age
+          system = "x86_64-linux";
+          channelName = "nixos";
+          imports = [ (digga.lib.importExportableModules ./modules) ];
+          modules = [
+            # agenix.nixosModules.age
             ./users/root.nix
-	    home-manager.nixosModules.home-manager {
-	      home-manager.useGlobalPkgs = true;
-	      home-manager.useUserPackages = true;
-	    }
-#	    arion.nixosModules.arion
-	  ];
-	};
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+            }
+            # arion.nixosModules.arion
+          ];
+        };
 
         imports = [ (digga.lib.importHosts ./hosts) ];
 
-	importables = rec {
-	  profiles = digga.lib.rakeLeaves ./profiles;
-	  suites = with builtins; let explodeAttrs = set: map (a: getAttr a set) (attrNames set); in
-	  with profiles; rec {
+        importables = rec {
+          profiles = digga.lib.rakeLeaves ./profiles;
+          suites = with builtins; let explodeAttrs = set: map (a: getAttr a set) (attrNames set); in
+          with profiles; rec {
             base = (explodeAttrs core) ++ [ vars ];
-	    server = base ++ [ profiles.server profiles.harden ];
-#	    desktop = base ++ [ audio ] ++ (explodeAddrs graphical) ++ (explodeAttrs pc) ++ (explodeAttrs hardware) ++ (explodeAttrs develop);
-	    laptop = base ++ [ profiles.laptop ];
-	  };
-	};
+            server = base ++ [ profiles.server harden ];
+            # desktop = base ++ [ audio ] ++ (explodeAddrs graphical) ++ (explodeAttrs pc) ++ (explodeAttrs hardware) ++ (explodeAttrs develop);
+            laptop = base ++ [ profiles.laptop ];
+          };
+        };
 
-	hosts = {
-	  aluminium.modules = [ nixos-hardware.nixosModules.framework-12th-gen-intel ./users/derek.nix ];
-	  ebin-v5.system = "aarch64-linux";
-	  ebin-v7.system = "aarch64-linux";
-	};
+        hosts = {
+          aluminium.modules = [ nixos-hardware.nixosModules.framework-12th-gen-intel ./users/derek.nix ];
+          ebin-v5.system = "aarch64-linux";
+          ebin-v7.system = "aarch64-linux";
+        };
       };
 
-#      devshell = ./shell;
+      # devshell = ./shell;
 
-      homeConfigurations = digga.lib.mkHomeConfigurations self.nixosConfigurations;
+      # homeConfigurations = digga.lib.mkHomeConfigurations self.nixosConfigurations;
 
       deploy.nodes = digga.lib.mkDeployNodes self.nixosConfigurations {
         ebin-v5 = {
-	  profiles.system.sshUser = "root";
-	};
-	ebin-v7 = {
-	  profiles.system.sshUser = "root";
-	};
+          profiles.system.sshUser = "root";
+        };
+        ebin-v7 = {
+          profiles.system.sshUser = "root";
+        };
       };
 
     };

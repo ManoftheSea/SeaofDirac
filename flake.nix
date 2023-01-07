@@ -9,7 +9,7 @@
     digga.inputs.nixpkgs.follows = "nixos";
     digga.inputs.nixlib.follows = "nixos";
     digga.inputs.home-manager.follows = "home-manager";
-    digga.inputs.deploy.follows = "deploy";
+    digga.inputs.deploy.follows = "deploy-rs";
 
     home-manager.url = "github:nix-community/home-manager/release-22.11";
     home-manager.inputs.nixpkgs.follows = "nixos";
@@ -17,8 +17,8 @@
     agenix.url = "github:yaxitech/ragenix";
     agenix.inputs.nixpkgs.follows = "nixos";
 
-    deploy.url = "github:serokell/deploy-rs";
-    deploy.inputs.nixpkgs.follows = "nixos";
+    deploy-rs.url = "github:serokell/deploy-rs";
+    deploy-rs.inputs.nixpkgs.follows = "nixos";
 
     nixos-generators.url = "github:nix-community/nixos-generators";
 
@@ -33,7 +33,7 @@
     , digga
     , home-manager
     , agenix
-    , deploy
+    , deploy-rs
     , nixos-generators
     } @ inputs:
 

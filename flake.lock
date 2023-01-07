@@ -65,7 +65,7 @@
         "type": "github"
       }
     },
-    "deploy": {
+    "deploy-rs": {
       "inputs": {
         "flake-compat": "flake-compat",
         "nixpkgs": [
@@ -113,7 +113,7 @@
       "inputs": {
         "darwin": "darwin",
         "deploy": [
-          "deploy"
+          "deploy-rs"
         ],
         "devshell": "devshell",
         "flake-compat": "flake-compat_2",
@@ -362,7 +362,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
-        "deploy": "deploy",
+        "deploy-rs": "deploy-rs",
         "digga": "digga",
         "home-manager": "home-manager",
         "nixos": "nixos",

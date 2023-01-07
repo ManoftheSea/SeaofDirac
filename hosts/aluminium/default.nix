@@ -123,6 +123,7 @@
 
   environment = {
     systemPackages = with pkgs; [
+      deploy-rs
       gptfdisk
       git
       home-manager

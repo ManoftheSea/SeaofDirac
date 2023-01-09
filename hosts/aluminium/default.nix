@@ -16,14 +16,14 @@
     kernelParams = [ "module_blacklist=hid_sensor_hub" ];
     extraModulePackages = [ ];
 
-    loader = {
-      systemd-boot.enable = true;
-      systemd-boot.editor = true;
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/efi";
-      };
-    };
+    # loader = {
+    #   systemd-boot.enable = true;
+    #   systemd-boot.editor = true;
+    #     efi = {
+    #       canTouchEfiVariables = true;
+    #       efiSysMountPoint = "/efi";
+    #     };
+    #   };
   };
 
   fileSystems = {
@@ -124,6 +124,7 @@
   environment = {
     systemPackages = with pkgs; [
       deploy-rs
+      file
       gptfdisk
       git
       home-manager

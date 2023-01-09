@@ -6,13 +6,7 @@ in
 {
   imports = suites.server;
 
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi = {
-      efiSysMountPoint = "/efi";
-      canTouchEfiVariables = false;
-    };
-  };
+  boot.loader.efi.canTouchEfiVariables = false;
 
   fileSystems = {
     "/" = {

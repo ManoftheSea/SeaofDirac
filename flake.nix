@@ -3,24 +3,38 @@
 
   inputs = {
     nixos.url = "github:nixos/nixpkgs/22.11";
+
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
-    digga.url = "github:divnix/digga";
-    digga.inputs.nixpkgs.follows = "nixos";
-    digga.inputs.nixlib.follows = "nixos";
-    digga.inputs.home-manager.follows = "home-manager";
-    digga.inputs.deploy.follows = "deploy-rs";
+    digga = {
+      url = "github:divnix/digga";
+      inputs = {
+        nixpkgs.follows = "nixos";
+        nixlib.follows = "nixos";
+        home-manager.follows = "home-manager";
+        deploy.follows = "deploy-rs";
+      };
+    };
 
-    home-manager.url = "github:nix-community/home-manager/release-22.11";
-    home-manager.inputs.nixpkgs.follows = "nixos";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-22.11";
+      inputs.nixpkgs.follows = "nixos";
+    };
 
-    agenix.url = "github:yaxitech/ragenix";
-    agenix.inputs.nixpkgs.follows = "nixos";
+    agenix = {
+      url = "github:yaxitech/ragenix";
+      inputs.nixpkgs.follows = "nixos";
+    };
 
-    deploy-rs.url = "github:serokell/deploy-rs";
-    deploy-rs.inputs.nixpkgs.follows = "nixos";
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixos";
+    };
 
-    nixos-generators.url = "github:nix-community/nixos-generators";
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixos";
+    };
 
     # arion - for services deployed through docker?
 

@@ -16,14 +16,6 @@
     kernelParams = [ "module_blacklist=hid_sensor_hub" ];
     extraModulePackages = [ ];
 
-    # loader = {
-    #   systemd-boot.enable = true;
-    #   systemd-boot.editor = true;
-    #     efi = {
-    #       canTouchEfiVariables = true;
-    #       efiSysMountPoint = "/efi";
-    #     };
-    #   };
   };
 
   fileSystems = {
@@ -70,20 +62,14 @@
     useDHCP = lib.mkDefault true;
     hostName = "aluminium";
     networkmanager.enable = true; # Easiest to use and most distros use this by default.
-    # firewall = {
-    #  allowedTCPPorts = [ ... ];
-    #  allowedUDPPorts = [ ... ];
-    # };
   };
 
-  # Enable the X11 windowing system.
   services = {
     avahi.enable = true;
     fwupd.enable = true;
 
     power-profiles-daemon.enable = false;
 
-    # Enable CUPS to print documents.
     printing.enable = true;
 
     tlp = {
@@ -98,11 +84,8 @@
       enable = true;
       layout = "us";
 
-      # Enable the Plasma 5 Desktop Environment.
       displayManager.sddm.enable = true;
       desktopManager.plasma5.enable = true;
-
-      # libinput.enable = true; # touchpad
     };
 
   };

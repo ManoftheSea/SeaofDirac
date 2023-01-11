@@ -1,7 +1,7 @@
 { config, lib, suites, profiles, pkgs, ... }:
 
 {
-  imports = suites.laptop;
+  imports = suites.laptop ++ [ ./usbguard-rules.nix ];
 
   boot = {
     binfmt.emulatedSystems = [ "aarch64-linux" ];

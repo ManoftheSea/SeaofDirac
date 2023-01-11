@@ -97,6 +97,7 @@
 
         hosts = {
           aluminium.modules = [ nixos-hardware.nixosModules.framework-12th-gen-intel ./users/derek.nix ];
+          osmium.modules = [ nixos-hardware.nixosModules.framework-12th-gen-intel ];
           ebin-v5.system = "aarch64-linux";
           ebin-v7.system = "aarch64-linux";
         };

@@ -4,6 +4,7 @@
   environment.etc = {
     "usbguard/rules.d/framework.conf".text = ''
       # Hardwired equipment
+      allow id 0bda:5634 serial "200901010001" with-interface { 0e:01:00 0e:02:00 0e:02:00 0e:02:00 0e:02:00 0e:02:00 0e:02:00 0e:02:00 0e:02:00 } with-connect-type "hardwired"  # camera
       allow id 27c6:609c with-connect-type "hardwired"  # fingerprint reader
       allow id 8087:0032 with-connect-type "hardwired"  # AX210 bluetooth
 

@@ -1,10 +1,10 @@
 { config, lib, suites, profiles, pkgs, ... }:
 
 {
-  imports = suites.laptop;
+  imports = suites.laptop ++ [ ./usbguard-rules.nix ];
 
   boot = {
-  #  binfmt.emulatedSystems = [ "aarch64-linux" ];
+    # binfmt.emulatedSystems = [ "aarch64-linux" ];
 
     initrd = {
       availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
@@ -111,7 +111,7 @@
       localadmin = {
         isNormalUser = true;
         extraGroups = [ "wheel" "networkmanager" "video" "audio" "dialout" ]; # Enable ‘sudo’ for the user.
-	initialPassword = "hunter2";
+        initialPassword = "hunter2";
         packages = with pkgs; [
           firefox
         ];
@@ -120,7 +120,10 @@
   };
 
   environment = {
-    # etc."ssh".source symlink to var somehow
+    etc = {
+      "machine-id".text = "79a69c13c47946b987cbee878d43745b";
+      # "ssh".source symlink to var somehow
+    };
     systemPackages = with pkgs; [
       deploy-rs
       file

@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
   services = {
@@ -6,4 +6,8 @@
       enable = true;
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    usbutils
+  ];
 }

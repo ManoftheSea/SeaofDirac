@@ -21,20 +21,20 @@
       inputs.nixpkgs.follows = "nixos";
     };
 
-    agenix = {
-      url = "github:yaxitech/ragenix";
-      inputs.nixpkgs.follows = "nixos";
-    };
+    # agenix = {
+    #   url = "github:yaxitech/ragenix";
+    #   inputs.nixpkgs.follows = "nixos";
+    # };
 
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixos";
     };
 
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixos";
-    };
+    # nixos-generators = {
+    #   url = "github:nix-community/nixos-generators";
+    #   inputs.nixpkgs.follows = "nixos";
+    # };
 
     # arion - for services deployed through docker?
 
@@ -46,9 +46,9 @@
     , nixos-hardware
     , digga
     , home-manager
-    , agenix
+    # , agenix
     , deploy-rs
-    , nixos-generators
+    # , nixos-generators
     } @ inputs:
 
     digga.lib.mkFlake {

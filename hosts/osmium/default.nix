@@ -28,11 +28,18 @@
       device = "/dev/disk/by-label/nix_store";
       fsType = "ext4";
     };
-    # "/efi" = {
-    #   device = "/dev/disk/by-label/ESP-USB";
-    #   fsType = "vfat";
-    # };
-    # also want to point at var and home
+    "/var" = {
+      device = "/dev/disk/by-label/var-usb";
+      fsType = "ext4";
+    };
+    "/home" = {
+      device = "/dev/disk/by-label/home-usb";
+      fsType = "ext4";
+    };
+    "/efi" = {
+      device = "/dev/disk/by-label/ESP-USB";
+      fsType = "vfat";
+    };
   };
 
   swapDevices = [ ];

@@ -1,11 +1,16 @@
 { config, lib, suites, profiles, pkgs, ... }:
 
 {
-  imports = suites.laptop ++ [ profiles.usbguard ];
+  imports = suites.laptop ++ [
+    profiles.usbguard
+    profiles.graphical.intel-gpu
+    profiles.graphical.plasma5
+    profiles.audio.pipewire
+    profiles.hardware.virt-manager
+    profiles.impermanence
+  ];
 
   boot = {
-    # binfmt.emulatedSystems = [ "aarch64-linux" ];
-
     initrd = {
       availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
       kernelModules = [ ];
@@ -45,37 +50,14 @@
   swapDevices = [ ];
 
   hardware = {
-    bluetooth = {
-      enable = true;
-      powerOnBoot = true;
-    };
-
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
-    opengl = {
-      enable = true;
-      extraPackages = with pkgs; [
-        vaapiIntel
-        vaapiVdpau
-        libvdpau-va-gl
-        intel-media-driver
-      ];
-    };
-
-    pulseaudio = {
-      enable = true;
-      package = pkgs.pulseaudioFull;
-    };
 
     sane.enable = true;
 
     video.hidpi.enable = true;
   };
 
-  networking = {
-    hostName = "osmium";
-    networkmanager.enable = true; # Easiest to use and most distros use this by default.
-  };
+  networking.hostName = "osmium";
 
   services = {
     avahi.enable = true;
@@ -84,27 +66,7 @@
     power-profiles-daemon.enable = false;
 
     printing.enable = true;
-
-    tlp = {
-      enable = true;
-      settings = {
-        CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      };
-    };
-
-    xserver = {
-      enable = true;
-      layout = "us";
-
-      displayManager.sddm.enable = true;
-      desktopManager.plasma5.enable = true;
-    };
-
   };
-
-  # Enable sound.
-  sound.enable = true;
 
   users = {
     mutableUsers = false;
@@ -123,12 +85,9 @@
   environment = {
     etc = {
       "machine-id".text = "79a69c13c47946b987cbee878d43745b";
-      # "ssh".source symlink to var somehow
     };
     systemPackages = with pkgs; [
       deploy-rs
-      file
-      gptfdisk
       git
       home-manager
       minicom

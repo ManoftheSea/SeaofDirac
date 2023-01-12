@@ -2,7 +2,7 @@
 
 {
   # Maybe add some test to see if NetworkManager is being used?
-  etc."NetworkManager/system-connections" = {
+  environment.etc."NetworkManager/system-connections" = {
     source = "/var/lib/NetworkManager/system-connections/";
   };
 
@@ -11,7 +11,7 @@
       {
         path = "/var/lib/ssh/ssh_host_key_ed25519_key";
         type = "ed25519";
-      };
+      }
     ];
   };
 

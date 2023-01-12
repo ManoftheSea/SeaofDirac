@@ -11,6 +11,7 @@
 
   boot = {
     binfmt.emulatedSystems = [ "aarch64-linux" ];
+    binfmt.registrations.aarch64-linux.fixBinary = true;
 
     initrd = {
       availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];

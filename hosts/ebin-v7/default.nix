@@ -1,8 +1,5 @@
-{ lib, pkgs, config, suites, ... }:
+{ config, lib, suites, profiles, pkgs, ... }:
 
-let
-  placeholder = "";
-in
 {
   imports = suites.server;
 
@@ -10,14 +7,22 @@ in
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-label/nixos";
+      device = "none";
+      fsType = "tmpfs";
+      options = [ "defaults" "mode=755" ];
+    };
+    "/nix" = {
+      device = "/dev/disk/by-label/nix_store";
+      fsType = "ext4";
+    };
+    "/var" = {
+      device = "/dev/disk/by-label/var";
       fsType = "ext4";
     };
     "/efi" = {
-      device = "/dev/disk/by-partlabel/ESP";
+      device = "/dev/disk/by-label/ESP";
       fsType = "vfat";
     };
-    # TODO add data partition
   };
 
   swapDevices = [
@@ -77,4 +82,16 @@ in
 
   hardware.enableRedistributableFirmware = true;
 
+  services.openssh = {
+    hostKeys = [
+      {
+        path = "/var/lib/ssh/ssh_host_key_ed25519_key";
+        type = "ed25519";
+      }
+    ];
+  };
+
+  system.activationScripts.persistent-directories = ''
+    mkdir -pm 0755 /var/lib/ssh
+  '';
 }

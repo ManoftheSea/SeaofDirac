@@ -91,6 +91,7 @@
       git
       home-manager
       minicom
+      tree
       wget
     ];
     variables = {

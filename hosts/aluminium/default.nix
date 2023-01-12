@@ -11,6 +11,9 @@
       kernelModules = [ ];
     };
 
+    cleanTmpDir = true;
+    tmpOnTmpfs = true;
+
     kernelModules = [ "kvm-intel" ];
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [ "module_blacklist=hid_sensor_hub" ];
@@ -50,12 +53,14 @@
       ];
     };
 
-    pulseaudio = {
-      enable = true;
-      package = pkgs.pulseaudioFull;
-    };
+    # pulseaudio = {
+    #   enable = true;
+    #   package = pkgs.pulseaudioFull;
+    # };
 
     sane.enable = true;
+
+    video.hidpi.enable = true;
   };
 
   networking = {
@@ -91,7 +96,7 @@
   };
 
   # Enable sound.
-  sound.enable = true;
+  # sound.enable = true;
 
   users.users = {
     localadmin = {

@@ -21,20 +21,10 @@
       inputs.nixpkgs.follows = "nixos";
     };
 
-    # agenix = {
-    #   url = "github:yaxitech/ragenix";
-    #   inputs.nixpkgs.follows = "nixos";
-    # };
-
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixos";
     };
-
-    # nixos-generators = {
-    #   url = "github:nix-community/nixos-generators";
-    #   inputs.nixpkgs.follows = "nixos";
-    # };
 
     # arion - for services deployed through docker?
 
@@ -46,9 +36,7 @@
     , nixos-hardware
     , digga
     , home-manager
-    # , agenix
     , deploy-rs
-    # , nixos-generators
     } @ inputs:
 
     digga.lib.mkFlake {
@@ -89,7 +77,7 @@
           suites = with builtins; let explodeAttrs = set: map (a: getAttr a set) (attrNames set); in
           with profiles; rec {
             base = (explodeAttrs core) ++ [ vars ];
-            server = base ++ [ profiles.server harden ];
+            server = base ++ (explodeAttrs profiles.server);
             # desktop = base ++ [ audio ] ++ (explodeAddrs graphical) ++ (explodeAttrs pc) ++ (explodeAttrs hardware) ++ (explodeAttrs develop);
             laptop = base ++ [ profiles.laptop ];
           };

@@ -1,7 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
-  security.rtkit.enable = mkDefault true;
+  security.rtkit.enable = lib.mkDefault true;
 
   services.pipewire = {
     enable = true;
@@ -25,12 +25,6 @@
     };
     systemPackages = with pkgs; [
       pavucontrol
-      pw-cli
-      pw-mon
-      pw-top
-      # If plasma configured, add plasma-pa
     ];
   };
-
-
-
+}

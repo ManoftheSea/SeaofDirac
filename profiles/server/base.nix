@@ -5,10 +5,8 @@
 
   nix = {
     gc = {
-      automatic = true;
       options = "--delete-older-than 5d";
     };
-    optimise.automatic = true;
   };
 
   services = {

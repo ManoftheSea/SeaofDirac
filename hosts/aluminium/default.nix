@@ -1,7 +1,7 @@
 { config, lib, suites, profiles, pkgs, ... }:
 
 {
-  imports = suites.laptop ++ [ ./usbguard-rules.nix ];
+  imports = suites.laptop ++ [ profiles.usbguard ];
 
   boot = {
     binfmt.emulatedSystems = [ "aarch64-linux" ];
@@ -64,7 +64,6 @@
   };
 
   networking = {
-    useDHCP = lib.mkDefault true;
     hostName = "aluminium";
     networkmanager.enable = true; # Easiest to use and most distros use this by default.
   };
@@ -97,17 +96,6 @@
 
   # Enable sound.
   # sound.enable = true;
-
-  users.users = {
-    localadmin = {
-      isNormalUser = true;
-      home = "/home/localadmin";
-      extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
-      packages = with pkgs; [
-        firefox
-      ];
-    };
-  };
 
   environment = {
     systemPackages = with pkgs; [

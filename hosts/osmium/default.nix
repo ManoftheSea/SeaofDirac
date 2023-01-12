@@ -1,7 +1,7 @@
 { config, lib, suites, profiles, pkgs, ... }:
 
 {
-  imports = suites.laptop ++ [ ./usbguard-rules.nix ];
+  imports = suites.laptop ++ [ profiles.usbguard ];
 
   boot = {
     # binfmt.emulatedSystems = [ "aarch64-linux" ];
@@ -68,10 +68,11 @@
     };
 
     sane.enable = true;
+
+    video.hidpi.enable = true;
   };
 
   networking = {
-    useDHCP = lib.mkDefault true;
     hostName = "osmium";
     networkmanager.enable = true; # Easiest to use and most distros use this by default.
   };

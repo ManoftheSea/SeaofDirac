@@ -1,75 +1,23 @@
-{ lib, pkgs, config, suites, ... }:
+{ config, lib, suites, profiles, pkgs, ... }:
 
-let
-  placeholder = "";
-in
 {
-  imports = suites.server;
-
-  boot.loader.efi.canTouchEfiVariables = false;
-
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-label/nixos";
-      fsType = "ext4";
-    };
-    "/efi" = {
-      device = "/dev/disk/by-partlabel/ESP";
-      fsType = "vfat";
-    };
-    # TODO add data partition
-  };
-
-  swapDevices = [
-    {
-      device = "/dev/disk/by-label/swap";
-    }
+  imports = suites.server ++ [
+    ./filesystem.nix
+    ./network.nix
   ];
 
-  networking = {
-    hostName = "ebin-v7";
-    useNetworkd = true;
-    wireless.enable = false;
-    useDHCP = false;
-    firewall = {
-      enable = true;
-      allowPing = true;
-      trustedInterfaces = [ "br0" ];
-      allowedTCPPorts = [
-        22
-      ];
-      allowedUDPPorts = [ ];
-    };
-  };
-
-  systemd.network = {
-    enable = true;
-    netdevs.br0.netdevConfig = {
-      Name = "br0";
-      Kind = "bridge";
-    };
-    networks = {
-      eth0 = {
-        matchConfig.Name = "eth0";
-      };
-      wan = {
-        matchConfig.Name = "wan";
-        networkConfig = {
-          DHCP = "yes";
-        };
-      };
-      lan = {
-        matchConfig.Name = "lan*";
-        networkConfig = {
-          Bridge = "br0";
-        };
-      };
-    };
-  };
+  boot.kernelModules = [ "coretemp" ];
 
   environment = {
+    etc."sysconfig/lm_sensors".text = ''
+      HWMON_MODULES="coretemp"
+    '';
+
     noXlibs = true;
+
     systemPackages = with pkgs; [
+      lm_sensors
+      powertop
       vim
       wget
     ];
@@ -77,4 +25,19 @@ in
 
   hardware.enableRedistributableFirmware = true;
 
+  powerManagement.cpuFreqGovernor = "ondemand";
+  powerManagement.powertop.enable = true;
+
+  services.openssh = {
+    hostKeys = [
+      {
+        path = "/var/lib/ssh/ssh_host_key_ed25519_key";
+        type = "ed25519";
+      }
+    ];
+  };
+
+  system.activationScripts.persistent-directories = ''
+    mkdir -pm 0755 /var/lib/ssh
+  '';
 }

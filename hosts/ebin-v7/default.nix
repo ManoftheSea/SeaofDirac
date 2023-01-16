@@ -6,16 +6,18 @@
     ./network.nix
   ];
 
-  # boot.kernelModules = [ "coretemp" ];
+  boot.kernelModules = [ "coretemp" ];
 
   environment = {
-    # etc."sysconfig/lm_sensors".text = ''
-    #   HWMON_MODULES="coretemp"
-    # '';
+    etc."sysconfig/lm_sensors".text = ''
+      HWMON_MODULES="coretemp"
+    '';
 
     noXlibs = true;
 
     systemPackages = with pkgs; [
+      lm_sensors
+      powertop
       vim
       wget
     ];
@@ -23,8 +25,8 @@
 
   hardware.enableRedistributableFirmware = true;
 
-  # powerManagement.cpuFreqGovernor = "ondemand";
-  # powerManagement.powertop.enable = true;
+  powerManagement.cpuFreqGovernor = "ondemand";
+  powerManagement.powertop.enable = true;
 
   services.openssh = {
     hostKeys = [

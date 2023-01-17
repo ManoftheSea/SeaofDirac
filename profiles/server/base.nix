@@ -1,9 +1,9 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 {
   documentation.enable = false;
 
-  environment.noXlibs = mkDefault true;
+  environment.noXlibs = lib.mkDefault true;
 
   nix = {
     gc = {

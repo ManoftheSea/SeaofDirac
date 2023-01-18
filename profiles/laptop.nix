@@ -3,6 +3,8 @@
 {
   environment.systemPackages = with pkgs; [ ];
 
+  fonts.fontconfig.enable = true; # enable user fonts
+
   hardware = {
     bluetooth = {
       enable = lib.mkDefault true;

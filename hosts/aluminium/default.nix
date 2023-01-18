@@ -79,5 +79,7 @@
     };
   };
 
+  security.polkit.enable = true;
+
 }
 

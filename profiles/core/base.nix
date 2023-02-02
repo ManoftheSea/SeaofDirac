@@ -21,6 +21,7 @@
 
   nix = {
     gc.automatic = lib.mkDefault true;
+    gc.options = lib.mkDefault "--delete-older-than 30d";
     optimise.automatic = lib.mkDefault true;
     settings.auto-optimise-store = lib.mkDefault true;
   };

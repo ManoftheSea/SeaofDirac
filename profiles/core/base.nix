@@ -17,17 +17,12 @@
       tmux
       usbutils
     ];
-    variables = {
-      VISUAL = "less";
-    };
   };
 
   nix = {
     gc.automatic = lib.mkDefault true;
     optimise.automatic = lib.mkDefault true;
-    settings = {
-      auto-optimise-store = lib.mkDefault true;
-    };
+    settings.auto-optimise-store = lib.mkDefault true;
   };
 
   security = {
@@ -38,4 +33,3 @@
 
   time.timeZone = lib.mkDefault "America/New_York";
 }
-

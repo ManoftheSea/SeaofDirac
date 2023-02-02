@@ -60,7 +60,6 @@
 
   environment = {
     systemPackages = with pkgs; [
-      deploy-rs # move to home-manager
       git
       home-manager
       minicom

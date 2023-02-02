@@ -11,14 +11,8 @@
       inputs = {
         nixpkgs.follows = "nixos";
         nixlib.follows = "nixos";
-        home-manager.follows = "home-manager";
         deploy.follows = "deploy-rs";
       };
-    };
-
-    home-manager = {
-      url = "github:nix-community/home-manager/release-22.11";
-      inputs.nixpkgs.follows = "nixos";
     };
 
     deploy-rs = {
@@ -35,7 +29,6 @@
     , nixos
     , nixos-hardware
     , digga
-    , home-manager
     , deploy-rs
     } @ inputs:
 
@@ -57,15 +50,10 @@
         hostDefaults = {
           system = "x86_64-linux";
           channelName = "nixos";
-          imports = [ (digga.lib.importExportableModules ./modules) ];
+          #imports = [ (digga.lib.importExportableModules ./modules) ];
           modules = [
             # agenix.nixosModules.age
             ./users/root.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-            }
             # arion.nixosModules.arion
           ];
         };
@@ -76,7 +64,7 @@
           profiles = digga.lib.rakeLeaves ./profiles;
           suites = with builtins; let explodeAttrs = set: map (a: getAttr a set) (attrNames set); in
           with profiles; rec {
-            base = (explodeAttrs core) ++ [ vars ];
+            base = (explodeAttrs core);
             server = base ++ (explodeAttrs profiles.server);
             # desktop = base ++ [ audio ] ++ (explodeAddrs graphical) ++ (explodeAttrs pc) ++ (explodeAttrs hardware) ++ (explodeAttrs develop);
             laptop = base ++ [ profiles.laptop ];

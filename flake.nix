@@ -21,22 +21,20 @@
     };
 
     # arion - for services deployed through docker?
-
   };
 
-  outputs =
-    { self
-    , nixos
-    , nixos-hardware
-    , digga
-    , deploy-rs
-    } @ inputs:
-
+  outputs = {
+    self,
+    nixos,
+    nixos-hardware,
+    digga,
+    deploy-rs,
+  } @ inputs:
     digga.lib.mkFlake {
       inherit self inputs;
 
-      supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
-      formatter.x86_64-linux = nixos.legacyPackages.x86_64-linux.nixpkgs-fmt;
+      supportedSystems = ["x86_64-linux" "aarch64-linux"];
+      formatter.x86_64-linux = nixos.legacyPackages.x86_64-linux.alejandra;
 
       channels.nixos = {
         # imports = [ (digga.lib.importOverlays ./overlays) ];
@@ -58,22 +56,24 @@
           ];
         };
 
-        imports = [ (digga.lib.importHosts ./hosts) ];
+        imports = [(digga.lib.importHosts ./hosts)];
 
         importables = rec {
           profiles = digga.lib.rakeLeaves ./profiles;
-          suites = with builtins; let explodeAttrs = set: map (a: getAttr a set) (attrNames set); in
-          with profiles; rec {
-            base = (explodeAttrs core);
-            server = base ++ (explodeAttrs profiles.server);
-            # desktop = base ++ [ audio ] ++ (explodeAddrs graphical) ++ (explodeAttrs pc) ++ (explodeAttrs hardware) ++ (explodeAttrs develop);
-            laptop = base ++ [ profiles.laptop ];
-          };
+          suites = with builtins; let
+            explodeAttrs = set: map (a: getAttr a set) (attrNames set);
+          in
+            with profiles; rec {
+              base = explodeAttrs core;
+              server = base ++ (explodeAttrs profiles.server);
+              # desktop = base ++ [ audio ] ++ (explodeAddrs graphical) ++ (explodeAttrs pc) ++ (explodeAttrs hardware) ++ (explodeAttrs develop);
+              laptop = base ++ [profiles.laptop];
+            };
         };
 
         hosts = {
-          aluminium.modules = [ nixos-hardware.nixosModules.framework-12th-gen-intel ./users/derek.nix ];
-          osmium.modules = [ nixos-hardware.nixosModules.framework-12th-gen-intel ];
+          aluminium.modules = [nixos-hardware.nixosModules.framework-12th-gen-intel ./users/derek.nix];
+          osmium.modules = [nixos-hardware.nixosModules.framework-12th-gen-intel];
           ebin-v5.system = "aarch64-linux";
           ebin-v7.system = "aarch64-linux";
         };
@@ -91,6 +91,5 @@
           profiles.system.sshUser = "root";
         };
       };
-
     };
 }

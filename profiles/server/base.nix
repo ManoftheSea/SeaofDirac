@@ -1,6 +1,8 @@
-{ config, lib, ... }:
-
 {
+  config,
+  lib,
+  ...
+}: {
   documentation.enable = false;
 
   environment.noXlibs = lib.mkDefault true;

@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   boot = {
     cleanTmpDir = lib.mkDefault true;
     tmpOnTmpfs = lib.mkDefault true;

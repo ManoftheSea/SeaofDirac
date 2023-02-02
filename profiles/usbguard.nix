@@ -1,6 +1,4 @@
-{ config, ... }:
-
-{
+{config, ...}: {
   services = {
     usbguard = {
       enable = true;

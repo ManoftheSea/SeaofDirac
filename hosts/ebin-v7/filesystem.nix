@@ -5,7 +5,7 @@
     "/" = {
       device = "none";
       fsType = "tmpfs";
-      options = [ "defaults" "mode=755" ];
+      options = ["defaults" "mode=755"];
     };
     "/nix" = {
       device = "/dev/disk/by-label/nix_store";

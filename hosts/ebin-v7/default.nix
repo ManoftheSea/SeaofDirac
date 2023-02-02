@@ -1,12 +1,19 @@
-{ config, lib, suites, profiles, pkgs, ... }:
-
 {
-  imports = suites.server ++ [
-    ./filesystem.nix
-    ./network.nix
-  ];
+  config,
+  lib,
+  suites,
+  profiles,
+  pkgs,
+  ...
+}: {
+  imports =
+    suites.server
+    ++ [
+      ./filesystem.nix
+      ./network.nix
+    ];
 
-  boot.kernelModules = [ "coretemp" ];
+  boot.kernelModules = ["coretemp"];
 
   environment = {
     etc."sysconfig/lm_sensors".text = ''

@@ -1,33 +1,39 @@
-{ config, lib, suites, profiles, pkgs, ... }:
-
 {
-  imports = suites.laptop ++ [
-    profiles.usbguard
-    profiles.graphical.intel-gpu
-    profiles.graphical.plasma5
-    profiles.audio.pipewire
-    profiles.hardware.virt-manager
-    profiles.impermanence
-  ];
+  config,
+  lib,
+  suites,
+  profiles,
+  pkgs,
+  ...
+}: {
+  imports =
+    suites.laptop
+    ++ [
+      profiles.usbguard
+      profiles.graphical.intel-gpu
+      profiles.graphical.plasma5
+      profiles.audio.pipewire
+      profiles.hardware.virt-manager
+      profiles.impermanence
+    ];
 
   boot = {
     initrd = {
-      availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
-      kernelModules = [ ];
+      availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod"];
+      kernelModules = [];
     };
 
-    kernelModules = [ "kvm-intel" ];
+    kernelModules = ["kvm-intel"];
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "module_blacklist=hid_sensor_hub" ];
-    extraModulePackages = [ ];
-
+    kernelParams = ["module_blacklist=hid_sensor_hub"];
+    extraModulePackages = [];
   };
 
   fileSystems = {
     "/" = {
       device = "none";
       fsType = "tmpfs";
-      options = [ "defaults" "size=2G" "mode=755" ];
+      options = ["defaults" "size=2G" "mode=755"];
     };
     "/nix" = {
       device = "/dev/disk/by-label/nix_store";
@@ -47,7 +53,7 @@
     };
   };
 
-  swapDevices = [ ];
+  swapDevices = [];
 
   hardware = {
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
@@ -73,7 +79,7 @@
     users = {
       localadmin = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "networkmanager" "video" "audio" "dialout" ]; # Enable ‘sudo’ for the user.
+        extraGroups = ["wheel" "networkmanager" "video" "audio" "dialout"]; # Enable ‘sudo’ for the user.
         initialPassword = "hunter2";
         packages = with pkgs; [
           firefox
@@ -106,6 +112,4 @@
       vimAlias = true;
     };
   };
-
 }
-

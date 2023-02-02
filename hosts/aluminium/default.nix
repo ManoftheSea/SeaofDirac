@@ -1,28 +1,34 @@
-{ config, lib, suites, profiles, pkgs, ... }:
-
 {
-  imports = suites.laptop ++ [
-    profiles.usbguard
-    profiles.graphical.intel-gpu
-    profiles.graphical.plasma5
-    profiles.audio.pipewire
-    profiles.hardware.virt-manager
-  ];
+  config,
+  lib,
+  suites,
+  profiles,
+  pkgs,
+  ...
+}: {
+  imports =
+    suites.laptop
+    ++ [
+      profiles.usbguard
+      profiles.graphical.intel-gpu
+      profiles.graphical.plasma5
+      profiles.audio.pipewire
+      profiles.hardware.virt-manager
+    ];
 
   boot = {
-    binfmt.emulatedSystems = [ "aarch64-linux" ];
+    binfmt.emulatedSystems = ["aarch64-linux"];
     binfmt.registrations.aarch64-linux.fixBinary = true;
 
     initrd = {
-      availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
-      kernelModules = [ ];
+      availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod"];
+      kernelModules = [];
     };
 
-    kernelModules = [ "kvm-intel" ];
+    kernelModules = ["kvm-intel"];
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "module_blacklist=hid_sensor_hub" ];
-    extraModulePackages = [ ];
-
+    kernelParams = ["module_blacklist=hid_sensor_hub"];
+    extraModulePackages = [];
   };
 
   fileSystems = {
@@ -37,7 +43,7 @@
     };
   };
 
-  swapDevices = [ ];
+  swapDevices = [];
 
   hardware = {
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
@@ -79,6 +85,4 @@
   };
 
   security.polkit.enable = true;
-
 }
-

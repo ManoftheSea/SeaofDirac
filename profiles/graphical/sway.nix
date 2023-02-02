@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   environment.defaultPackages = with pkgs; [
     grim
     slurp
@@ -16,5 +18,4 @@
 
   programs.sway.enable = true;
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
 }

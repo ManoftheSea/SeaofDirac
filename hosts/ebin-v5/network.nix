@@ -7,11 +7,11 @@
     firewall = {
       enable = true;
       allowPing = true;
-      trustedInterfaces = [ "br0" ];
+      trustedInterfaces = ["br0"];
       allowedTCPPorts = [
         22
       ];
-      allowedUDPPorts = [ ];
+      allowedUDPPorts = [];
     };
   };
 
@@ -39,5 +39,4 @@
       };
     };
   };
-
 }

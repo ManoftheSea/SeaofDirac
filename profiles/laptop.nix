@@ -1,7 +1,10 @@
-{ config, pkgs, lib, ... }:
-
 {
-  environment.systemPackages = with pkgs; [ ];
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
+  environment.systemPackages = with pkgs; [];
 
   fonts.fontconfig.enable = true; # enable user fonts
 

@@ -29,6 +29,8 @@
     systemPackages = builtins.attrValues {
       inherit
         (pkgs)
+        ndisc6
+        tcpdump
         vim
         wget
         ;

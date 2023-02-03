@@ -23,10 +23,11 @@
     networks = {
       ens3 = {
         matchConfig.Name = "ens3";
-        address = ["2001:550:5a00:b28c::1/64"];
+        #address = ["2001:550:5a00:b28c::1/64"];
         networkConfig = {
-          DHCP = "ipv4";
+          DHCP = "yes";
           IPv6AcceptRA = true;
+          LinkLocalAddressing = "ipv6";
         };
       };
     };

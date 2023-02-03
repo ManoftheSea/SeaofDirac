@@ -64,8 +64,9 @@
             explodeAttrs = set: map (a: getAttr a set) (attrNames set);
           in
             with profiles; rec {
-              base = explodeAttrs core;
+              base = explodeAttrs core ++ [profiles.hardware.efi];
               server = base ++ (explodeAttrs profiles.server);
+              vps = explodeAttrs core ++ (explodeAttrs profiles.server);
               # desktop = base ++ [ audio ] ++ (explodeAddrs graphical) ++ (explodeAttrs pc) ++ (explodeAttrs hardware) ++ (explodeAttrs develop);
               laptop = base ++ [profiles.laptop];
             };

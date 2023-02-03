@@ -65,14 +65,14 @@
   };
 
   environment = {
-    systemPackages = with pkgs; [
-      git
-      home-manager
-      minicom
-      wget
-    ];
-    variables = {
-      EDITOR = "nvim";
+    systemPackages = builtins.attrValues {
+      inherit
+        (pkgs)
+        git
+        home-manager
+        minicom
+        wget
+        ;
     };
   };
 

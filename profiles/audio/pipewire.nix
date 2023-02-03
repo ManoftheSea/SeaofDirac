@@ -26,8 +26,6 @@
         }
       '';
     };
-    systemPackages = with pkgs; [
-      pavucontrol
-    ];
+    systemPackages = [pkgs.pavucontrol];
   };
 }

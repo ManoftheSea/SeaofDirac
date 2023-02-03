@@ -7,12 +7,15 @@
   hardware = {
     opengl = {
       enable = lib.mkDefault true;
-      extraPackages = with pkgs; [
-        vaapiIntel
-        vaapiVdpau
-        libvdpau-va-gl
-        intel-media-driver
-      ];
+      extraPackages = builtins.attrValues {
+        inherit
+          (pkgs)
+          vaapiIntel
+          vaapiVdpau
+          libvdpau-va-gl
+          intel-media-driver
+          ;
+      };
     };
   };
 }

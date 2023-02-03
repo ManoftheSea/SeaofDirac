@@ -10,16 +10,19 @@
   };
 
   environment = {
-    defaultPackages = with pkgs; [
-      dnsutils
-      file
-      gptfdisk
-      less
-      pciutils
-      psmisc
-      tmux
-      usbutils
-    ];
+    defaultPackages = builtins.attrValues {
+      inherit
+        (pkgs)
+        dnsutils
+        file
+        gptfdisk
+        less
+        pciutils
+        psmisc
+        tmux
+        usbutils
+        ;
+    };
   };
 
   nix = {

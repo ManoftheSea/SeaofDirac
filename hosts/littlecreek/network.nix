@@ -9,8 +9,6 @@
       ];
       allowedUDPPorts = [
         53 # named
-        67 # dhcp4
-        547 # dhcp6
       ];
       trustedInterfaces = [];
     };
@@ -25,11 +23,11 @@
     networks = {
       ens3 = {
         matchConfig.Name = "ens3";
+        address = ["2001:550:5a00:b28c::1/64"];
         networkConfig = {
-          DHCP = "yes";
+          DHCP = "ipv4";
           IPv6AcceptRA = true;
         };
-        ipv6AcceptRAConfig.Token = "::1";
       };
     };
   };

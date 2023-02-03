@@ -3,11 +3,16 @@
     firewall = {
       enable = true;
       allowPing = true;
-      trustedInterfaces = [];
       allowedTCPPorts = [
-        22
+        22 # ssh
+        53 # named
       ];
-      allowedUDPPorts = [];
+      allowedUDPPorts = [
+        53 # named
+        67 # dhcp4
+        547 # dhcp6
+      ];
+      trustedInterfaces = [];
     };
     hostName = "littlecreek";
     useDHCP = false;
@@ -22,8 +27,9 @@
         matchConfig.Name = "ens3";
         networkConfig = {
           DHCP = "yes";
-          # @TODO IPv6
+          IPv6AcceptRA = true;
         };
+        ipv6AcceptRAConfig.Token = "::1";
       };
     };
   };

@@ -91,9 +91,8 @@
         ebin-v7 = {
           profiles.system.sshUser = "root";
         };
-        littlecreek = {
-          profiles.system.sshUser = "root";
-        };
+        littlecreek.profiles.system.sshUser = "root";
+        nextarray.profiles.system.sshUser = "root";
       };
     };
 }

@@ -13,6 +13,7 @@
     "/nix" = {
       device = "/dev/disk/by-label/nix";
       fsType = "ext4";
+      options = ["noatime"];
     };
     "/var" = {
       device = "/dev/disk/by-label/var";

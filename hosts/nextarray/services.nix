@@ -1,5 +1,9 @@
 {
   services = {
+    grocy = {
+      enable = true;
+      hostName = "grocy.seaofdirac.org";
+    };
     openssh = {
       enable = true;
       hostKeys = [

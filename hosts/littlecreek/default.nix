@@ -11,11 +11,11 @@
       ./filesystem.nix
       ./network.nix
       ./services.nix
+      profiles.acme
     ];
 
-  boot.kernelModules = [];
+  boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "virtio_pci" "virtio_blk"];
   boot.loader = {
-    efi.canTouchEfiVariables = false;
     grub = {
       enable = true;
       version = 2;

@@ -9,13 +9,12 @@
       ];
       allowedUDPPorts = [
         53 # named
+        546 # dhcp6
       ];
-      trustedInterfaces = [];
     };
     hostName = "littlecreek";
     useDHCP = false;
     useNetworkd = true;
-    wireless.enable = false;
   };
 
   systemd.network = {

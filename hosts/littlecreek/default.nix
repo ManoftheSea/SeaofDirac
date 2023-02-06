@@ -6,7 +6,7 @@
   ...
 }: {
   imports =
-    suites.server
+    suites.vps
     ++ [
       ./filesystem.nix
       ./network.nix
@@ -21,7 +21,6 @@
       version = 2;
       device = "/dev/vda";
     };
-    systemd-boot.enable = false;
   };
 
   environment = {

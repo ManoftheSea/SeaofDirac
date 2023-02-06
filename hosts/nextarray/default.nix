@@ -11,6 +11,7 @@
       ./filesystem.nix
       ./network.nix
       ./services.nix
+      profiles.acme
     ];
 
   boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "virtio_pci" "virtio_blk"];

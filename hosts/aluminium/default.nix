@@ -58,7 +58,7 @@
   services = {
     avahi.enable = true;
     fwupd.enable = true;
-
+    hardware.bolt.enable = true;
     pcscd.enable = true;
     power-profiles-daemon.enable = false;
 

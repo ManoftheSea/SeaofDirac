@@ -59,6 +59,7 @@
     avahi.enable = true;
     fwupd.enable = true;
 
+    pcscd.enable = true;
     power-profiles-daemon.enable = false;
 
     printing.enable = true;

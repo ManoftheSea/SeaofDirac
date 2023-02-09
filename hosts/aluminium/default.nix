@@ -11,7 +11,6 @@
     ++ [
       profiles.usbguard
       profiles.graphical.intel-gpu
-      profiles.graphical.plasma5
       profiles.audio.pipewire
       profiles.hardware.virt-manager
     ];

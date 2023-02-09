@@ -84,15 +84,13 @@
 
       # homeConfigurations = digga.lib.mkHomeConfigurations self.nixosConfigurations;
 
-      deploy.nodes = digga.lib.mkDeployNodes self.nixosConfigurations {
-        ebin-v5 = {
-          profiles.system.sshUser = "root";
+      deploy = {
+        sshUser = "root";
+        user = "root";
+
+        nodes = digga.lib.mkDeployNodes self.nixosConfigurations {
+          # ebin-v5.hostname = "192.168.1.2";
         };
-        ebin-v7 = {
-          profiles.system.sshUser = "root";
-        };
-        littlecreek.profiles.system.sshUser = "root";
-        nextarray.profiles.system.sshUser = "root";
       };
     };
 }

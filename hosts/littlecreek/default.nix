@@ -1,18 +1,13 @@
 {
   config,
   pkgs,
-  profiles,
-  suites,
   ...
 }: {
-  imports =
-    suites.vps
-    ++ [
-      ./filesystem.nix
-      ./network.nix
-      ./services.nix
-      profiles.acme
-    ];
+  imports = [
+    ./filesystem.nix
+    ./network.nix
+    ./services.nix
+  ];
 
   boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "virtio_pci" "virtio_blk"];
   boot.loader = {

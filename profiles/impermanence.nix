@@ -11,7 +11,7 @@
   services.openssh = {
     hostKeys = [
       {
-        path = "/var/lib/ssh/ssh_host_key_ed25519_key";
+        path = "/var/lib/ssh/ssh_host_ed25519_key";
         type = "ed25519";
       }
     ];

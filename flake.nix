@@ -6,15 +6,6 @@
 
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
-    digga = {
-      url = "github:divnix/digga";
-      inputs = {
-        nixpkgs.follows = "nixos";
-        nixlib.follows = "nixos";
-        deploy.follows = "deploy-rs";
-      };
-    };
-
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixos";
@@ -27,70 +18,121 @@
     self,
     nixos,
     nixos-hardware,
-    digga,
     deploy-rs,
-  } @ inputs:
-    digga.lib.mkFlake {
-      inherit self inputs;
+  } @ inputs: {
+    formatter.x86_64-linux = nixos.legacyPackages.x86_64-linux.alejandra;
 
-      supportedSystems = ["x86_64-linux" "aarch64-linux"];
-      formatter.x86_64-linux = nixos.legacyPackages.x86_64-linux.alejandra;
-
-      channels.nixos = {
-        # imports = [ (digga.lib.importOverlays ./overlays) ];
-        overlays = [
-          # agenix.overlays.default
-          # ./pkgs/default.nix
+    nixosConfigurations = {
+      aluminium = nixos.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = inputs;
+        modules = [
+          ./hosts/aluminium/default.nix
+          nixos-hardware.nixosModules.framework-12th-gen-intel
+          ./profiles/audio/pipewire.nix
+          ./profiles/core/base.nix
+          ./profiles/core/flakes.nix
+          ./profiles/graphical/intel-gpu.nix
+          ./profiles/hardware/efi.nix
+          ./profiles/hardware/virt-manager.nix
+          ./profiles/laptop.nix
+          ./profiles/usbguard.nix
+          ./users/derek.nix
+          ./users/root.nix
         ];
       };
 
-      nixos = {
-        hostDefaults = {
-          system = "x86_64-linux";
-          channelName = "nixos";
-          #imports = [ (digga.lib.importExportableModules ./modules) ];
-          modules = [
-            # agenix.nixosModules.age
-            ./users/root.nix
-            # arion.nixosModules.arion
-          ];
-        };
-
-        imports = [(digga.lib.importHosts ./hosts)];
-
-        importables = rec {
-          profiles = digga.lib.rakeLeaves ./profiles;
-          suites = with builtins; let
-            explodeAttrs = set: map (a: getAttr a set) (attrNames set);
-          in
-            with profiles; rec {
-              base = explodeAttrs core ++ [profiles.hardware.efi];
-              server = base ++ (explodeAttrs profiles.server);
-              vps = explodeAttrs core ++ (explodeAttrs profiles.server);
-              # desktop = base ++ [ audio ] ++ (explodeAddrs graphical) ++ (explodeAttrs pc) ++ (explodeAttrs hardware) ++ (explodeAttrs develop);
-              laptop = base ++ [profiles.laptop];
-            };
-        };
-
-        hosts = {
-          aluminium.modules = [nixos-hardware.nixosModules.framework-12th-gen-intel ./users/derek.nix];
-          osmium.modules = [nixos-hardware.nixosModules.framework-12th-gen-intel];
-          ebin-v5.system = "aarch64-linux";
-          ebin-v7.system = "aarch64-linux";
-        };
+      ebin-v5 = nixos.lib.nixosSystem {
+        system = "aarch64-linux";
+        specialArgs = inputs;
+        modules = [
+          ./hosts/ebin-v5/default.nix
+          ./profiles/core/base.nix
+          ./profiles/core/flakes.nix
+          ./profiles/hardware/efi.nix
+          ./profiles/impermanence.nix
+          ./profiles/server/base.nix
+          ./profiles/server/harden-network.nix
+          ./users/root.nix
+        ];
       };
+      ebin-v7 = nixos.lib.nixosSystem {
+        system = "aarch64-linux";
+        specialArgs = inputs;
+        modules = [
+          ./hosts/ebin-v7/default.nix
+          ./profiles/core/base.nix
+          ./profiles/core/flakes.nix
+          ./profiles/hardware/efi.nix
+          ./profiles/impermanence.nix
+          ./profiles/server/base.nix
+          ./profiles/server/harden-network.nix
+          ./users/root.nix
+        ];
+      };
+      littlecreek = nixos.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = inputs;
+        modules = [
+          ./hosts/littlecreek/default.nix
+          ./profiles/core/base.nix
+          ./profiles/core/flakes.nix
+          ./profiles/server/base.nix
+          ./profiles/server/harden-network.nix
+          ./profiles/acme.nix
+          ./users/root.nix
+        ];
+      };
+      nextarray = nixos.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = inputs;
+        modules = [
+          ./hosts/nextarray/default.nix
+          ./profiles/core/base.nix
+          ./profiles/core/flakes.nix
+          ./profiles/server/base.nix
+          ./profiles/server/harden-network.nix
+          ./profiles/acme.nix
+          ./users/root.nix
+        ];
+      };
+    };
 
-      # devshell = ./shell;
+    # devshell = ./shell;
 
-      # homeConfigurations = digga.lib.mkHomeConfigurations self.nixosConfigurations;
+    # @TODO
+    deploy = {
+      sshUser = "root";
+      user = "root";
+      fastConnect = true;
 
-      deploy = {
-        sshUser = "root";
-        user = "root";
+      nodes = {
+        aluminium = {
+          hostname = "aluminium";
+          profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.aluminium;
+        };
+        littlecreek = {
+          fastConnect = false;
+          hostname = "littlecreek";
+          profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.littlecreek;
+        };
+        nextarray = {
+          fastConnect = false;
+          hostname = "nextarray";
+          profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.nextarray;
+        };
 
-        nodes = digga.lib.mkDeployNodes self.nixosConfigurations {
-          # ebin-v5.hostname = "192.168.1.2";
+        ebin-v5 = {
+          hostname = "ebin-v5";
+          profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.ebin-v5;
+        };
+        ebin-v7 = {
+          hostname = "ebin-v7";
+          profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.ebin-v5;
         };
       };
     };
+
+    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+  };
 }

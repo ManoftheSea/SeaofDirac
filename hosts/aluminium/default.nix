@@ -1,20 +1,10 @@
 {
   config,
-  lib,
-  suites,
-  profiles,
   pkgs,
+  nixos,
+  nixos-hardware,
   ...
 }: {
-  imports =
-    suites.laptop
-    ++ [
-      profiles.usbguard
-      profiles.graphical.intel-gpu
-      profiles.audio.pipewire
-      profiles.hardware.virt-manager
-    ];
-
   boot = {
     binfmt.emulatedSystems = ["aarch64-linux"];
     binfmt.registrations.aarch64-linux.fixBinary = true;
@@ -45,7 +35,7 @@
   swapDevices = [];
 
   hardware = {
-    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    cpu.intel.updateMicrocode = nixos.lib.mkDefault config.hardware.enableRedistributableFirmware;
 
     sane.enable = true;
 

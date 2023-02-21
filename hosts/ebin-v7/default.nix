@@ -1,17 +1,12 @@
 {
   config,
-  lib,
-  suites,
-  profiles,
   pkgs,
   ...
 }: {
-  imports =
-    suites.server
-    ++ [
-      ./filesystem.nix
-      ./network.nix
-    ];
+  imports = [
+    ./filesystem.nix
+    ./network.nix
+  ];
 
   boot.kernelModules = ["coretemp"];
 

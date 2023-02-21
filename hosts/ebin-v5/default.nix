@@ -1,16 +1,12 @@
 {
-  lib,
-  pkgs,
   config,
-  suites,
+  pkgs,
   ...
 }: {
-  imports =
-    suites.server
-    ++ [
-      ./filesystem.nix
-      ./network.nix
-    ];
+  imports = [
+    ./filesystem.nix
+    ./network.nix
+  ];
 
   environment = {
     noXlibs = true;

@@ -10,13 +10,26 @@
     binfmt.registrations.aarch64-linux.fixBinary = true;
 
     initrd = {
-      availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod"];
+      availableKernelModules = [
+        "nvme"
+        "sd_mod"
+        "thunderbolt"
+        "usb_storage"
+        "xhci_pci"
+        # "z3fold"
+        # "zstd"
+      ];
       kernelModules = [];
     };
 
     kernelModules = ["kvm-intel"];
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = ["module_blacklist=hid_sensor_hub"];
+    kernelParams = [
+      "module_blacklist=hid_sensor_hub"
+      # "zswap.enabled=1"
+      # "zswap.compressor=zstd"
+      # "zswap.zpool=z3fold"
+    ];
     extraModulePackages = [];
   };
 
@@ -75,4 +88,7 @@
   };
 
   security.polkit.enable = true;
+
+  zramSwap.enable = true;
+  # zramSwap.memoryPercent = 50;
 }

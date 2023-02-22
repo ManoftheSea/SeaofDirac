@@ -106,31 +106,19 @@
       user = "root";
       fastConnect = true;
 
-      nodes = {
-        aluminium = {
-          hostname = "aluminium";
-          profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.aluminium;
+      # Create a deploy with the system profile for each nixosConfigurations
+      nodes =
+        nixos.lib.recursiveUpdate (
+          builtins.mapAttrs (hostname: nixosConfig: {
+            inherit hostname;
+            profiles.system.path = deploy-rs.lib.${nixosConfig.config.nixpkgs.system}.activate.nixos nixosConfig;
+          })
+          self.nixosConfigurations
+        )
+        {
+          littlecreek.fastConnect = false;
+          nextarray.fastConnect = false;
         };
-        littlecreek = {
-          fastConnect = false;
-          hostname = "littlecreek";
-          profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.littlecreek;
-        };
-        nextarray = {
-          fastConnect = false;
-          hostname = "nextarray";
-          profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.nextarray;
-        };
-
-        ebin-v5 = {
-          hostname = "ebin-v5";
-          profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.ebin-v5;
-        };
-        ebin-v7 = {
-          hostname = "ebin-v7";
-          profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.ebin-v5;
-        };
-      };
     };
 
     checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;

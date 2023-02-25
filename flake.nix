@@ -79,6 +79,7 @@
           ./profiles/core/flakes.nix
           ./profiles/server/base.nix
           ./profiles/server/harden-network.nix
+          ./profiles/server/security.nix
           ./profiles/acme.nix
           ./users/root.nix
         ];
@@ -92,6 +93,7 @@
           ./profiles/core/flakes.nix
           ./profiles/server/base.nix
           ./profiles/server/harden-network.nix
+          ./profiles/server/security.nix
           ./profiles/acme.nix
           ./users/root.nix
         ];

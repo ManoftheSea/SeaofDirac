@@ -41,6 +41,23 @@
           ./users/root.nix
         ];
       };
+      osmium = nixos.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = inputs;
+        modules = [
+          ./hosts/osmium/default.nix
+          nixos-hardware.nixosModules.framework-12th-gen-intel
+          ./profiles/audio/pipewire.nix
+          ./profiles/core/base.nix
+          ./profiles/core/flakes.nix
+          ./profiles/graphical/intel-gpu.nix
+          ./profiles/hardware/efi.nix
+          ./profiles/laptop.nix
+          ./profiles/usbguard.nix
+          ./users/derek.nix
+          ./users/root.nix
+        ];
+      };
 
       ebin-v5 = nixos.lib.nixosSystem {
         system = "aarch64-linux";
@@ -102,7 +119,6 @@
 
     # devshell = ./shell;
 
-    # @TODO
     deploy = {
       sshUser = "root";
       user = "root";

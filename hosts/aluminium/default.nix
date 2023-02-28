@@ -68,6 +68,9 @@
   };
 
   environment = {
+    etc = {
+      "machine-id".text = "2904306768fd4a8185f3660916616816";
+    };
     systemPackages = builtins.attrValues {
       inherit
         (pkgs)

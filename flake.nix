@@ -35,6 +35,7 @@
           ./profiles/graphical/intel-gpu.nix
           ./profiles/hardware/efi.nix
           ./profiles/hardware/virt-manager.nix
+          ./profiles/impermanence.nix
           ./profiles/laptop.nix
           ./profiles/usbguard.nix
           ./users/derek.nix
@@ -52,6 +53,7 @@
           ./profiles/core/flakes.nix
           ./profiles/graphical/intel-gpu.nix
           ./profiles/hardware/efi.nix
+          ./profiles/impermanence.nix
           ./profiles/laptop.nix
           ./profiles/usbguard.nix
           ./users/derek.nix

@@ -5,6 +5,10 @@
   nixos-hardware,
   ...
 }: {
+  imports = [
+    ./filesystem.nix
+  ];
+
   boot = {
     binfmt.emulatedSystems = ["aarch64-linux"];
     binfmt.registrations.aarch64-linux.fixBinary = true;
@@ -32,20 +36,6 @@
     ];
     extraModulePackages = [];
   };
-
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-uuid/9ef1549f-25e3-4e22-a60b-cb10ae840130";
-      fsType = "ext4";
-    };
-
-    "/efi" = {
-      device = "/dev/disk/by-uuid/9E84-0C07";
-      fsType = "vfat";
-    };
-  };
-
-  swapDevices = [];
 
   hardware = {
     cpu.intel.updateMicrocode = nixos.lib.mkDefault config.hardware.enableRedistributableFirmware;

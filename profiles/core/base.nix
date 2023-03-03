@@ -17,8 +17,12 @@
         file
         gptfdisk
         less
+        nano
         pciutils
+        perl
         psmisc
+        rsync
+        strace
         tmux
         usbutils
         ;

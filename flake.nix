@@ -21,6 +21,12 @@
       inputs.utils.follows = "deploy-rs/utils";
     };
 
+    sops-nix = {
+      url = "github:mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixos";
+      inputs.nixpkgs-stable.follows = "nixos";
+    };
+
     # arion - for services deployed through docker?
   };
 
@@ -30,6 +36,7 @@
     nixos-hardware,
     deploy-rs,
     snm,
+    sops-nix,
   } @ inputs: {
     formatter.x86_64-linux = nixos.legacyPackages.x86_64-linux.alejandra;
 
@@ -105,6 +112,7 @@
         specialArgs = inputs;
         modules = [
           snm.nixosModule
+          sops-nix.nixosModules.sops
           ./hosts/littlecreek/default.nix
           ./profiles/core/base.nix
           ./profiles/core/flakes.nix

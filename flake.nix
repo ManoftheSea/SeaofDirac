@@ -6,9 +6,19 @@
 
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
+    # flake-utils.url = "github:/numtide/flake-utils";
+
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixos";
+      # inputs.utils.follows = "flake-utils";
+    };
+
+    snm = {
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-22.11";
+      inputs.nixpkgs.follows = "nixos";
+      inputs.nixpkgs-22_11.follows = "nixos";
+      inputs.utils.follows = "deploy-rs/utils";
     };
 
     # arion - for services deployed through docker?
@@ -19,6 +29,7 @@
     nixos,
     nixos-hardware,
     deploy-rs,
+    snm,
   } @ inputs: {
     formatter.x86_64-linux = nixos.legacyPackages.x86_64-linux.alejandra;
 
@@ -83,7 +94,7 @@
           ./profiles/core/base.nix
           ./profiles/core/flakes.nix
           ./profiles/hardware/efi.nix
-          ./profiles/impermanence.nix
+          # ./profiles/impermanence.nix
           ./profiles/server/base.nix
           ./profiles/server/harden-network.nix
           ./users/root.nix
@@ -93,6 +104,7 @@
         system = "x86_64-linux";
         specialArgs = inputs;
         modules = [
+          snm.nixosModule
           ./hosts/littlecreek/default.nix
           ./profiles/core/base.nix
           ./profiles/core/flakes.nix

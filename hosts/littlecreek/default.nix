@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./filesystem.nix
+    ./mailserver.nix
     ./network.nix
     ./services.nix
   ];

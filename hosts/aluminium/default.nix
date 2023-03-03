@@ -78,6 +78,7 @@
       viAlias = true;
       vimAlias = true;
     };
+    sway.enable = true;
   };
 
   security.polkit.enable = true;

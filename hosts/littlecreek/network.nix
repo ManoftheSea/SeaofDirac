@@ -6,6 +6,7 @@
       allowedTCPPorts = [
         22 # ssh
         53 # named
+        443 # https
       ];
       allowedUDPPorts = [
         53 # named

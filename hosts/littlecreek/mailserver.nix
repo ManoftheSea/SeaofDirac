@@ -1,7 +1,7 @@
-{config,...}:{
+{config, ...}: {
   mailserver = {
     enable = true;
-    fqdn = "littlecreek.seaofdirac.org";
+    certificateScheme = 3;
     domains = ["seaofdirac.org"];
     loginAccounts = {
       "derek@seaofdirac.org" = {
@@ -14,6 +14,16 @@
       };
       "jessica@seaofdirac.org".hashedPasswordFile = config.sops.secrets.derek_password.path;
       "benjamin@seaofdirac.org".hashedPasswordFile = config.sops.secrets.derek_password.path;
+    };
+    fqdn = "littlecreek.seaofdirac.org";
+  };
+
+  services.nginx = {
+    enable = true;
+    virtualHosts."mta-sts.seaofdirac.org" = {
+      useACMEHost = "littlecreek.seaofdirac.org";
+      forceSSL = true;
+      root = "/var/www/mta-sts.seaofdirac.org";
     };
   };
 

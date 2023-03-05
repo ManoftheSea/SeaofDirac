@@ -1,8 +1,18 @@
 {config, ...}: {
   mailserver = {
     enable = true;
+
     certificateScheme = 3;
     domains = ["seaofdirac.org"];
+    fullTextSearch = {
+      enable = true;
+      # index new email as they arrive
+      autoIndex = true;
+      # this only applies to plain text attachments, binary attachments are never indexed
+      indexAttachments = true;
+      enforced = "body";
+    };
+    indexDir = "/var/lib/dovcot/indices";
     loginAccounts = {
       "derek@seaofdirac.org" = {
         hashedPasswordFile = config.sops.secrets.derek_password.path;

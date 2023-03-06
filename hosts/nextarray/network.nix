@@ -19,13 +19,9 @@
 
   systemd.network = {
     enable = true;
-    networks = {
-      ens3 = {
-        matchConfig.Name = "ens3";
-        networkConfig = {
-          DHCP = "yes";
-        };
-      };
+    networks.ens3 = {
+      matchConfig.Name = "ens3";
+      networkConfig.DHCP = "yes";
     };
   };
 }

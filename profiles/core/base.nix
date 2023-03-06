@@ -9,25 +9,7 @@
     tmpOnTmpfs = lib.mkDefault true;
   };
 
-  environment = {
-    defaultPackages = builtins.attrValues {
-      inherit
-        (pkgs)
-        dnsutils
-        file
-        gptfdisk
-        less
-        nano
-        pciutils
-        perl
-        psmisc
-        rsync
-        strace
-        tmux
-        usbutils
-        ;
-    };
-  };
+  environment.defaultPackages = [];
 
   nix = {
     gc.automatic = lib.mkDefault true;
@@ -36,9 +18,7 @@
     settings.auto-optimise-store = lib.mkDefault true;
   };
 
-  security = {
-    rtkit.enable = lib.mkDefault true;
-  };
+  security.rtkit.enable = lib.mkDefault true;
 
   system.stateVersion = lib.mkDefault "22.11";
 

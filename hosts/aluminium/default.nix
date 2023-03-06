@@ -64,9 +64,20 @@
     systemPackages = builtins.attrValues {
       inherit
         (pkgs)
+        dnsutils
+        file
         git
+        gptfdisk
         home-manager
+        less
         minicom
+        pciutils
+        perl
+        psmisc
+        rsync
+        strace
+        tmux
+        usbutils
         wget
         ;
     };

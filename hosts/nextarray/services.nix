@@ -13,6 +13,5 @@
         }
       ];
     };
-    qemuGuest.enable = true;
   };
 }

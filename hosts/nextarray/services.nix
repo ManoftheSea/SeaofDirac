@@ -1,8 +1,16 @@
 {
+  security.acme.certs."nextarray.seaofdirac.org".group = "certs";
+
   services = {
     grocy = {
       enable = true;
       hostName = "grocy.seaofdirac.org";
+    };
+    nginx = {
+      recommendedTlsSettings = true;
+      recommendedOptimisation = true;
+      recommendedGzipSettings = true;
+      virtualHosts."nextarray.seaofdirac.org".enableACME = true;
     };
     openssh = {
       enable = true;
@@ -14,4 +22,6 @@
       ];
     };
   };
+
+  users.groups.certs.members = ["nginx"];
 }

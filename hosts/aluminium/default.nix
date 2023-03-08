@@ -40,7 +40,10 @@
   hardware = {
     cpu.intel.updateMicrocode = nixos.lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-    sane.enable = true;
+    sane = {
+      enable = true;
+      extraBackends = [pkgs.hplip];
+    };
 
     video.hidpi.enable = true;
   };
@@ -48,7 +51,11 @@
   networking.hostName = "aluminium";
 
   services = {
-    avahi.enable = true;
+    avahi = {
+      enable = true;
+      nssmdns = true;
+      openFirewall = true;
+    };
     fwupd.enable = true;
     hardware.bolt.enable = true;
     pcscd.enable = true;

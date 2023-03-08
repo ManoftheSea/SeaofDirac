@@ -13,6 +13,7 @@
       ++ pkgs.lib.optional config.virtualisation.docker.enable "docker"
       ++ pkgs.lib.optional config.networking.networkmanager.enable "networkmanager"
       # ++ pkgs.lib.optional config.programs.light.enable "video"
+      ++ pkgs.lib.optional config.hardware.sane.enable "scanner"
       ++ pkgs.lib.optional config.hardware.pulseaudio.enable "audio";
   };
 }

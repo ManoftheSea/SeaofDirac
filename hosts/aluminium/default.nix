@@ -104,6 +104,7 @@
   security.polkit.enable = true;
 
   virtualisation.libvirtd.enable = true;
+  virtualisation.docker.enable = true;
 
   zramSwap.enable = true;
   # zramSwap.memoryPercent = 50;

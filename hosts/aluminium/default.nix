@@ -85,12 +85,14 @@
         strace
         tmux
         usbutils
+        virt-manager
         wget
         ;
     };
   };
 
   programs = {
+    dconf.enable = true;
     neovim = {
       enable = true;
       viAlias = true;
@@ -100,6 +102,8 @@
   };
 
   security.polkit.enable = true;
+
+  virtualisation.libvirtd.enable = true;
 
   zramSwap.enable = true;
   # zramSwap.memoryPercent = 50;

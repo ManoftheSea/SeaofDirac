@@ -87,7 +87,6 @@
           ./profiles/core/base.nix
           ./profiles/core/flakes.nix
           ./profiles/hardware/efi.nix
-          ./profiles/impermanence.nix
           ./profiles/server/base.nix
           ./profiles/server/harden-network.nix
           ./users/root.nix
@@ -101,7 +100,6 @@
           ./profiles/core/base.nix
           ./profiles/core/flakes.nix
           ./profiles/hardware/efi.nix
-          # ./profiles/impermanence.nix
           ./profiles/server/base.nix
           ./profiles/server/harden-network.nix
           ./users/root.nix

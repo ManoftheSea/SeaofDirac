@@ -3,14 +3,24 @@
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-partlabel/Nixos";
+      device = "none";
+      fsType = "tmpfs";
+      options = ["defaults" "mode=755" "noexec"];
+    };
+    "/nix" = {
+      device = "/dev/disk/by-label/nix_store";
       fsType = "ext4";
     };
-    "/efi" = {
-      device = "/dev/disk/by-partlabel/ESP";
-      fsType = "vfat";
+    "/var" = {
+      device = "/dev/disk/by-label/var";
+      fsType = "ext4";
+      options = ["noexec"];
     };
-    # TODO add data partition
+    "/efi" = {
+      device = "/dev/disk/by-label/ESP";
+      fsType = "vfat";
+      options = ["noexec"];
+    };
   };
 
   swapDevices = [

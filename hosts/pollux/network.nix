@@ -1,6 +1,6 @@
 {
   networking = {
-    hostName = "ebin-v7";
+    hostName = "pollux";
     useNetworkd = true;
     wireless.enable = false;
     useDHCP = false;

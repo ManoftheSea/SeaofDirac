@@ -92,16 +92,19 @@
           ./users/root.nix
         ];
       };
-      ebin-v7 = nixos.lib.nixosSystem {
+      pollux = nixos.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = inputs;
         modules = [
-          ./hosts/ebin-v7/default.nix
+          sops-nix.nixosModules.sops
+          ./hosts/pollux/default.nix
           ./profiles/core/base.nix
           ./profiles/core/flakes.nix
           ./profiles/hardware/efi.nix
           ./profiles/server/base.nix
           ./profiles/server/harden-network.nix
+          ./profiles/server/security.nix
+          ./profiles/acme.nix
           ./users/root.nix
         ];
       };

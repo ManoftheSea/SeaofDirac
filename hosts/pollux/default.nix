@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./filesystem.nix
+    ./services.nix
     ./network.nix
   ];
 
@@ -30,13 +31,20 @@
   powerManagement.cpuFreqGovernor = "ondemand";
   powerManagement.powertop.enable = true;
 
+  security.acme.certs."pollux.seaofdirac.org".extraDomainNames = ["nextcloud.seaofdirac.org"];
+
   services.openssh = {
     hostKeys = [
       {
-        path = "/var/lib/ssh/ssh_host_key_ed25519_key";
+        path = "/var/lib/ssh/ssh_host_ed25519_key";
         type = "ed25519";
       }
     ];
+  };
+
+  sops = {
+    defaultSopsFile = ./secrets.yaml;
+    age.sshKeyPaths = ["/var/lib/ssh/ssh_host_ed25519_key"];
   };
 
   system.activationScripts.persistent-directories = ''

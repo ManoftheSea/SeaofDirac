@@ -21,6 +21,11 @@
       fsType = "vfat";
       options = ["noexec"];
     };
+    "/srv/disk" = {
+      device = "/dev/sda2";
+      fsType = "ext4";
+      options = ["noexec"];
+    };
   };
 
   swapDevices = [

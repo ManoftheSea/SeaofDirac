@@ -78,6 +78,7 @@
         home-manager
         less
         minicom
+        OVMF
         pciutils
         perl
         psmisc

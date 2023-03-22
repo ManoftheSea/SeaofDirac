@@ -105,6 +105,7 @@
           ./profiles/server/harden-network.nix
           ./profiles/server/security.nix
           ./profiles/acme.nix
+          ./profiles/certificates.nix
           ./users/root.nix
         ];
       };

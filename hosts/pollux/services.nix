@@ -19,8 +19,14 @@
     recommendedOptimisation = true;
     recommendedGzipSettings = true;
     virtualHosts = {
-      "nextcloud.seaofdirac.org".useACMEHost = "pollux.seaofdirac.org";
-      "pollux.seaofdirac.org".enableACME = true;
+      "nextcloud.seaofdirac.org" = {
+        forceSSL = true;
+        useACMEHost = "pollux.seaofdirac.org";
+      };
+      "pollux.seaofdirac.org" = {
+        enableACME = true;
+        forceSSL = true;
+      };
     };
   };
 

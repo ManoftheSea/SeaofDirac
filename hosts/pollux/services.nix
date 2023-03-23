@@ -3,6 +3,7 @@
 
   services.nextcloud = {
     enable = true;
+    https = true;
     hostName = "nextcloud.seaofdirac.org";
     config = {
       dbtype = "pgsql";

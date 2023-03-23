@@ -6,6 +6,7 @@
       allowedTCPPorts = [
         22 # ssh
         80 # http
+        389 # ldap
         443 # https
       ];
       allowedUDPPorts = [];

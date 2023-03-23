@@ -6,6 +6,10 @@ let
   ldapCertDomain = "nextarray.seaofdirac.org";
 in
   {pkgs, ...}: {
+    security.acme.certs."${ldapCertDomain}".postRun = ''
+      systemctl restart openldap.service
+    '';
+
     services.openldap = {
       enable = true;
       urlList = ["ldap:///"];
@@ -14,9 +18,9 @@ in
         attrs = {
           olcLogLevel = "stats";
 
-          olcTLSCACertificateFile = "/var/lib/acme/${ldapCertDomain}/full.pem";
-          olcTLSCertificateFile = "/var/lib/acme/${ldapCertDomain}/cert.pem";
-          olcTLSCertificateKeyFile = "/var/lib/acme/${ldapCertDomain}/key.pem";
+          olcTLSCACertificateFile = "/run/credentials/openldap.service/full.pem";
+          olcTLSCertificateFile = "/run/credentials/openldap.service/cert.pem";
+          olcTLSCertificateKeyFile = "/run/credentials/openldap.service/key.pem";
           # olcTLScipherSuite = "AES128-GCM-SHA256";
           olcTLSCRLCheck = "none";
           olcTLSVerifyClient = "try";
@@ -123,9 +127,12 @@ in
     };
 
     systemd.services.openldap = {
-      wants = ["acme-${ldapCertDomain}.service"];
+      serviceConfig.LoadCredential = [
+        "full.pem:/var/lib/acme/${ldapCertDomain}/full.pem"
+        "cert.pem:/var/lib/acme/${ldapCertDomain}/cert.pem"
+        "key.pem:/var/lib/acme/${ldapCertDomain}/key.pem"
+      ];
       after = ["acme-${ldapCertDomain}.service"];
+      wants = ["acme-${ldapCertDomain}.service"];
     };
-
-    users.groups.certs.members = ["openldap"];
   }

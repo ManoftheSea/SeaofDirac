@@ -47,9 +47,15 @@
   };
 
   # ensure that postgres is running *before* running the setup
-  systemd.services."nextcloud-setup" = {
-    requires = ["postgresql.service"];
-    after = ["postgresql.service"];
+  systemd.services = {
+    "nextcloud-setup" = {
+      requires = ["postgresql.service"];
+      after = ["postgresql.service"];
+    };
+    "nextcloud" = {
+      requires = ["var-lib-nextcloud.mount"];
+      after = ["var-lib-nextcloud.mount"];
+    };
   };
 
   systemd.services.nextcloud.serviceConfig.SupplementaryGroups = [config.users.groups.keys.name];

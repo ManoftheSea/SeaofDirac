@@ -103,6 +103,8 @@ in
                   by group/organizationalRole/roleOccupant="cn=admin,dc=seaofdirac,dc=org" write
                   by users read
                   by * break''
+              ''
+                {20}to * by users read''
             ];
             olcDbIndex = [
               "objectClass eq"

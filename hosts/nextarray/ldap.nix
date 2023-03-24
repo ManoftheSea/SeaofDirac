@@ -12,12 +12,16 @@ in
 
     services.openldap = {
       enable = true;
-      urlList = ["ldap:///"];
+      urlList = ["ldap://" "ldapi:///"];
 
       settings = {
         attrs = {
-          olcLogLevel = "stats";
+          olcLocalSSF = "256";
+          olcLogLevel = "ACL stats";
 
+          # olcSaslRealm = "SEAOFDIRAC.ORG";
+          # olcSaslSecProps = "noplain";
+          olcSecurity = ["ssf=128" "update_ssf=128"];
           olcTLSCACertificateFile = "/run/credentials/openldap.service/full.pem";
           olcTLSCertificateFile = "/run/credentials/openldap.service/cert.pem";
           olcTLSCertificateKeyFile = "/run/credentials/openldap.service/key.pem";
@@ -26,7 +30,7 @@ in
           olcTLSVerifyClient = "try";
           olcTLSProtocolMin = "3.4";
 
-          olcAuthzRegexp = "{0}uid=([^,/]+),cn=seaofdirac\.org,cn=[^,]+,cn=auth uid=$1,ou=People,dc=SeaofDirac,dc=org";
+          olcAuthzRegexp = "{0}uid=([^,/]+),cn=seaofdirac\\.org,cn=[^,]+,cn=auth uid=$1,ou=People,dc=SeaofDirac,dc=org";
         };
 
         children = {
@@ -40,6 +44,7 @@ in
             ./ldap-schema/openssh-lpk.ldif
             ./ldap-schema/autofs.ldif
           ];
+          # "olcDatabase={0}config".attrs.olcAccess = ["{0} to * by dn.exect=gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth manage by * break"];
           "olcDatabase={1}mdb".attrs = {
             objectClass = ["olcDatabaseConfig" "olcMdbConfig"];
             olcDatabase = "{1}mdb";
@@ -48,57 +53,56 @@ in
             olcRootDN = ldapRootDN;
             olcAccess = [
               ''
-                {0}to dn.base="dc=seaofdirac,dc=org"
-                  by anonymous read
-                  by * break ''
+                {0}to dn.base="dc=seaofdirac,dc=org" by anonymous read
+                  by * break''
               ''
                 {1}to filter=(objectClass=pkiCA) attrs=@pkiCA
                   by anonymous read 
-                  by * break ''
+                  by * break''
               ''
                 {2}to attrs=userPassword
                   by group/organizationalRole/roleOccupant="cn=admin,dc=seaofdirac,dc=org" write
-                  by * auth ''
+                  by * auth''
               ''
                 {3} to attrs=@posixAccount
                   by group/organizationalRole/roleOccupant="cn=admin,dc=seaofdirac,dc=org" write
-                  by * break ''
+                  by * break''
               ''
                 {4}to dn.subtree="ou=Realms,dc=seaofdirac,dc=org"
                   by dn.exact="cn=kdc-admin,ou=Service,dc=seaofdirac,dc=org" write
                   by dn.exact="cn=kdc-read,ou=Service,dc=seaofdirac,dc=org" read
                   by group/organizationalRole/roleOccupant="cn=kdc-admin,ou=Service,dc=seaofdirac,dc=org" write
                   by group/organizationalRole/roleOccupant="cn=kdc-read,ou=Service,dc=seaofdirac,dc=org" read
-                  by * none ''
+                  by * none''
               ''
                 {5}to attrs=objectClass val.regex=(krbPrincipalAux|krbTicketPolicyAux)
                   by dn.exact="cn=kdc-admin,ou=Service,dc=seaofdirac,dc=org" write
                   by group/organizationalRole/roleOccupant="cn=kdc-admin,ou=Service,dc=seaofdirac,dc=org" write
-                  by * break ''
+                  by * break''
               ''
                 {6}to attrs=objectClass
                   by group/organizationalRole/roleOccupant="cn=admin,dc=seaofdirac,dc=org" write
-                  by users read ''
+                  by users read''
               ''
                 {7}to attrs=krbLastSuccessfulAuth,krbLastFailedAuth,krbLoginFailedCount
                   by dn.exact="cn=kdc-admin,ou=Service,dc=seaofdirac,dc=org" write
                   by dn.exact="cn=kdc-read,ou=Service,dc=seaofdirac,dc=org" write
                   by group/organizationalRole/roleOccupant="cn=kdc-admin,ou=Service,dc=seaofdirac,dc=org" write
                   by group/organizationalRole/roleOccupant="cn=kdc-read,ou=Service,dc=seaofdirac,dc=org" write
-                  by * none ''
+                  by * none''
               ''
                 {8}to attrs=@krbPrincipal,@krbPrincipalAux,@krbTicketPolicyAux
                   by dn.exact="cn=kdc-admin,ou=Service,dc=seaofdirac,dc=org" write
                   by dn.exact="cn=kdc-read,ou=Service,dc=seaofdirac,dc=org" read
                   by group/organizationalRole/roleOccupant="cn=kdc-admin,ou=Service,dc=seaofdirac,dc=org" write
                   by group/organizationalRole/roleOccupant="cn=kdc-read,ou=Service,dc=seaofdirac,dc=org" read
-                  by * none ''
+                  by * none''
               ''
                 {9}to attrs=@person,@organizationalPerson,@inetOrgPerson,@ldapPublicKey
                   by self write
                   by group/organizationalRole/roleOccupant="cn=admin,dc=seaofdirac,dc=org" write
                   by users read
-                  by * break ''
+                  by * break''
             ];
             olcDbIndex = [
               "objectClass eq"

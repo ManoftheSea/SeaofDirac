@@ -17,7 +17,8 @@ in
       settings = {
         attrs = {
           olcLocalSSF = "256";
-          olcLogLevel = "ACL stats";
+          #olcLogLevel = "ACL stats";
+          olcLogLevel = "stats";
 
           # olcSaslRealm = "SEAOFDIRAC.ORG";
           # olcSaslSecProps = "noplain";

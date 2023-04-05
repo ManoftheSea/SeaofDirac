@@ -33,15 +33,6 @@
 
   security.acme.certs."pollux.seaofdirac.org".extraDomainNames = ["nextcloud.seaofdirac.org"];
 
-  services.openssh = {
-    hostKeys = [
-      {
-        path = "/var/lib/ssh/ssh_host_ed25519_key";
-        type = "ed25519";
-      }
-    ];
-  };
-
   sops = {
     defaultSopsFile = ./secrets.yaml;
     age.sshKeyPaths = ["/var/lib/ssh/ssh_host_ed25519_key"];

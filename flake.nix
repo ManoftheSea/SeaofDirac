@@ -78,7 +78,22 @@
           ./users/root.nix
         ];
       };
-
+      sodium = nixos.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = inputs;
+        modules = [
+          ./hosts/sodium/default.nix
+          ./profiles/audio/pipewire.nix
+          ./profiles/core/base.nix
+          ./profiles/core/flakes.nix
+          ./profiles/graphical/intel-gpu.nix
+          ./profiles/hardware/efi.nix
+          ./profiles/impermanence.nix
+          ./users/benjamin.nix
+          ./users/derek.nix
+          ./users/root.nix
+        ];
+      };
       ebin-v5 = nixos.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = inputs;

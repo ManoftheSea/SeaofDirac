@@ -94,16 +94,17 @@
           ./users/root.nix
         ];
       };
-      ebin-v5 = nixos.lib.nixosSystem {
+      castor = nixos.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = inputs;
         modules = [
-          ./hosts/ebin-v5/default.nix
+          ./hosts/castor/default.nix
           ./profiles/core/base.nix
           ./profiles/core/flakes.nix
           ./profiles/hardware/efi.nix
           ./profiles/server/base.nix
           ./profiles/server/harden-network.nix
+          ./profiles/server/security.nix
           ./users/root.nix
         ];
       };

@@ -1,6 +1,6 @@
 {
   networking = {
-    hostName = "ebin-v5";
+    hostName = "castor";
     useNetworkd = true;
     wireless.enable = false;
     useDHCP = false;
@@ -27,9 +27,12 @@
       };
       wan = {
         matchConfig.Name = "wan";
+        address = ["192.168.20.3/24" "2601:5cd:c101:5382::3/64" "fd50:63ed:f2b7:20::3/64"];
+        gateway = ["192.168.20.1" "fe80::1"];
         networkConfig = {
-          DHCP = "yes";
+          MulticastDNS = true;
         };
+        dhcpV6Config.UseDelegatedPrefix = false;
       };
       lan = {
         matchConfig.Name = "lan*";

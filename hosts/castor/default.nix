@@ -6,6 +6,7 @@
   imports = [
     ./filesystem.nix
     ./network.nix
+    ./services.nix
   ];
 
   boot.kernelModules = ["coretemp"];

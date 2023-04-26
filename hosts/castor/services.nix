@@ -37,7 +37,7 @@
   systemd.services = {
     "tftp-hpa" = {
       serviceConfig = {
-        ExecStart = "${pkgs.tftp-hpa}/bin/in.tftpd -L -c -s /srv/tftp";
+        ExecStart = "${pkgs.tftp-hpa}/bin/in.tftpd -L -c -s /var/lib/tftp";
       };
       wantedBy = ["multi-user.target"];
     };

@@ -24,6 +24,7 @@
     networks = {
       eth0 = {
         matchConfig.Name = "eth0";
+        networkConfig.LinkLocalAddressing = "no";
       };
       wan = {
         matchConfig.Name = "wan";

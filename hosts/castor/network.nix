@@ -28,9 +28,12 @@
       wan = {
         matchConfig.Name = "wan";
         address = ["192.168.20.3/24" "2601:5cd:c101:5382::3/64" "fd50:63ed:f2b7:20::3/64"];
-        gateway = ["192.168.20.1" "fe80::1"];
+        gateway = ["192.168.20.1"];
         networkConfig = {
           MulticastDNS = true;
+        };
+        ipv6AcceptRAConfig = {
+          UseAutonomousPrefix = false;
         };
         dhcpV6Config.UseDelegatedPrefix = false;
       };

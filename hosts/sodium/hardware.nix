@@ -27,8 +27,6 @@
       enable = true;
       extraBackends = [pkgs.hplip];
     };
-
-    video.hidpi.enable = true;
   };
 
   networking.networkmanager.enable = true;

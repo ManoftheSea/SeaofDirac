@@ -11,12 +11,9 @@
   ];
 
   boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "virtio_pci" "virtio_blk"];
-  boot.loader = {
-    grub = {
-      enable = true;
-      version = 2;
-      device = "/dev/vda";
-    };
+  boot.loader.grub = {
+    enable = true;
+    device = "/dev/vda";
   };
 
   environment = {

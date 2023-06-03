@@ -4,9 +4,9 @@
   lib,
   ...
 }: {
-  boot = {
-    cleanTmpDir = lib.mkDefault true;
-    tmpOnTmpfs = lib.mkDefault true;
+  boot.tmp = {
+    useTmpfs = lib.mkDefault true;
+    cleanOnBoot = lib.mkDefault true;
   };
 
   environment.defaultPackages = [];
@@ -20,7 +20,7 @@
 
   security.rtkit.enable = lib.mkDefault true;
 
-  system.stateVersion = lib.mkDefault "22.11";
+  system.stateVersion = lib.mkDefault "23.05";
 
   time.timeZone = lib.mkDefault "America/New_York";
 }

@@ -33,7 +33,6 @@
   hardware = {
     cpu.intel.updateMicrocode = config.hardware.enableRedistributableFirmware;
     sane.enable = true;
-    video.hidpi.enable = true;
   };
 
   networking.hostName = "osmium";

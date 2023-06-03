@@ -2,7 +2,7 @@
   description = "Sea of Dirac setup";
 
   inputs = {
-    nixos.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixos.url = "github:nixos/nixpkgs/nixos-23.05";
 
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
@@ -15,9 +15,8 @@
     };
 
     snm = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-22.11";
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-23.05";
       inputs.nixpkgs.follows = "nixos";
-      inputs.nixpkgs-22_11.follows = "nixos";
       inputs.utils.follows = "deploy-rs/utils";
     };
 

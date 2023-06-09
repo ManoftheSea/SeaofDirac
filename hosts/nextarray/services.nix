@@ -1,11 +1,10 @@
 {
-  security.acme.certs."nextarray.seaofdirac.org".group = "certs";
+  security.acme.certs."nextarray.seaofdirac.org" = {
+    webroot = "/var/lib/acme/.challenges";
+    group = "certs";
+  };
 
   services = {
-    grocy = {
-      enable = true;
-      hostName = "grocy.seaofdirac.org";
-    };
     nginx = {
       recommendedTlsSettings = true;
       recommendedOptimisation = true;

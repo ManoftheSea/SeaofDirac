@@ -1,10 +1,21 @@
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   networking.firewall.allowedTCPPorts = [80 443];
+
+  services.netbox = {
+    enable = true;
+    secretKeyFile = config.sops.secrets.netbox_password.path;
+  };
 
   services.nextcloud = {
     enable = true;
+    enableBrokenCiphersForSSE = false;
     https = true;
     hostName = "nextcloud.seaofdirac.org";
+    package = pkgs.nextcloud26;
     config = {
       dbtype = "pgsql";
       dbuser = "nextcloud";
@@ -16,10 +27,23 @@
   };
 
   services.nginx = {
+    clientMaxBodySize = "25m";
     recommendedTlsSettings = true;
     recommendedOptimisation = true;
     recommendedGzipSettings = true;
     virtualHosts = {
+      "netbox.seaofdirac.org" = {
+        locations = {
+          "/" = {
+            proxyPass = "http://[::1]:8001";
+          };
+          "/static/" = {
+            alias = "${config.services.netbox.dataDir}/static";
+          };
+        };
+        forceSSL = true;
+        useACMEHost = "pollux.seaofdirac.org";
+      };
       "nextcloud.seaofdirac.org" = {
         forceSSL = true;
         useACMEHost = "pollux.seaofdirac.org";
@@ -51,9 +75,15 @@
     ];
   };
 
-  sops.secrets.nextcloud_password = {
-    owner = config.users.users.nextcloud.name;
-    group = config.users.groups.nextcloud.name;
+  sops.secrets = {
+    netbox_password = {
+      owner = config.users.users.netbox.name;
+      group = config.users.groups.netbox.name;
+    };
+    nextcloud_password = {
+      owner = config.users.users.nextcloud.name;
+      group = config.users.groups.nextcloud.name;
+    };
   };
 
   # ensure that postgres is running *before* running the setup
@@ -68,5 +98,6 @@
     };
   };
 
+  systemd.services.netbox.serviceConfig.SupplementaryGroups = [config.users.groups.keys.name];
   systemd.services.nextcloud.serviceConfig.SupplementaryGroups = [config.users.groups.keys.name];
 }

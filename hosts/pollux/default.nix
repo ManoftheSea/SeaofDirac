@@ -16,7 +16,7 @@
       HWMON_MODULES="coretemp"
     '';
 
-    noXlibs = true;
+    noXlibs = false;
 
     systemPackages = with pkgs; [
       lm_sensors
@@ -41,4 +41,6 @@
   system.activationScripts.persistent-directories = ''
     mkdir -pm 0755 /var/lib/ssh
   '';
+
+  system.stateVersion = "23.05";
 }

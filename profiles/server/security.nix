@@ -1,6 +1,6 @@
-{config, ...}: {
+{lib, ...}: {
   nix.settings.allowed-users = ["root"];
-  security.sudo.enable = false;
+  security.sudo.enable = lib.mkDefault false;
   services.openssh.extraConfig = ''
     AllowTcpForwarding no
     AllowAgentForwarding no

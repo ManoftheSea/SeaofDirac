@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   imports = [
@@ -10,6 +11,21 @@
   ];
 
   boot.kernelModules = ["coretemp"];
+  boot.initrd = {
+    availableKernelModules = ["lz4" "lz4_compress" "z3fold"];
+    kernelModules = ["lz4" "lz4_compress" "z3fold"];
+    preDeviceCommands = ''
+      printf lz4 > /sys/module/zswap/parameters/compressor
+      printf z3fold > /sys/module/zswap/parameters/zpool
+    '';
+  };
+
+  boot.kernelParams = ["zswap.enabled=1" "zswap.compressor=lz4"];
+  boot.kernelPackages = pkgs.linuxPackages.extend (lib.const (super: {
+    kernel = super.kernel.overrideDerivation (drv: {
+      nativeBuildInputs = (drv.nativeBuildInputs or []) ++ [pkgs.lz4];
+    });
+  }));
 
   environment = {
     etc."sysconfig/lm_sensors".text = ''

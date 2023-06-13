@@ -5,11 +5,6 @@
 }: {
   networking.firewall.allowedTCPPorts = [80 443];
 
-  services.netbox = {
-    enable = true;
-    secretKeyFile = config.sops.secrets.netbox_password.path;
-  };
-
   services.nextcloud = {
     enable = true;
     enableBrokenCiphersForSSE = false;
@@ -76,10 +71,6 @@
   };
 
   sops.secrets = {
-    netbox_password = {
-      owner = config.users.users.netbox.name;
-      group = config.users.groups.netbox.name;
-    };
     nextcloud_password = {
       owner = config.users.users.nextcloud.name;
       group = config.users.groups.nextcloud.name;
@@ -98,6 +89,5 @@
     };
   };
 
-  systemd.services.netbox.serviceConfig.SupplementaryGroups = [config.users.groups.keys.name];
   systemd.services.nextcloud.serviceConfig.SupplementaryGroups = [config.users.groups.keys.name];
 }

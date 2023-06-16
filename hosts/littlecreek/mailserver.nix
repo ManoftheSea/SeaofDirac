@@ -12,7 +12,7 @@
       indexAttachments = true;
       enforced = "body";
     };
-    indexDir = "/var/lib/dovcot/indices";
+    indexDir = "/var/lib/dovecot/indices";
     loginAccounts = {
       "derek@seaofdirac.org" = {
         hashedPasswordFile = config.sops.secrets.derek_password.path;

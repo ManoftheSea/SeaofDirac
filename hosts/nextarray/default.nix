@@ -18,7 +18,7 @@
 
   environment = {
     etc."machine-id".text = "8eb3bde8fc964dde8a6437eb5c526900";
-    noXlibs = true;
+    # noXlibs = true;
     systemPackages = builtins.attrValues {
       inherit
         (pkgs)

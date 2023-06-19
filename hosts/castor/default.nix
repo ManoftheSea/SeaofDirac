@@ -15,7 +15,7 @@
     etc."sysconfig/lm_sensors".text = ''
       HWMON_MODULES="coretemp"
     '';
-    noXlibs = true;
+    # noXlibs = true;
     systemPackages = with pkgs; [
       lm_sensors
       powertop

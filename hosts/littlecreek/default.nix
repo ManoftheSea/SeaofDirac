@@ -6,6 +6,7 @@
   imports = [
     ./filesystem.nix
     ./mailserver.nix
+    ./named.nix
     ./network.nix
     ./services.nix
   ];

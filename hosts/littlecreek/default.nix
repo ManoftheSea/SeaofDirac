@@ -7,6 +7,7 @@
     ./filesystem.nix
     ./mailserver.nix
     ./named.nix
+    ./netbox.nix
     ./network.nix
     ./services.nix
   ];

@@ -27,18 +27,6 @@
     recommendedOptimisation = true;
     recommendedGzipSettings = true;
     virtualHosts = {
-      "netbox.seaofdirac.org" = {
-        locations = {
-          "/" = {
-            proxyPass = "http://[::1]:8001";
-          };
-          "/static/" = {
-            alias = "${config.services.netbox.dataDir}/static";
-          };
-        };
-        forceSSL = true;
-        useACMEHost = "pollux.seaofdirac.org";
-      };
       "nextcloud.seaofdirac.org" = {
         forceSSL = true;
         useACMEHost = "pollux.seaofdirac.org";

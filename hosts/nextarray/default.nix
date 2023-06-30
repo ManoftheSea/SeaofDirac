@@ -14,6 +14,18 @@
   boot.loader.grub = {
     enable = true;
     device = "/dev/vda";
+    extraEntries = ''
+      menuentry "Netboot.xyz - gPXE" --class netboot --unrestricted {
+        linux16 ($drive1)//netboot.xyz.lkrn
+      }
+    '';
+    ipxe = {
+      "Netboot" = ''
+        #!ipxe
+        dhcp
+        chain --autofree https://boot.netboot.xyz
+      '';
+    };
   };
 
   environment = {

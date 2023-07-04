@@ -76,6 +76,7 @@
         home-manager
         less
         minicom
+        nvme-cli
         OVMF
         pciutils
         perl

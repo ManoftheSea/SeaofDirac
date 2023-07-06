@@ -7,6 +7,7 @@
 }: {
   imports = [
     ./filesystem.nix
+    ./prometheus.nix
   ];
 
   boot = {

@@ -48,6 +48,7 @@
   };
 
   networking.hostName = "aluminium";
+  networking.nftables.enable = true;
 
   services = {
     avahi = {

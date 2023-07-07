@@ -1,6 +1,8 @@
 {config, ...}: {
   networking.firewall.allowedTCPPorts = [80 443];
 
+  security.acme.certs."littlecreek.seaofdirac.org".extraDomainNames = ["netbox.seaofdirac.org"];
+
   services.netbox = {
     enable = true;
     extraConfig = "CSRF_TRUSTED_ORIGINS = [\"https://netbox.seaofdirac.org\"]";

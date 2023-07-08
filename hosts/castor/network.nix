@@ -25,6 +25,7 @@
       eth0 = {
         matchConfig.Name = "eth0";
         networkConfig.LinkLocalAddressing = "no";
+        linkConfig.RequiredForOnline = false;
       };
       wan = {
         matchConfig.Name = "wan";
@@ -43,6 +44,7 @@
         networkConfig = {
           Bridge = "br0";
         };
+        linkConfig.RequiredForOnline = false;
       };
     };
   };

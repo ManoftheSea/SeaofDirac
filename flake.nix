@@ -25,8 +25,6 @@
       inputs.nixpkgs.follows = "nixos";
       inputs.nixpkgs-stable.follows = "nixos";
     };
-
-    # arion - for services deployed through docker?
   };
 
   outputs = {

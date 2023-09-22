@@ -12,7 +12,7 @@
       allowedUDPPorts = [];
       trustedInterfaces = [];
     };
-    hostName = "nextarray";
+    hostName = "cloudnium";
     useDHCP = false;
     useNetworkd = true;
     wireless.enable = false;
@@ -23,6 +23,8 @@
     networks.ens3 = {
       matchConfig.Name = "ens3";
       networkConfig.DHCP = "yes";
+      address = ["23.26.137.45/24"];
+      gateway = ["23.26.137.1"];
     };
   };
 }

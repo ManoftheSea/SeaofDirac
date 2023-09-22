@@ -1,5 +1,5 @@
 {
-  security.acme.certs."nextarray.seaofdirac.org" = {
+  security.acme.certs."cloudnium.seaofdirac.org" = {
     webroot = "/var/lib/acme/.challenges";
     group = "certs";
   };
@@ -9,7 +9,7 @@
       recommendedTlsSettings = true;
       recommendedOptimisation = true;
       recommendedGzipSettings = true;
-      virtualHosts."nextarray.seaofdirac.org".enableACME = true;
+      virtualHosts."cloudnium.seaofdirac.org".enableACME = true;
     };
     openssh = {
       enable = true;

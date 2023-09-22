@@ -4,16 +4,16 @@
   ...
 }: {
   imports = [
-    ./filesystem.nix
+    ./disko.nix
     ./network.nix
     ./services.nix
-    ./ldap.nix
+    #    ./ldap.nix
   ];
 
   boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "virtio_pci" "virtio_blk"];
   boot.loader.grub = {
     enable = true;
-    device = "/dev/vda";
+#    device = "/dev/vda";
     extraEntries = ''
       menuentry "Netboot.xyz - gPXE" --class netboot --unrestricted {
         linux16 ($drive1)//netboot.xyz.lkrn

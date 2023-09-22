@@ -3,15 +3,17 @@
 
   inputs = {
     nixos.url = "github:nixos/nixpkgs/nixos-23.05";
-
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
-
-    # flake-utils.url = "github:/numtide/flake-utils";
 
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixos";
       # inputs.utils.follows = "flake-utils";
+    };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixos";
     };
 
     snm = {
@@ -32,6 +34,7 @@
     nixos,
     nixos-hardware,
     deploy-rs,
+    disko,
     snm,
     sops-nix,
   } @ inputs: {
@@ -91,6 +94,21 @@
           ./users/root.nix
         ];
       };
+      cloudnium = nixos.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = inputs;
+        modules = [
+          disko.nixosModules.disko
+          ./hosts/cloudnium/default.nix
+          ./profiles/core/base.nix
+          ./profiles/core/flakes.nix
+          ./profiles/server/base.nix
+          ./profiles/server/harden-network.nix
+          ./profiles/server/security.nix
+          ./profiles/acme.nix
+          ./users/root.nix
+        ];
+      };
       castor = nixos.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = inputs;
@@ -129,20 +147,6 @@
           snm.nixosModule
           sops-nix.nixosModules.sops
           ./hosts/littlecreek/default.nix
-          ./profiles/core/base.nix
-          ./profiles/core/flakes.nix
-          ./profiles/server/base.nix
-          ./profiles/server/harden-network.nix
-          ./profiles/server/security.nix
-          ./profiles/acme.nix
-          ./users/root.nix
-        ];
-      };
-      nextarray = nixos.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = inputs;
-        modules = [
-          ./hosts/nextarray/default.nix
           ./profiles/core/base.nix
           ./profiles/core/flakes.nix
           ./profiles/server/base.nix

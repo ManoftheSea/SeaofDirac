@@ -32,36 +32,46 @@
       };
     }
     // lib.genAttrs [
-      "ata-ST3000DM008-2DM166_Z504NFBT"
-      "ata-ST3000DM008-2DM166_Z504PKPJ"
-      "ata-ST3000DM008-2DM166_Z505F8ZQ"
-      "ata-ST3000DM008-2DM166_Z505HCGY"
+      "Z504NFBT"
+      "Z504PKPJ"
+      "Z505F8ZQ"
+      "Z505HCGY"
     ] (name: {
-      device = "/dev/disk/by-id/${name}";
+      device = "/dev/disk/by-id/ata-ST3000DM008-2DM166_${name}";
       type = "disk";
       content = {
-        type = "mdraid";
-        name = "tech-raid";
+        type = "gpt";
+        partitions = {
+          ESP = {
+            type = "EF00";
+            end = "128M";
+            content = {
+              type = "filesystem";
+              format = "vfat";
+            };
+          };
+          lv_member = {
+            size = "100%";
+            content = {
+              type = "lvm_pv";
+              vg = "raidpool";
+            };
+          };
+        };
       };
     });
 
-  disko.devices.mdadm = {
-    tech-raid = {
-      type = "mdadm";
-      level = 1;
-      content = {
-        type = "lvm_pv";
-        vg = "tech-pool";
-      };
-    };
-  };
-
   disko.devices.lvm_vg = {
-    tech-pool = {
+    raidpool = {
       type = "lvm_vg";
       lvs = {
         nix = {
           size = "100G";
+          lvm_type = "raid1";
+          extraArgs = [
+            "-m 3"
+            "--raidintegrity y"
+          ];
           content = {
             type = "filesystem";
             format = "ext4";
@@ -71,10 +81,17 @@
         };
         swap = {
           size = "32G";
+          lvm_type = "raid0";
+          extraArgs = ["-i4"];
           content.type = "swap";
         };
         var = {
           size = "10G";
+          lvm_type = "raid1";
+          extraArgs = [
+            "-m 3"
+            "--raidintegrity y"
+          ];
           content = {
             type = "filesystem";
             format = "ext4";
@@ -84,6 +101,11 @@
         };
         var-log = {
           size = "10G";
+          lvm_type = "raid1";
+          extraArgs = [
+            "-m 3"
+            "--raidintegrity y"
+          ];
           content = {
             type = "filesystem";
             format = "ext4";

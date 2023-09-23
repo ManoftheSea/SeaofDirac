@@ -21,7 +21,10 @@
         "usb_storage"
         "xhci_pci"
       ];
-      kernelModules = [];
+      kernelModules = [
+        "dm-raid"
+        "dm-integrity"
+      ];
     };
 
     kernelModules = ["kvm-intel"];
@@ -31,7 +34,7 @@
   };
 
   environment = {
-    #  etc."machine-id".text = "TODO";
+    etc."machine-id".text = "f90a55a23b01430b92228b0baa8c1d8e";
     systemPackages = builtins.attrValues {
       inherit
         (pkgs)

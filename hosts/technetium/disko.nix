@@ -15,7 +15,7 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/efi";
-                mountOptions = ["relatime" "noexec"];
+                mountOptions = ["relatime" "noexec" "discard"];
               };
             };
             nix-small = {
@@ -24,7 +24,7 @@
                 type = "filesystem";
                 format = "ext4";
                 mountpoint = "/nix-small";
-                mountOptions = ["noatime"];
+                mountOptions = ["noatime" "discard"];
               };
             };
           };
@@ -76,7 +76,7 @@
             type = "filesystem";
             format = "ext4";
             mountpoint = "/nix";
-            mountOptions = ["noatime"];
+            mountOptions = ["noatime" "discard"];
           };
         };
         swap = {
@@ -96,7 +96,7 @@
             type = "filesystem";
             format = "ext4";
             mountpoint = "/var";
-            mountOptions = ["relatime" "noexec"];
+            mountOptions = ["relatime" "noexec" "discard"];
           };
         };
         var-log = {
@@ -110,7 +110,7 @@
             type = "filesystem";
             format = "ext4";
             mountpoint = "/var/log";
-            mountOptions = ["relatime" "noexec"];
+            mountOptions = ["relatime" "noexec" "discard"];
           };
         };
       };

@@ -4,15 +4,16 @@
       enable = true;
       allowPing = true;
       allowedTCPPorts = [
-        22 # ssh
-        80 # http
-        389 # ldap
-        443 # https
+        22   # ssh
+        80   # http
+        443  # https
+        8080 # nix-serve
       ];
       allowedUDPPorts = [];
       trustedInterfaces = [];
     };
     hostName = "technetium";
+    nftables.enable = true;
     useDHCP = false;
     useNetworkd = true;
     wireless.enable = false;

@@ -11,6 +11,12 @@
       recommendedGzipSettings = true;
       virtualHosts."technetium.seaofdirac.org".enableACME = true;
     };
+
+    nix-serve = {
+      enable = true;
+      port = 8080;
+    };
+
     openssh = {
       enable = true;
       hostKeys = [

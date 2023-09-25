@@ -38,7 +38,17 @@
     systemPackages = builtins.attrValues {
       inherit
         (pkgs)
+        dnsutils
+        efibootmgr
+        file
+        gptfdisk
+        less
+        pciutils
+        psmisc
+        tmux
+        usbutils
         vim
+        wget
         ;
     };
   };

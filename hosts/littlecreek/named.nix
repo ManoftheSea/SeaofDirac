@@ -17,6 +17,7 @@
     # "dns64", allow-recusion, allow-query
     extraConfig = ''
       include "${config.sops.secrets."bind/acme_keys/cloudnium".path}";
+      include "${config.sops.secrets."bind/acme_keys/gravity".path}";
       include "${config.sops.secrets."bind/acme_keys/littlecreek".path}";
       include "${config.sops.secrets."bind/rndc_keys/aluminium".path}";
       include "${config.sops.secrets."bind/config/acls".path}";
@@ -31,8 +32,10 @@
         extraConfig = ''
           update-policy {
             grant aluminium zonesub any;
-            grant cloudnium.seaofdirac.org. name _acme-challenge.cloudnium.seaofdirac.org. txt;
-            grant littlecreek.seaofdirac.org. name _acme-challenge.littlecreek.seaofdirac.org. txt;
+            grant cloudnium.seaofdirac.org. name _acme-challenge.cloudnium.seaofdirac.org. TXT;
+            grant gravity.seaofdirac.org. name gravity.seaofdirac.org. ANY;
+            grant littlecreek.seaofdirac.org. name _acme-challenge.littlecreek.seaofdirac.org. TXT;
+            grant littlecreek.seaofdirac.org. name _acme-challenge.mta-sts.seaofdirac.org. TXT;
           };
         '';
       };

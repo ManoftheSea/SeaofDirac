@@ -1,4 +1,4 @@
-{
+{config, ...}: {
   security.acme.certs."littlecreek.seaofdirac.org" = {
     credentialsFile = config.sops.secrets."rfc2136.secret".path;
     dnsProvider = "rfc2136";

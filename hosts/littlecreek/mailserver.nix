@@ -2,7 +2,7 @@
   mailserver = {
     enable = true;
 
-    certificateScheme = "acme-nginx";
+    certificateScheme = "acme";
     domains = ["seaofdirac.org"];
     fullTextSearch = {
       enable = true;

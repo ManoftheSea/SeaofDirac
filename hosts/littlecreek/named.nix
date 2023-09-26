@@ -43,6 +43,7 @@
   };
 
   sops.secrets."bind/acme_keys/cloudnium".owner = config.users.users.named.name;
+  sops.secrets."bind/acme_keys/gravity".owner = config.users.users.named.name;
   sops.secrets."bind/acme_keys/littlecreek".owner = config.users.users.named.name;
   sops.secrets."bind/rndc_keys/aluminium".owner = config.users.users.named.name;
   sops.secrets."bind/config/acls".owner = config.users.users.named.name;

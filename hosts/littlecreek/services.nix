@@ -1,17 +1,23 @@
 {config, ...}: {
-  security.acme.certs."littlecreek.seaofdirac.org" = {
-    credentialsFile = config.sops.secrets."rfc2136.secret".path;
+  security.acme.defaults = {
+    credentialsFile = config.sops.secrets.rfc2136_secret.path;
     dnsProvider = "rfc2136";
-    email = "derek@seaofdirac.org";
-    extraDomainNames = ["mta-sts.seaofdirac.org"];
   };
+  security.acme.certs."littlecreek.seaofdirac.org".extraDomainNames = [
+    "mta-sts.seaofdirac.org"
+  ];
 
   services = {
     nginx = {
       recommendedTlsSettings = true;
       recommendedOptimisation = true;
       recommendedGzipSettings = true;
-      virtualHosts."littlecreek.seaofdirac.org".enableACME = true;
+      virtualHosts = {
+        "littlecreek.seaofdirac.org" = {
+          enableACME = true;
+          acmeRoot = null;
+        };
+      };
     };
 
     openssh.hostKeys = [
@@ -22,4 +28,8 @@
     ];
     qemuGuest.enable = true;
   };
+
+  sops.secrets.rfc2136_secret.owner = config.users.users.acme.name;
+
+  users.groups.certs.members = ["nginx"];
 }

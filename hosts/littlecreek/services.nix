@@ -1,5 +1,7 @@
 {
   security.acme.certs."littlecreek.seaofdirac.org" = {
+    credentialsFile = config.sops.secrets."rfc2136.secret".path;
+    dnsProvider = "rfc2136";
     email = "derek@seaofdirac.org";
     extraDomainNames = ["mta-sts.seaofdirac.org"];
   };

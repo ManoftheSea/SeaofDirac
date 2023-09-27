@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./disko.nix
+    ./named.nix
     ./network.nix
     ./services.nix
     #    ./ldap.nix
@@ -48,6 +49,11 @@
   };
 
   hardware.enableRedistributableFirmware = true;
+
+  sops = {
+    defaultSopsFile = ./secrets.yaml;
+    age.sshKeyPaths = ["/var/lib/ssh/ssh_host_ed25519_key"];
+  };
 
   system.activationScripts.persistent-directories = ''
     mkdir -pm 0755 /var/lib/ssh

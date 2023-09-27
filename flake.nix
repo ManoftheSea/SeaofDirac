@@ -114,6 +114,7 @@
         specialArgs = inputs;
         modules = [
           disko.nixosModules.disko
+          sops-nix.nixosModules.sops
           ./hosts/crunchbits/default.nix
           ./profiles/core/base.nix
           ./profiles/core/flakes.nix

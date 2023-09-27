@@ -23,7 +23,7 @@
       "seaofdirac.org" = {
         file = "/var/dns/seaofdirac.org.db";
         master = false;
-        masters = ["2601:550:5a00:b28c::1"];
+        masters = ["2001:550:5a00:b28c::1"];
       };
     };
   };

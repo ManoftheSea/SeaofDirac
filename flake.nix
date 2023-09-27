@@ -109,6 +109,21 @@
           ./users/root.nix
         ];
       };
+      crunchbits = nixos.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = inputs;
+        modules = [
+          disko.nixosModules.disko
+          ./hosts/crunchbits/default.nix
+          ./profiles/core/base.nix
+          ./profiles/core/flakes.nix
+          ./profiles/server/base.nix
+          ./profiles/server/harden-network.nix
+          ./profiles/server/security.nix
+          ./profiles/acme.nix
+          ./users/root.nix
+        ];
+      };
       castor = nixos.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = inputs;

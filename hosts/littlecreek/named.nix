@@ -17,6 +17,7 @@
     # "dns64", allow-recusion, allow-query
     extraConfig = ''
       include "${config.sops.secrets."bind/acme_keys/cloudnium".path}";
+      include "${config.sops.secrets."bind/acme_keys/crunchbits".path}";
       include "${config.sops.secrets."bind/acme_keys/gravity".path}";
       include "${config.sops.secrets."bind/acme_keys/littlecreek".path}";
       include "${config.sops.secrets."bind/rndc_keys/aluminium".path}";
@@ -28,11 +29,17 @@
       "seaofdirac.org" = {
         file = "/var/dns/seaofdirac.org.db";
         master = true;
-        slaves = ["homenets"];
+        slaves = [
+          "homenets"
+          "38.175.192.169"
+          "2606:a8c0:3::348"
+          "2606:a8c0:3:35c::/64"
+        ];
         extraConfig = ''
           update-policy {
             grant aluminium zonesub any;
             grant cloudnium.seaofdirac.org. name _acme-challenge.cloudnium.seaofdirac.org. TXT;
+            grant crunchbits.seaofdirac.org. name _acme-challenge.crunchbits.seaofdirac.org. TXT;
             grant gravity.seaofdirac.org. name gravity.seaofdirac.org. ANY;
             grant littlecreek.seaofdirac.org. name _acme-challenge.littlecreek.seaofdirac.org. TXT;
             grant littlecreek.seaofdirac.org. name _acme-challenge.mta-sts.seaofdirac.org. TXT;
@@ -43,6 +50,7 @@
   };
 
   sops.secrets."bind/acme_keys/cloudnium".owner = config.users.users.named.name;
+  sops.secrets."bind/acme_keys/crunchbits".owner = config.users.users.named.name;
   sops.secrets."bind/acme_keys/gravity".owner = config.users.users.named.name;
   sops.secrets."bind/acme_keys/littlecreek".owner = config.users.users.named.name;
   sops.secrets."bind/rndc_keys/aluminium".owner = config.users.users.named.name;

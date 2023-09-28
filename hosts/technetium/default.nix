@@ -58,6 +58,9 @@
     enableRedistributableFirmware = true;
   };
 
+  # Overwrite default
+  nix.gc.options = "";
+
   system.activationScripts.persistent-directories = ''
     mkdir -pm 0755 /var/lib/ssh
   '';

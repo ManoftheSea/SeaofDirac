@@ -177,14 +177,14 @@
         specialArgs = inputs;
         modules = [
           disko.nixosModules.disko
+          sops-nix.nixosModules.sops
           ./hosts/technetium/default.nix
           ./profiles/core/base.nix
           ./profiles/core/flakes.nix
           ./profiles/hardware/efi.nix
-          ./profiles/server/base.nix
           ./profiles/server/harden-network.nix
           ./profiles/server/security.nix
-          # ./profiles/acme.nix
+          ./profiles/acme.nix
           ./profiles/certificates.nix
           ./profiles/usbguard.nix
           ./users/root.nix

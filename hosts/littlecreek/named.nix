@@ -20,6 +20,7 @@
       include "${config.sops.secrets."bind/acme_keys/crunchbits".path}";
       include "${config.sops.secrets."bind/acme_keys/gravity".path}";
       include "${config.sops.secrets."bind/acme_keys/littlecreek".path}";
+      include "${config.sops.secrets."bind/acme_keys/singularity".path}";
       include "${config.sops.secrets."bind/acme_keys/technetium".path}";
       include "${config.sops.secrets."bind/rndc_keys/aluminium".path}";
       include "${config.sops.secrets."bind/config/acls".path}";
@@ -44,6 +45,7 @@
             grant gravity.seaofdirac.org. name gravity.seaofdirac.org. ANY;
             grant littlecreek.seaofdirac.org. name _acme-challenge.littlecreek.seaofdirac.org. TXT;
             grant littlecreek.seaofdirac.org. name _acme-challenge.mta-sts.seaofdirac.org. TXT;
+            grant singularity.seaofdirac.org. name _acme-challenge.singularity.seaofdirac.org. TXT;
             grant technetium.seaofdirac.org. name _acme-challenge.technetium.seaofdirac.org. TXT;
           };
         '';
@@ -55,6 +57,7 @@
   sops.secrets."bind/acme_keys/crunchbits".owner = config.users.users.named.name;
   sops.secrets."bind/acme_keys/gravity".owner = config.users.users.named.name;
   sops.secrets."bind/acme_keys/littlecreek".owner = config.users.users.named.name;
+  sops.secrets."bind/acme_keys/singularity".owner = config.users.users.named.name;
   sops.secrets."bind/acme_keys/technetium".owner = config.users.users.named.name;
   sops.secrets."bind/rndc_keys/aluminium".owner = config.users.users.named.name;
   sops.secrets."bind/config/acls".owner = config.users.users.named.name;

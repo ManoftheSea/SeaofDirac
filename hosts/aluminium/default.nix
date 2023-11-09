@@ -45,6 +45,7 @@
       enable = true;
       extraBackends = [pkgs.hplip];
     };
+    usbWwan.enable = true; # will be renamed usb-modeswitch in 23.11
   };
 
   networking.hostName = "aluminium";
@@ -60,7 +61,6 @@
     hardware.bolt.enable = true;
     pcscd.enable = true;
     power-profiles-daemon.enable = false;
-
     printing.enable = true;
   };
 

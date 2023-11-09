@@ -25,9 +25,10 @@
       address = [
         "38.175.192.169/24"
         "2606:a8c0:3::348/128"
-        "2606:a8c0:3:35c::a/64"
+#        "2606:a8c0:3:35c::a/64"
       ];
       gateway = ["38.175.192.1"];
+      networkConfig.LinkLocalAddressing = "ipv6";
       routes = [
         {
           routeConfig = {

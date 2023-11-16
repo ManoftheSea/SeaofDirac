@@ -46,7 +46,7 @@
       enable = true;
       extraBackends = [pkgs.hplip];
     };
-    usbWwan.enable = true; # will be renamed usb-modeswitch in 23.11
+    usb-modeswitch.enable = true;
   };
 
   networking.hostName = "aluminium";
@@ -105,6 +105,8 @@
   };
 
   security.polkit.enable = true;
+
+  system.stateVersion = "23.11";
 
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;

@@ -45,8 +45,8 @@
     locate = {
       enable = true;
       interval = "daily";
-      locate = pkgs.plocate;
       localuser = null;
+      package = pkgs.plocate;
     };
     power-profiles-daemon.enable = false; # conflict with tlp
     resolved = {

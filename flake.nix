@@ -2,7 +2,7 @@
   description = "Sea of Dirac setup";
 
   inputs = {
-    nixos.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixos.url = "github:nixos/nixpkgs/nixos-23.11";
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
     deploy-rs = {

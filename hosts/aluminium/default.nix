@@ -19,6 +19,7 @@
         "nvme"
         "sd_mod"
         "thunderbolt"
+        "uas"
         "usb_storage"
         "xhci_pci"
         # "z3fold"

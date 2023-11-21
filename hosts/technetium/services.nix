@@ -1,5 +1,7 @@
 {
   services = {
+    fstrim.enable = true;
+
     nix-serve = {
       enable = true;
       port = 8080;

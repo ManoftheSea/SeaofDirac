@@ -53,7 +53,7 @@
       requires = ["postgresql.service"];
       after = ["postgresql.service"];
     };
-    "nextcloud" = {
+    "phpfpm-nextcloud" = {
       requires = ["var-lib-nextcloud.mount"];
       after = ["var-lib-nextcloud.mount"];
     };

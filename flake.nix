@@ -46,6 +46,7 @@
         specialArgs = inputs;
         modules = [
           ./hosts/aluminium/default.nix
+          disko.nixosModules.disko
           nixos-hardware.nixosModules.framework-12th-gen-intel
           ./profiles/audio/pipewire.nix
           ./profiles/core/base.nix

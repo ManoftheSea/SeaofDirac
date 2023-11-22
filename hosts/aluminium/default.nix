@@ -6,7 +6,7 @@
   ...
 }: {
   imports = [
-    ./filesystem.nix
+    ./disko.nix
     ./prometheus.nix
   ];
 

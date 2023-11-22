@@ -1,4 +1,11 @@
 {
+  imports = [
+    ./nextcloud.nix
+    ./nginx.nix
+  ];
+
+  networking.firewall.allowedTCPPorts = [8080];
+
   services = {
     fstrim.enable = true;
 
@@ -16,5 +23,7 @@
         }
       ];
     };
+
+    postgresql.enable = true;
   };
 }

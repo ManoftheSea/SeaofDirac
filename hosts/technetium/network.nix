@@ -5,9 +5,6 @@
       allowPing = true;
       allowedTCPPorts = [
         22 # ssh
-        80 # http
-        443 # https
-        8080 # nix-serve
       ];
       allowedUDPPorts = [];
       trustedInterfaces = [];

@@ -113,6 +113,20 @@
             mountOptions = ["relatime" "noexec"];
           };
         };
+        var-lib-nextcloud = {
+          size = "1T";
+          lvm_type = "raid1";
+          extraArgs = [
+            "-m 3"
+            "--raidintegrity y"
+          ];
+          content = {
+            type = "filesystem";
+            format = "ext4";
+            mountpoint = "/var/lib/nextcloud";
+            mountOptions = ["nodev" "noexec" "relatime"];
+          };
+        };
       };
     };
   };

@@ -22,8 +22,9 @@
           "security@seaofdirac.org"
         ];
       };
-      "jessica@seaofdirac.org".hashedPasswordFile = config.sops.secrets.derek_password.path;
       "benjamin@seaofdirac.org".hashedPasswordFile = config.sops.secrets.derek_password.path;
+      "jessica@seaofdirac.org".hashedPasswordFile = config.sops.secrets.derek_password.path;
+      "nextcloud@seaofdirac.org".hashedPasswordFile = config.sops.secrets.nextcloud_password.path;
     };
     fqdn = "littlecreek.seaofdirac.org";
   };
@@ -38,5 +39,6 @@
   };
 
   sops.secrets.derek_password.owner = config.users.users.dovecot2.name;
+  sops.secrets.nextcloud_password.owner = config.users.users.dovecot2.name;
   systemd.services.dovecot2.serviceConfig.SupplementaryGroups = [config.users.groups.keys.name];
 }

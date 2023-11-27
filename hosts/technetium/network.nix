@@ -19,10 +19,10 @@
   systemd.network = {
     enable = true;
     networks = {
-      eno1 = {
-        matchConfig.Name = "eno1";
-        address = ["192.168.30.10/24"];
-        gateway = ["192.168.30.1"];
+      enp4s0f0 = {
+        matchConfig.Name = "enp4s0f0";
+        address = ["192.168.200.10/24"];
+        gateway = ["192.168.200.1"];
       };
     };
   };

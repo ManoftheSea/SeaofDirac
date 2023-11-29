@@ -2,6 +2,7 @@
   imports = [
     ./nextcloud.nix
     ./nginx.nix
+    ./tftp.nix
   ];
 
   networking.firewall.allowedTCPPorts = [8080];

@@ -42,6 +42,7 @@
         efibootmgr
         file
         gptfdisk
+        ipmitool
         less
         pciutils
         psmisc

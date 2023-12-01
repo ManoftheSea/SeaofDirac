@@ -139,7 +139,6 @@ in
         "cert.pem:/var/lib/acme/${ldapCertDomain}/cert.pem"
         "key.pem:/var/lib/acme/${ldapCertDomain}/key.pem"
       ];
-      after = ["acme-${ldapCertDomain}.service"];
       wants = ["acme-${ldapCertDomain}.service"];
     };
   }

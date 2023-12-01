@@ -18,7 +18,6 @@
       dbname = "nextcloud";
     };
     configureRedis = true;
-    enableBrokenCiphersForSSE = false;
     #extraOptions = {
     #  mail_smtpmode = "sendmail";
     #  mail_sendmailmode = "pipe";
@@ -40,7 +39,7 @@
     ensureUsers = [
       {
         name = "nextcloud";
-        ensurePermissions."DATABASE nextcloud" = "ALL PRIVILEGES";
+        ensureDBOwnership = true;
       }
     ];
   };

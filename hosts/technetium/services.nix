@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   imports = [
     ./nextcloud.nix
     ./nginx.nix
@@ -25,6 +25,9 @@
       ];
     };
 
-    postgresql.enable = true;
+    postgresql = {
+      enable = true;
+      package = pkgs.postgresql_15;
+    };
   };
 }

@@ -15,6 +15,7 @@
       availableKernelModules = [
         "ahci"
         "ehci_pci"
+        "raid1"
         "sd_mod"
         "sr_mod"
         "usbhid"
@@ -71,6 +72,8 @@
   system.activationScripts.persistent-directories = ''
     mkdir -pm 0755 /var/lib/ssh
   '';
+
+  system.stateVersion = "23.11";
 
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;

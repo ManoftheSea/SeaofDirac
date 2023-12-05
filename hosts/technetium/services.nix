@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   imports = [
+    ./kea.nix
     ./nextcloud.nix
     ./nginx.nix
     ./tftp.nix

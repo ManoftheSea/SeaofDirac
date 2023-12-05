@@ -74,6 +74,7 @@
   '';
 
   system.stateVersion = "23.11";
+  time.timeZone = "UTC";
 
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;

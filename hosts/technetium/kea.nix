@@ -80,7 +80,7 @@
               {
                 hw-address = "04:0e:3c:58:90:06";
                 ip-address = "192.168.201.3";
-                hostname = "printer.seaofdirac.org";
+                hostname = "HP589006";
               }
             ];
             subnet = "192.168.201.0/24";

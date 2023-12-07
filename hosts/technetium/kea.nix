@@ -89,8 +89,16 @@
             id = 400;
             option-data = [
               {
+                name = "routers";
+                data = "172.20.20.1";
+              }
+              {
                 name = "domain-name-servers";
                 data = "8.8.8.8, 1.1.1.1";
+              }
+              {
+                name = "domain-name";
+                data = "guests.seaofdirac.org";
               }
             ];
             pools = [
@@ -126,6 +134,51 @@
               }
             ];
             subnet = "172.20.20.0/24";
+          }
+          {
+            id = 1000;
+            option-data = [
+              {
+                name = "routers";
+                data = "10.255.253.1";
+              }
+              {
+                name = "domain-name";
+                data = "internal.seaofdirac.org";
+              }
+              {
+                name = "domain-search";
+                data = "seaofdirac.org";
+              }
+            ];
+            reservations = [
+              {
+                hw-address = "18:66:da:ac:91:23";
+                ip-address = "10.255.253.100";
+                hostname = "tech-ipmi";
+              }
+              {
+                hw-address = "00:00:68:17:9a:c5";
+                ip-address = "10.255.253.110";
+                hostname = "ups";
+              }
+              {
+                hw-address = "fc:ec:da:e5:e3:e6";
+                ip-address = "10.255.253.253";
+                hostname = "uap-e5e3e6";
+              }
+              {
+                hw-address = "8c:fe:74:12:d9:b0";
+                ip-address = "10.255.253.252";
+                hostname = "r610-12d9b0";
+              }
+              {
+                hw-address = "8c:fe:74:12:ab:40";
+                ip-address = "10.255.253.251";
+                hostname = "r610-12ab40";
+              }
+            ];
+            subnet = "10.255.253.0/24";
           }
         ];
       };

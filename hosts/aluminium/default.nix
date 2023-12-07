@@ -62,7 +62,10 @@
     hardware.bolt.enable = true;
     pcscd.enable = true;
     power-profiles-daemon.enable = false;
-    printing.enable = true;
+    printing = {
+      enable = true;
+      drivers = [pkgs.hplip];
+    };
   };
 
   environment = {

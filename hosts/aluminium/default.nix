@@ -66,6 +66,7 @@
       enable = true;
       drivers = [pkgs.hplip];
     };
+    resolved.enable = true;
   };
 
   environment = {

@@ -6,7 +6,7 @@
       allowedTCPPorts = [
         22 # ssh
       ];
-      allowedUDPPorts = [];
+      allowedUDPPorts = [5353];
       trustedInterfaces = [];
     };
     hostName = "technetium";

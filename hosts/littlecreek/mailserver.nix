@@ -13,6 +13,7 @@
       enforced = "body";
     };
     indexDir = "/var/lib/dovecot/indices";
+    localDnsResolver = false;
     loginAccounts = {
       "derek@seaofdirac.org" = {
         hashedPasswordFile = config.sops.secrets.derek_password.path;

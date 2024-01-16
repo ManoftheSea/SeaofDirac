@@ -158,7 +158,7 @@
                 hostname = "tech-ipmi";
               }
               {
-                hw-address = "00:00:68:17:9a:c5";
+                hw-address = "00:02:99:1B:76:79";
                 ip-address = "10.255.253.110";
                 hostname = "ups";
               }

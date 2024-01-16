@@ -40,6 +40,7 @@
   } @ inputs: {
     formatter.x86_64-linux = nixos.legacyPackages.x86_64-linux.alejandra;
 
+    # client systems
     nixosConfigurations = {
       aluminium = nixos.lib.nixosSystem {
         system = "x86_64-linux";
@@ -54,24 +55,6 @@
           ./profiles/graphical/intel-gpu.nix
           ./profiles/hardware/efi.nix
           ./profiles/hardware/virt-manager.nix
-          ./profiles/impermanence.nix
-          ./profiles/laptop.nix
-          ./profiles/usbguard.nix
-          ./users/derek.nix
-          ./users/root.nix
-        ];
-      };
-      osmium = nixos.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = inputs;
-        modules = [
-          ./hosts/osmium/default.nix
-          nixos-hardware.nixosModules.framework-12th-gen-intel
-          ./profiles/audio/pipewire.nix
-          ./profiles/core/base.nix
-          ./profiles/core/flakes.nix
-          ./profiles/graphical/intel-gpu.nix
-          ./profiles/hardware/efi.nix
           ./profiles/impermanence.nix
           ./profiles/laptop.nix
           ./profiles/usbguard.nix
@@ -95,21 +78,8 @@
           ./users/root.nix
         ];
       };
-      cloudnium = nixos.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = inputs;
-        modules = [
-          disko.nixosModules.disko
-          ./hosts/cloudnium/default.nix
-          ./profiles/core/base.nix
-          ./profiles/core/flakes.nix
-          ./profiles/server/base.nix
-          ./profiles/server/harden-network.nix
-          ./profiles/server/security.nix
-          ./profiles/acme.nix
-          ./users/root.nix
-        ];
-      };
+
+      # server systems
       crunchbits = nixos.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = inputs;
@@ -123,37 +93,6 @@
           ./profiles/server/harden-network.nix
           ./profiles/server/security.nix
           ./profiles/acme.nix
-          ./users/root.nix
-        ];
-      };
-      castor = nixos.lib.nixosSystem {
-        system = "aarch64-linux";
-        specialArgs = inputs;
-        modules = [
-          ./hosts/castor/default.nix
-          ./profiles/core/base.nix
-          ./profiles/core/flakes.nix
-          ./profiles/hardware/efi.nix
-          ./profiles/server/base.nix
-          ./profiles/server/harden-network.nix
-          ./profiles/server/security.nix
-          ./users/root.nix
-        ];
-      };
-      pollux = nixos.lib.nixosSystem {
-        system = "aarch64-linux";
-        specialArgs = inputs;
-        modules = [
-          sops-nix.nixosModules.sops
-          ./hosts/pollux/default.nix
-          ./profiles/core/base.nix
-          ./profiles/core/flakes.nix
-          ./profiles/hardware/efi.nix
-          ./profiles/server/base.nix
-          ./profiles/server/harden-network.nix
-          ./profiles/server/security.nix
-          ./profiles/acme.nix
-          ./profiles/certificates.nix
           ./users/root.nix
         ];
       };
@@ -210,8 +149,8 @@
           self.nixosConfigurations
         )
         {
+          crunchbits.fastConnect = false;
           littlecreek.fastConnect = false;
-          nextarray.fastConnect = false;
         };
     };
 

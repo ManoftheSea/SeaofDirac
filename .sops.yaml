@@ -1,18 +1,11 @@
 keys:
   - &user_derek       age1m9lkn3stwwkgdrrhvt2npqs6hhvpceduwz4csrzgwlypde4jd3usphxwca
   - &user_derek_yk    age1yubikey1qtsz0xkjqqxvm4uev2d6fpkdvu5zmx9v8th8dfzpdtcx23qedk832f7nf8v
-  - &host_cloudnium   age176fs8zynkw8qq3wcmjyj4qcv3q4c3juwpqcplmqr8q32mfuy3pyq84pkhl
   - &host_crunchbits  age1kf2f7dh5tqur8lszqa6jsa7efn00krk6g0hzwx7apprx62q6ru2qm0fr3g
   - &host_littlecreek age1lttery3xgzrze6757s8mmg48slu27jwhawjhn98tyx0ft2fekd3qyuhmy0
-  - &host_pollux      age1ctes29mnyzr9jwnknl69rgerkv8ztpnlqg7dvd47y6rllx2nc46qw4yc2j
   - &host_technetium  age1tzrqdxvp9mqwqq2p8xf3zfn7pstp4e054m5w03c62j6rqth2p9qq2tf044
 
 creation_rules:
-  - path_regex: hosts/cloudnium/secrets\.yaml$
-    key_groups:
-    - age:
-      - *user_derek
-      - *host_cloudnium
   - path_regex: hosts/crunchbits/secrets\.yaml$
     key_groups:
     - age:
@@ -23,11 +16,6 @@ creation_rules:
     - age:
       - *user_derek
       - *host_littlecreek
-  - path_regex: hosts/pollux/secrets\.yaml$
-    key_groups:
-    - age:
-      - *user_derek
-      - *host_pollux
   - path_regex: hosts/technetium/secrets\.yaml$
     key_groups:
     - age:

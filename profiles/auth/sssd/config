@@ -10,8 +10,8 @@
 
 [domain/seaofdirac.org]
   access_provider       = ldap
-  auth_provider         = krb5
-  chpass_provider       = krb5
+  auth_provider         = ldap
+  chpass_provider       = ldap
   id_provider           = ldap
 
   ldap_uri              = _srv_
@@ -32,6 +32,6 @@
   krb5_store_password_if_offline = true
   krb5_ccname_template  = KEYRING:persistent:%U
   enumerate             = false
-  min_id                = 1000
+  min_id                = 2000
   cache_credentials     = true
   debug_level           = 0x0070

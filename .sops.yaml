@@ -3,6 +3,7 @@ keys:
   - &user_derek_yk    age1yubikey1qtsz0xkjqqxvm4uev2d6fpkdvu5zmx9v8th8dfzpdtcx23qedk832f7nf8v
   - &host_crunchbits  age1kf2f7dh5tqur8lszqa6jsa7efn00krk6g0hzwx7apprx62q6ru2qm0fr3g
   - &host_littlecreek age1lttery3xgzrze6757s8mmg48slu27jwhawjhn98tyx0ft2fekd3qyuhmy0
+  - &host_nickel      age1nnsgzkz2wjwkm6ky5deztag73w5k25kk3myndpxpmyfrm6lkny6q5gkzpm
   - &host_technetium  age1tzrqdxvp9mqwqq2p8xf3zfn7pstp4e054m5w03c62j6rqth2p9qq2tf044
 
 creation_rules:
@@ -16,6 +17,11 @@ creation_rules:
     - age:
       - *user_derek
       - *host_littlecreek
+  - path_regex: hosts/nickel/secrets\.yaml$
+    key_groups:
+    - age:
+      - *user_derek
+      - *host_nickel
   - path_regex: hosts/technetium/secrets\.yaml$
     key_groups:
     - age:

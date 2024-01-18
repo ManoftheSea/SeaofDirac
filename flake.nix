@@ -51,6 +51,7 @@
           nixos-hardware.nixosModules.framework-12th-gen-intel
           ./profiles/audio/pipewire.nix
           ./profiles/core/base.nix
+          ./profiles/core/dist.nix
           ./profiles/core/flakes.nix
           ./profiles/graphical/intel-gpu.nix
           ./profiles/hardware/efi.nix

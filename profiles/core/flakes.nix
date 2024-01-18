@@ -1,4 +1,7 @@
 {nixos, ...}: {
-  nix.registry.nixpkgs.flake = nixos;
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix = {
+    nixPath = ["nixpkgs=${nixos.outPath}"];
+    registry.nixpkgs.flake = nixos;
+    settings.experimental-features = ["nix-command" "flakes"];
+  };
 }

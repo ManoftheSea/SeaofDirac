@@ -1,0 +1,37 @@
+[sssd]
+  config_file_version = 2
+  services            = nss, pam, sudo, ssh
+  domains             = seaofdirac.org
+
+[nss]
+  filter_groups       = root
+  filter_users        = root
+  enum_cache_timeout  = 30
+
+[domain/seaofdirac.org]
+  access_provider       = ldap
+  auth_provider         = ldap
+  chpass_provider       = ldap
+  id_provider           = ldap
+
+  ldap_uri              = _srv_
+  ldap_search_base      = dc=seaofdirac,dc=org
+  ldap_sudo_search_base = ou=sudoers,dc=seaofdirac,dc=org
+  ldap_access_filter    = (objectClass=posixAccount)
+  ldap_chpass_update_last_change = true
+  ldap_pwd_policy       = none
+  ldap_tls_reqcert      = demand
+  ldap_tls_cacert       = /etc/ssl/certs/ca-certificates.crt
+  ldap_id_use_start_tls = true
+  ldap_default_bind_dn  = cn=readonly,ou=Service,dc=seaofdirac,dc=org
+  ldap_default_authtok  = $SSSD_LDAP_DEFAULT_AUTHTOK
+  ldap_user_ssh_public_key = sshPublicKey
+
+  krb5_realm            = SEAOFDIRAC.ORG
+  krb5_server           = kerberos.seaofdirac.org
+  krb5_store_password_if_offline = true
+  krb5_ccname_template  = KEYRING:persistent:%U
+  enumerate             = false
+  min_id                = 1999
+  cache_credentials     = true
+  debug_level           = 0x0070

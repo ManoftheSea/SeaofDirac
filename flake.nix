@@ -62,6 +62,27 @@
           ./users/root.nix
         ];
       };
+      nickel = nixos.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = inputs;
+        modules = [
+          ./hosts/nickel/default.nix
+          disko.nixosModules.disko
+          sops-nix.nixosModules.sops
+          ./profiles/audio/pipewire.nix
+          ./profiles/core/base.nix
+          ./profiles/core/flakes.nix
+          ./profiles/graphical/intel-gpu.nix
+          ./profiles/hardware/efi.nix
+          ./profiles/hardware/virt-manager.nix
+          ./profiles/impermanence.nix
+          ./profiles/laptop.nix
+          ./profiles/usbguard.nix
+          ./users/derek.nix
+          ./users/benjamin.nix
+          ./users/root.nix
+        ];
+      };
       sodium = nixos.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = inputs;

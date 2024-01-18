@@ -70,7 +70,6 @@
           disko.nixosModules.disko
           sops-nix.nixosModules.sops
           ./profiles/audio/pipewire.nix
-          ./profiles/auth/sssd.nix
           ./profiles/core/base.nix
           ./profiles/core/flakes.nix
           ./profiles/graphical/intel-gpu.nix
@@ -80,6 +79,7 @@
           ./profiles/laptop.nix
           ./profiles/usbguard.nix
           ./users/derek.nix
+          ./users/benjamin.nix
           ./users/root.nix
         ];
       };

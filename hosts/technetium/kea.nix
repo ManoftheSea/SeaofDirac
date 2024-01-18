@@ -69,6 +69,40 @@
             subnet = "192.168.101.0/24";
           }
           {
+            id = 102;
+            option-data = [
+              {
+                name = "routers";
+                data = "192.168.102.1";
+              }
+              {
+                name = "time-servers";
+                data = "192.168.102.1";
+              }
+              {
+                name = "domain-name";
+                data = "users.seaofdirac.org";
+              }
+              {
+                name = "domain-search";
+                data = "seaofdirac.org";
+              }
+            ];
+            pools = [
+              {
+                pool = "192.168.102.100 - 192.168.102.200";
+              }
+            ];
+            reservations = [
+              {
+                hw-address = "30:24:32:84:bf:2f";
+                ip-address = "192.168.102.50";
+                hostname = "nickel";
+              }
+            ];
+            subnet = "192.168.102.0/24";
+          }
+          {
             id = 201;
             option-data = [
               {

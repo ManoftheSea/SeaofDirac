@@ -8,7 +8,7 @@
         partitions = {
           ESP = {
             type = "EF00";
-            priority=1000;
+            priority = 1000;
             start = "1M";
             end = "1G";
             content = {
@@ -20,7 +20,7 @@
           };
           public = {
             type = "8E00";
-            priority=1010;
+            priority = 1010;
             end = "512G";
             content = {
               type = "lvm_pv";
@@ -29,7 +29,7 @@
           };
           private = {
             type = "8309";
-            priority=1020;
+            priority = 1020;
             end = "1536G";
             content = {
               type = "luks";

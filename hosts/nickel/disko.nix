@@ -1,7 +1,7 @@
 {
   disko.devices = {
-    disk.emmc = {
-      device = "/dev/mmcblk0";
+    disk.sda = {
+      device = "/dev/disk/by-id/ata-SPCC_M.2_SSD_YT20220400149";
       type = "disk";
       content = {
         type = "gpt";
@@ -18,7 +18,7 @@
             };
           };
           nix = {
-            end = "11G";
+            end = "100G";
             priority = 1010;
             content = {
               type = "filesystem";
@@ -28,7 +28,7 @@
             };
           };
           var = {
-            end = "13G";
+            end = "200G";
             priority = 1020;
             content = {
               type = "filesystem";
@@ -38,7 +38,7 @@
             };
           };
           home = {
-            end = "14G";
+            end = "470G";
             priority = 1030;
             content = {
               type = "filesystem";

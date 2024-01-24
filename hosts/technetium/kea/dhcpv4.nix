@@ -45,10 +45,10 @@
               name = "domain-search";
               data = "seaofdirac.org";
             }
-            #{
-            #  name = "v6-only-preferred";
-            #  data = "1800";
-            #}
+            {
+              name = "v6-only-preferred";
+              data = "1800";
+            }
           ];
           pools = [
             {

@@ -6,6 +6,7 @@
   imports = [
     ./kea/dhcpv4.nix
     ./kea/dhcpv6.nix
+    ./kea/dhcp-ddns.nix
   ];
 
   networking.firewall.allowedTCPPorts = [];

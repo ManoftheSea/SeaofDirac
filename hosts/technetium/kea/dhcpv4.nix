@@ -2,13 +2,10 @@
   services.kea.dhcp4 = {
     enable = true;
     settings = {
+      authoritative = true;
+      dhcp-ddns.enable-updates = true;
+      ddns-override-client-update = true;
       hosts-database = {
-        type = "postgresql";
-        name = "kea";
-        host = "/run/postgresql";
-        user = "kea";
-      };
-      lease-database = {
         type = "postgresql";
         name = "kea";
         host = "/run/postgresql";
@@ -18,15 +15,21 @@
         dhcp-socket-type = "udp";
         interfaces = ["enp4s0f0/192.168.200.10"];
       };
+      lease-database = {
+        type = "postgresql";
+        name = "kea";
+        host = "/run/postgresql";
+        user = "kea";
+      };
       option-data = [
         {
           name = "domain-name-servers";
           data = "192.168.200.5";
         }
       ];
-      authoritative = true;
       subnet4 = [
         {
+          ddns-qualifying-suffix = "users.seaofdirac.org";
           id = 101;
           option-data = [
             {

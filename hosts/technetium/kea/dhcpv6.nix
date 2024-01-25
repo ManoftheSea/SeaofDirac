@@ -18,6 +18,8 @@
       # lease-database {
       #   type = "memfile";
       # };
+      dhcp-ddns.enable-updates = true;
+      ddns-override-client-update = true;
       interfaces-config.interfaces = ["enp4s0f0/2601:5cd:c100:3940::10"];
       option-data = [
         {
@@ -56,6 +58,7 @@
           subnet = "2601:5cd:c100:3941::/64";
         }
         {
+          ddns-qualifying-suffix = "users.seaofdirac.org";
           id = 82;
           subnet = "2601:5cd:c100:3942::/64";
         }

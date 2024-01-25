@@ -6,38 +6,12 @@
   ...
 }: {
   imports = [
+    ./bootloader.nix
     ./disko.nix
+    ./network.nix
     ./prometheus.nix
+    ./services.nix
   ];
-
-  boot = {
-    binfmt.emulatedSystems = ["aarch64-linux"];
-    binfmt.registrations.aarch64-linux.fixBinary = true;
-
-    initrd = {
-      availableKernelModules = [
-        "nvme"
-        "sd_mod"
-        "thunderbolt"
-        "uas"
-        "usb_storage"
-        "xhci_pci"
-        # "z3fold"
-        # "zstd"
-      ];
-      kernelModules = [];
-    };
-
-    kernelModules = ["kvm-intel"];
-    kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [
-      "module_blacklist=hid_sensor_hub"
-      # "zswap.enabled=1"
-      # "zswap.compressor=zstd"
-      # "zswap.zpool=z3fold"
-    ];
-    extraModulePackages = [];
-  };
 
   hardware = {
     cpu.intel.updateMicrocode = nixos.lib.mkDefault config.hardware.enableRedistributableFirmware;
@@ -47,26 +21,6 @@
       extraBackends = [pkgs.hplip];
     };
     usb-modeswitch.enable = true;
-  };
-
-  networking.hostName = "aluminium";
-  networking.nftables.enable = true;
-
-  services = {
-    avahi = {
-      enable = true;
-      nssmdns = true;
-      openFirewall = true;
-    };
-    fwupd.enable = true;
-    hardware.bolt.enable = true;
-    pcscd.enable = true;
-    power-profiles-daemon.enable = false;
-    printing = {
-      enable = true;
-      drivers = [pkgs.hplip];
-    };
-    resolved.enable = true;
   };
 
   environment = {
@@ -96,14 +50,6 @@
         wget
         ;
     };
-  };
-
-  networking.firewall = {
-    allowedTCPPorts = [5355]; # LLMNR
-    allowedUDPPorts = [
-      5353 # mDNS
-      5355 # LLMNR
-    ];
   };
 
   programs = {

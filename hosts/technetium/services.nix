@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./kea.nix
     ./nextcloud.nix
@@ -14,6 +18,7 @@
     nix-serve = {
       enable = true;
       port = 8080;
+      secretKeyFile = config.sops.secrets.nix_build_key.path;
     };
 
     openssh = {

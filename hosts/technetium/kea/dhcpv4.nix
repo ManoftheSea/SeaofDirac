@@ -61,6 +61,7 @@
           subnet = "192.168.101.0/24";
         }
         {
+          ddns-qualifying-suffix = "users.seaofdirac.org";
           id = 102;
           option-data = [
             {
@@ -89,7 +90,7 @@
             {
               hw-address = "30:24:32:84:bf:2f";
               ip-address = "192.168.102.50";
-              hostname = "nickel";
+              hostname = "nickel.users.seaofdirac.org.";
             }
           ];
           subnet = "192.168.102.0/24";
@@ -106,7 +107,7 @@
             {
               hw-address = "04:0e:3c:58:90:06";
               ip-address = "192.168.201.3";
-              hostname = "HP589006";
+              hostname = "HP589006.seaofdirac.org.";
             }
           ];
           subnet = "192.168.201.0/24";
@@ -181,22 +182,22 @@
             {
               hw-address = "18:66:da:ac:91:23";
               ip-address = "10.255.253.100";
-              hostname = "tech-ipmi";
+              hostname = "tech-ipmi.seaofdirac.org.";
             }
             {
               hw-address = "00:02:99:1B:76:79";
               ip-address = "10.255.253.110";
-              hostname = "ups";
+              hostname = "ups.seaofdirac.org.";
             }
             {
               hw-address = "8c:fe:74:12:d9:b0";
               ip-address = "10.255.253.252";
-              hostname = "r610-12d9b0";
+              hostname = "r610-12d9b0.seaofdirac.org.";
             }
             {
               hw-address = "8c:fe:74:12:ab:40";
               ip-address = "10.255.253.251";
-              hostname = "r610-12ab40";
+              hostname = "r610-12ab40.seaofdirac.org.";
             }
           ];
           subnet = "10.255.253.0/24";

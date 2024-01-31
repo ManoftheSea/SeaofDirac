@@ -41,6 +41,7 @@
         rsync
         strace
         tmux
+        unar
         usbutils
         vim
         virt-manager

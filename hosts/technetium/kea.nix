@@ -24,4 +24,15 @@
       }
     ];
   };
+  
+  systemd.services = {
+    "kea-dhcp4-server" = {
+      requires = ["postgresql.service"];
+      after = ["postgresql.service"];
+    };
+    "kea-dhcp6-server" = {
+      requires = ["postgresql.service"];
+      after = ["postgresql.service"];
+    };
+  };
 }

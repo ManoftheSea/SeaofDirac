@@ -43,6 +43,7 @@
         tmux
         unar
         usbutils
+        vlc
         vim
         virt-manager
         wget

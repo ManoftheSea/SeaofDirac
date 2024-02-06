@@ -4,18 +4,13 @@
   ...
 }: {
   imports = [
+    ./bootloader.nix
     ./filesystem.nix
     ./mailserver.nix
     ./named.nix
     ./network.nix
     ./services.nix
   ];
-
-  boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "virtio_pci" "virtio_blk"];
-  boot.loader.grub = {
-    enable = true;
-    device = "/dev/vda";
-  };
 
   environment = {
     etc."machine-id".text = "5ad95e997a0f413f8770de368bb106ce";

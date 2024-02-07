@@ -5,7 +5,6 @@
       nssmdns = true;
       openFirewall = true;
     };
-    fwupd.enable = true;
     hardware.bolt.enable = true;
     openssh.enable = true;
     pcscd.enable = true;

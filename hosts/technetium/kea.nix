@@ -24,7 +24,7 @@
       }
     ];
   };
-  
+
   systemd.services = {
     "kea-dhcp4-server" = {
       requires = ["postgresql.service"];

@@ -1,8 +1,8 @@
-{nixos, ...}: {
+{nixpkgs, ...}: {
   nix = {
     channel.enable = false;
-    nixPath = ["nixpkgs=${nixos.outPath}"];
-    registry.nixpkgs.flake = nixos;
+    nixPath = ["nixpkgs=${nixpkgs.outPath}"];
+    registry.nixpkgs.flake = nixpkgs;
     settings.experimental-features = ["nix-command" "flakes"];
   };
 }

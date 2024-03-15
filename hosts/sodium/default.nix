@@ -1,8 +1,6 @@
 {
   config,
   pkgs,
-  nixos,
-  nixos-hardware,
   ...
 }: {
   imports = [

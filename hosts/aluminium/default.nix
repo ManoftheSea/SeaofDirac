@@ -1,8 +1,7 @@
 {
   config,
   pkgs,
-  nixos,
-  nixos-hardware,
+  lib,
   ...
 }: {
   imports = [
@@ -14,7 +13,7 @@
   ];
 
   hardware = {
-    cpu.intel.updateMicrocode = nixos.lib.mkDefault config.hardware.enableRedistributableFirmware;
+    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
     sane = {
       enable = true;

@@ -2,47 +2,66 @@
   description = "Sea of Dirac setup";
 
   inputs = {
-    nixos.url = "github:nixos/nixpkgs/nixos-23.11";
+    ### Official NixOS Package Sources ###
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    # Official hardware configurations
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
+    ### Utility repos ###
+
+    # Deployment tool with magic rollback
     deploy-rs = {
       url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
       # inputs.utils.follows = "flake-utils";
     };
 
+    # Declarative partitioning and formatting
     disko = {
       url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Declarative mail server with postfix and dovecot
     snm = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-23.05";
-      inputs.nixpkgs.follows = "nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "deploy-rs/utils";
     };
 
+    # Secrets management. TODO ./docs/secrets.md
     sops-nix = {
       url = "github:mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixos";
-      inputs.nixpkgs-stable.follows = "nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs";
     };
   };
 
   outputs = {
     self,
-    nixos,
+    nixpkgs,
     nixos-hardware,
     deploy-rs,
     disko,
     snm,
     sops-nix,
-  } @ inputs: {
-    formatter.x86_64-linux = nixos.legacyPackages.x86_64-linux.alejandra;
+    ...
+  } @ inputs: let
+    systems = [
+      "aarch64-linux"
+      "x86_64-linux"
+    ];
+    forAllSystems = function:
+      nixpkgs.lib.genAttrs systems (system: function nixpkgs.legacyPackages.${system});
+
+  in {
+    formatter = forAllSystems (pkgs: pkgs.alejandra);
 
     # client systems
     nixosConfigurations = {
-      aluminium = nixos.lib.nixosSystem {
+      aluminium = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = inputs;
         modules = [
@@ -63,7 +82,7 @@
           ./users/root.nix
         ];
       };
-      nickel = nixos.lib.nixosSystem {
+      nickel = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = inputs;
         modules = [
@@ -85,7 +104,7 @@
           ./users/root.nix
         ];
       };
-      sodium = nixos.lib.nixosSystem {
+      sodium = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = inputs;
         modules = [
@@ -103,7 +122,7 @@
       };
 
       # server systems
-      crunchbits = nixos.lib.nixosSystem {
+      crunchbits = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = inputs;
         modules = [
@@ -119,7 +138,7 @@
           ./users/root.nix
         ];
       };
-      littlecreek = nixos.lib.nixosSystem {
+      littlecreek = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = inputs;
         modules = [
@@ -135,7 +154,7 @@
           ./users/root.nix
         ];
       };
-      technetium = nixos.lib.nixosSystem {
+      technetium = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = inputs;
         modules = [
@@ -155,8 +174,9 @@
       };
     };
 
-    # devshell = ./shell;
+    devShells = forAllSystems (pkgs: import ./shell.nix {inherit pkgs;});
 
+    # Deploy-rs uses "outputs.deploy" and "outputs.checks"
     deploy = {
       sshUser = "root";
       user = "root";
@@ -164,7 +184,7 @@
 
       # Create a deploy with the system profile for each nixosConfigurations
       nodes =
-        nixos.lib.recursiveUpdate (
+        nixpkgs.lib.recursiveUpdate (
           builtins.mapAttrs (hostname: nixosConfig: {
             inherit hostname;
             profiles.system.path = deploy-rs.lib.${nixosConfig.config.nixpkgs.system}.activate.nixos nixosConfig;

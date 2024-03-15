@@ -1,1 +1,4 @@
 .deploy-gc
+.direnv
+tmp
+result

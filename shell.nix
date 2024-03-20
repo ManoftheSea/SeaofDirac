@@ -16,6 +16,7 @@
       inherit
         (pkgs)
         age
+        deploy-rs
         git
         home-manager
         nix

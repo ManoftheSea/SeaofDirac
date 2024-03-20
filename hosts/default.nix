@@ -29,7 +29,7 @@ in {
       ../users/root.nix
     ];
   };
-  nickel = nixpkgs.lib.nixosSystem {
+  nickel = lib.nixosSystem {
     system = "x86_64-linux";
     specialArgs = inputs;
     modules = [
@@ -51,7 +51,7 @@ in {
       ../users/root.nix
     ];
   };
-  sodium = nixpkgs.lib.nixosSystem {
+  sodium = lib.nixosSystem {
     system = "x86_64-linux";
     specialArgs = inputs;
     modules = [
@@ -69,7 +69,7 @@ in {
   };
 
   # server systems
-  crunchbits = nixpkgs.lib.nixosSystem {
+  crunchbits = lib.nixosSystem {
     system = "x86_64-linux";
     specialArgs = inputs;
     modules = [
@@ -85,7 +85,7 @@ in {
       ../users/root.nix
     ];
   };
-  littlecreek = nixpkgs.lib.nixosSystem {
+  littlecreek = lib.nixosSystem {
     system = "x86_64-linux";
     specialArgs = inputs;
     modules = [
@@ -101,7 +101,7 @@ in {
       ../users/root.nix
     ];
   };
-  technetium = nixpkgs.lib.nixosSystem {
+  technetium = lib.nixosSystem {
     system = "x86_64-linux";
     specialArgs = inputs;
     modules = [

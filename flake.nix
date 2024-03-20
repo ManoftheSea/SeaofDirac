@@ -53,12 +53,9 @@
     forAllSystems = function:
       nixpkgs.lib.genAttrs systems (system: function nixpkgs.legacyPackages.${system});
   in {
-    formatter = forAllSystems (pkgs: pkgs.alejandra);
-
-    # client systems
-    nixosConfigurations = import ./hosts inputs;
-
     devShells = forAllSystems (pkgs: import ./shell.nix {inherit pkgs;});
+    formatter = forAllSystems (pkgs: pkgs.alejandra);
+    nixosConfigurations = import ./hosts inputs;
 
     # Deploy-rs uses "outputs.deploy" and "outputs.checks"
     deploy = {

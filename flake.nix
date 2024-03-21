@@ -51,10 +51,10 @@
       "x86_64-linux"
     ];
     forAllSystems = function:
-      nixpkgs.lib.genAttrs systems (system: function nixpkgs.legacyPackages.${system});
+      nixpkgs.lib.genAttrs systems (system: function system);
   in {
-    devShells = forAllSystems (pkgs: import ./shell.nix {inherit pkgs;});
-    formatter = forAllSystems (pkgs: pkgs.alejandra);
+    devShells = forAllSystems (system: import ./shell.nix (inputs // {inherit system;}));
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
     nixosConfigurations = import ./hosts inputs;
 
     # Deploy-rs uses "outputs.deploy" and "outputs.checks"

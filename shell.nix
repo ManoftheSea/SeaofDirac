@@ -1,18 +1,21 @@
 # Shell for bootstrapping, modifying the config, and managing secrets
 {
-  pkgs ? let
+  nixpkgs ? let
     lock = (builtins.fromJSON (builtins.readFile ./flake.lock)).nodes.nixpkgs.locked;
     nixpkgs = fetchTarball {
       url = "https://github.com/nixos/nixpkgs/archive/${lock.rev}.tar.gz";
       sha256 = lock.narHash;
     };
   in
-    import nixpkgs {},
+    nixpkgs,
+  system ? builtins.currentSystem,
   ...
-}: {
-  default = pkgs.mkShell {
+}: let
+  pkgs = import nixpkgs {inherit system;};
+in {
+  default = pkgs.mkShellNoCC {
     NIX_CONFIG = "extra-experimental-features = nix-command flakes repl-flake";
-    nativeBuildInputs = builtins.attrValues {
+    packages = builtins.attrValues {
       inherit
         (pkgs)
         age

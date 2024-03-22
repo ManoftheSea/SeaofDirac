@@ -7,41 +7,43 @@
     "${config.services.nextcloud.hostName}"
   ];
 
-  services.nextcloud = {
-    enable = true;
-    config = {
-      adminpassFile = config.sops.secrets.nextcloud_password.path;
-      adminuser = "root";
-      dbtype = "pgsql";
-      dbuser = "nextcloud";
-      dbhost = "/run/postgresql"; # nextcloud will add /.s.PGSQL.5432 by itself
-      dbname = "nextcloud";
+  services = {
+    nextcloud = {
+      enable = true;
+      config = {
+        adminpassFile = config.sops.secrets.nextcloud_password.path;
+        adminuser = "root";
+        dbtype = "pgsql";
+        dbuser = "nextcloud";
+        dbhost = "/run/postgresql"; # nextcloud will add /.s.PGSQL.5432 by itself
+        dbname = "nextcloud";
+      };
+      configureRedis = true;
+      #extraOptions = {
+      #  mail_smtpmode = "sendmail";
+      #  mail_sendmailmode = "pipe";
+      #};
+      https = true;
+      hostName = "nextcloud.seaofdirac.org";
+      package = pkgs.nextcloud27;
+      # phpOptions = { upload_max_filesize = "1G"; post_max_size = "1G"; };
     };
-    configureRedis = true;
-    #extraOptions = {
-    #  mail_smtpmode = "sendmail";
-    #  mail_sendmailmode = "pipe";
-    #};
-    https = true;
-    hostName = "nextcloud.seaofdirac.org";
-    package = pkgs.nextcloud27;
-    # phpOptions = { upload_max_filesize = "1G"; post_max_size = "1G"; };
-  };
 
-  services.nginx.virtualHosts.${config.services.nextcloud.hostName} = {
-    acmeRoot = null;
-    enableACME = true;
-    forceSSL = true;
-  };
+    nginx.virtualHosts.${config.services.nextcloud.hostName} = {
+      acmeRoot = null;
+      enableACME = true;
+      forceSSL = true;
+    };
 
-  services.postgresql = {
-    ensureDatabases = ["nextcloud"];
-    ensureUsers = [
-      {
-        name = "nextcloud";
-        ensureDBOwnership = true;
-      }
-    ];
+    postgresql = {
+      ensureDatabases = ["nextcloud"];
+      ensureUsers = [
+        {
+          name = "nextcloud";
+          ensureDBOwnership = true;
+        }
+      ];
+    };
   };
 
   sops.secrets.nextcloud_password.owner = config.users.users.nextcloud.name;

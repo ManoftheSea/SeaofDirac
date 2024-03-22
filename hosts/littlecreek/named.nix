@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  lib,
+  ...
+}: {
   networking.firewall = {
     allowedTCPPorts = [
       53 # named
@@ -56,12 +60,17 @@
     };
   };
 
-  sops.secrets."bind/acme_keys/crunchbits".owner = config.users.users.named.name;
-  sops.secrets."bind/acme_keys/gravity".owner = config.users.users.named.name;
-  sops.secrets."bind/acme_keys/littlecreek".owner = config.users.users.named.name;
-  sops.secrets."bind/acme_keys/singularity".owner = config.users.users.named.name;
-  sops.secrets."bind/acme_keys/technetium".owner = config.users.users.named.name;
-  sops.secrets."bind/rndc_keys/aluminium".owner = config.users.users.named.name;
-  sops.secrets."bind/config/acls".owner = config.users.users.named.name;
-  sops.secrets."bind/config/controls".owner = config.users.users.named.name;
+  sops.secrets =
+    lib.genAttrs [
+      "bind/acme_keys/crunchbits"
+      "bind/acme_keys/gravity"
+      "bind/acme_keys/littlecreek"
+      "bind/acme_keys/singularity"
+      "bind/acme_keys/technetium"
+      "bind/rndc_keys/aluminium"
+      "bind/config/acls"
+      "bind/config/controls"
+    ] (_: {
+      owner = config.users.users.named.name;
+    });
 }

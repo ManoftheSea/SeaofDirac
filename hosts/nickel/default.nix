@@ -65,9 +65,11 @@
 
   system.stateVersion = "23.11";
 
-  virtualisation.libvirtd.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
-  virtualisation.docker.enable = true;
+  virtualisation = {
+    libvirtd.enable = true;
+    spiceUSBRedirection.enable = true;
+    docker.enable = true;
+  };
 
   zramSwap.enable = true;
   # zramSwap.memoryPercent = 50;

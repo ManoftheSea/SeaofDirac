@@ -31,7 +31,9 @@
     };
   };
 
-  sops.secrets."bind/rndc_keys/aluminium".owner = config.users.users.named.name;
-  sops.secrets."bind/config/acls".owner = config.users.users.named.name;
-  sops.secrets."bind/config/controls".owner = config.users.users.named.name;
+  sops.secrets = {
+    "bind/rndc_keys/aluminium".owner = config.users.users.named.name;
+    "bind/config/acls".owner = config.users.users.named.name;
+    "bind/config/controls".owner = config.users.users.named.name;
+  };
 }

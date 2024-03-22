@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{...}: {
   imports = [
     ./kea/dhcpv4.nix
     ./kea/dhcpv6.nix

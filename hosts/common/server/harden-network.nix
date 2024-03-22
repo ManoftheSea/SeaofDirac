@@ -1,4 +1,4 @@
-{config, ...}: {
+_: {
   ## Enable BBR module
   boot.kernelModules = ["tcp_bbr"];
 

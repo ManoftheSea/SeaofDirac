@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+_: {
   # Maybe add some test to see if NetworkManager is being used?
   environment.etc."NetworkManager/system-connections".source = "/var/lib/NetworkManager/system-connections/";
 

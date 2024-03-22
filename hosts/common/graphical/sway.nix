@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   environment = {
     defaultPackages = builtins.attrValues {
       inherit

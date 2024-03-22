@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}: {
+_: {
   documentation.enable = false;
 
   nix.gc.options = "--delete-older-than 5d";

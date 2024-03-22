@@ -1,8 +1,4 @@
 {
-  config,
-  pkgs,
-  ...
-}: {
   boot.initrd.availableKernelModules = [
     "ata_piix"
     "virtio_pci"

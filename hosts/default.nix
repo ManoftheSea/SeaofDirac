@@ -6,7 +6,7 @@
   sops-nix,
   ...
 } @ inputs: let
-  lib = nixpkgs.lib;
+  inherit (nixpkgs) lib;
 in {
   aluminium = lib.nixosSystem {
     system = "x86_64-linux";

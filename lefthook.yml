@@ -1,0 +1,14 @@
+pre-commit:
+  parallel: true
+  commands:
+    formatting:
+      glob: "*.nix"
+      run: nix fmt -- --check {staged_files}
+
+    statix-lint:
+      glob: "*.nix"
+      run: nix run --inputs-from . nixpkgs#statix -- check
+
+    deadnix-lint:
+      glob: "*.nix"
+      run: nix run --inputs-from . nixpkgs#deadnix -- -f

@@ -45,13 +45,13 @@
     deploy-rs,
     ...
   } @ inputs: let
-    lib = nixpkgs.lib;
+    inherit (nixpkgs) lib;
     systems = [
       "aarch64-linux"
       "x86_64-linux"
     ];
     forAllSystems = function:
-      nixpkgs.lib.genAttrs systems (system: function system);
+      nixpkgs.lib.genAttrs systems function;
   in {
     devShells = forAllSystems (system: import ./shell.nix (inputs // {inherit system;}));
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
@@ -78,6 +78,6 @@
         };
     };
 
-    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+    checks = builtins.mapAttrs (_system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
   };
 }

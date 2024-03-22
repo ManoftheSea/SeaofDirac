@@ -1,4 +1,4 @@
-{config, ...}: {
+_: {
   networking.firewall.allowedTCPPorts = [80 443];
 
   services = {

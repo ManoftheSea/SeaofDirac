@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+_: {
   users.users.root = {
     initialHashedPassword = "$y$j9T$Fxria.3Ik92O6AxG1YKaE/$TA2bgiNBW1Bw2GWmihHzXI/wIKkVX7CIR88yG8HCL3B";
     home = "/root";

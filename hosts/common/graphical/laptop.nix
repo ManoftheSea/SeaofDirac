@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   # Reload ddcci module on monitor hotplug
   services.udev.extraRules = let
     reloadScript = pkgs.writeShellScriptBin "reload-ddcci" ''

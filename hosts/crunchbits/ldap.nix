@@ -3,7 +3,7 @@ let
   dbSuffix = "dc=seaofdirac,dc=org";
 
   ldapRootDN = "cn=admin,${dbSuffix}";
-  ldapCertDomain = "crunchbits.seaofdirac.org";
+  ldapCertDomain = "crunchbits.${dbDomain}";
 in
   {pkgs, ...}: {
     security.acme.certs."${ldapCertDomain}".postRun = ''

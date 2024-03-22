@@ -22,6 +22,7 @@ in {
         deploy-rs
         git
         home-manager
+        lefthook
         nix
         sops
         ssh-to-age

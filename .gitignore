@@ -1,4 +1,5 @@
 .deploy-gc
 .direnv
+.pre-commit-config.yaml
 tmp
 result

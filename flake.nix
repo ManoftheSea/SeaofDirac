@@ -65,12 +65,12 @@
 
       # Create a deploy with the system profile for each nixosConfigurations
       nodes =
-        nixpkgs.lib.recursiveUpdate (
+        lib.recursiveUpdate (
           builtins.mapAttrs (hostname: nixosConfig: {
             inherit hostname;
             profiles.system.path = deploy-rs.lib.${nixosConfig.config.nixpkgs.system}.activate.nixos nixosConfig;
           })
-          self.nixosConfigurations
+          (lib.filterAttrs (n: _v: n != "aluminium") self.nixosConfigurations)
         )
         {
           crunchbits.fastConnect = false;

@@ -51,22 +51,22 @@ in {
       ../users/root.nix
     ];
   };
-  sodium = lib.nixosSystem {
-    system = "x86_64-linux";
-    specialArgs = inputs;
-    modules = [
-      ./sodium/default.nix
-      ./common/audio/pipewire.nix
-      ./common/core/base.nix
-      ./common/core/flakes.nix
-      ./common/graphical/intel-gpu.nix
-      ./common/hardware/efi.nix
-      ./common/impermanence.nix
-      ../users/benjamin.nix
-      ../users/derek.nix
-      ../users/root.nix
-    ];
-  };
+  #  sodium = lib.nixosSystem {
+  #    system = "x86_64-linux";
+  #    specialArgs = inputs;
+  #    modules = [
+  #      ./sodium/default.nix
+  #      ./common/audio/pipewire.nix
+  #      ./common/core/base.nix
+  #      ./common/core/flakes.nix
+  #      ./common/graphical/intel-gpu.nix
+  #      ./common/hardware/efi.nix
+  #      ./common/impermanence.nix
+  #      ../users/benjamin.nix
+  #      ../users/derek.nix
+  #      ../users/root.nix
+  #    ];
+  #  };
 
   # server systems
   crunchbits = lib.nixosSystem {

@@ -5,34 +5,11 @@
   ...
 }: {
   imports = [
+    ./bootloader.nix
     ./disko.nix
     ./network.nix
     ./services.nix
   ];
-
-  boot = {
-    initrd = {
-      availableKernelModules = [
-        "ahci"
-        "ehci_pci"
-        "raid1"
-        "sd_mod"
-        "sr_mod"
-        "usbhid"
-        "usb_storage"
-        "xhci_pci"
-      ];
-      kernelModules = [
-        "dm-raid"
-        "dm-integrity"
-      ];
-    };
-
-    kernelModules = ["kvm-intel"];
-    kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [];
-    extraModulePackages = [];
-  };
 
   environment = {
     etc."machine-id".text = "f90a55a23b01430b92228b0baa8c1d8e";

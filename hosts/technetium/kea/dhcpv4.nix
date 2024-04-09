@@ -3,6 +3,41 @@
     enable = true;
     settings = {
       authoritative = true;
+      client-classes = [
+        {
+          name = "ipxe_efi_amd64";
+          test = "option[93].hex == 0x0009"; #x86_64
+          next-server = "192.168.200.10";
+          boot-file-name = "/bootloaders/netboot.xyz.kpxe";
+          only-if-required = true;
+        }
+        {
+          name = "ipxe_efi_arm64";
+          test = "option[93].hex == 0x000b"; #ARM64
+          next-server = "192.168.200.10";
+          #boot-file-name = "/bootloaders/netboot.xyz-arm64.efi";
+          only-if-required = true;
+        }
+        {
+          name = "http_efi_amd64";
+          test = "option[93].hex == 0x0010"; #x86_64
+          boot-file-name = "http://technetium.seaofdirac.org/bootloaders/netboot.xyz.efi";
+          only-if-required = true;
+        }
+        {
+          name = "http_efi_arm64";
+          test = "option[93].hex == 0x0013"; #ARM64
+          #boot-file-name = "http://technetium.seaofdirac.org/bootloaders/netboot.xyz-arm64.efi";
+          only-if-required = true;
+        }
+        {
+          name = "uboot_arm64";
+          test = "option[93].hex == 0x0016";
+          next-server = "192.168.200.10";
+          only-if-required = true;
+        }
+        # Also seen: Vendor Class (60) of "U-Boot.armv8" "PXEClient:Arch:00011:UNDI:003000"
+      ];
       dhcp-ddns.enable-updates = true;
       ddns-override-client-update = true;
       hosts-database = {
@@ -111,6 +146,56 @@
             }
           ];
           subnet = "192.168.201.0/24";
+        }
+        {
+          id = 205;
+          option-data = [
+            {
+              name = "domain-name";
+              data = "lab.seaofdirac.org";
+            }
+            {
+              name = "domain-search";
+              data = "seaofdirac.org";
+            }
+            {
+              name = "routers";
+              data = "192.168.205.1";
+            }
+            /*
+            {
+              name = "v6-only-preferred";
+              data = "1800";
+            }
+            */
+          ];
+          reservations = [
+            /*
+            {
+              hw-address = "f0:ad:4e:08:60:f8"
+              ip-address = "192.168.205.10";
+              hostname = "v5.lab.seaofdirac.org.";
+            }
+            {
+              hw-address = "f0:ad:4e:09:08:f0"
+              ip-address = "192.168.205.20";
+              hostname = "v7.lab.seaofdirac.org.";
+            }
+            */
+          ];
+          pools = [
+            {
+              pool = "192.168.205.100 - 192.168.205.200";
+            }
+          ];
+          require-client-classes = [
+            "http_efi_amd64"
+            "http_efi_arm64"
+            "ipxe_efi_amd64"
+            "ipxe_efi_arm64"
+            "uboot_arm64"
+          ];
+          subnet = "192.168.205.0/24";
         }
         {
           id = 400;

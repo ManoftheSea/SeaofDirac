@@ -2,22 +2,54 @@
   services.kea.dhcp6 = {
     enable = true;
     settings = {
-      # control-socket = { };
-      # hosts-database = {
-      #   type = "postgresql";
-      #   name = "kea";
-      #   host = "/run/postgresql";
-      #   user = "kea";
-      # };
-      # lease-database = {
-      #   type = "postgresql";
-      #   name = "kea";
-      #   host = "/run/postgresql";
-      #   user = "kea";
-      # };
-      # lease-database {
-      #   type = "memfile";
-      # };
+      /*
+      control-socket = { };
+      hosts-database = {
+        type = "postgresql";
+        name = "kea";
+        host = "/run/postgresql";
+        user = "kea";
+      };
+      lease-database = {
+        type = "postgresql";
+        name = "kea";
+        host = "/run/postgresql";
+        user = "kea";
+      };
+      lease-database {
+        type = "memfile";
+      };
+      */
+      /*
+      client-classes = [
+        {
+          name = "ipxe_efi_amd64";
+          test = "option[93].hex == 0x0009"; #x86_64
+          next-server = "192.168.200.10";
+          boot-file-name = "/bootloaders/netboot.xyz.kpxe";
+          only-if-required = true;
+        }
+        {
+          name = "ipxe_efi_arm64";
+          test = "option[93].hex == 0x000b"; #ARM64
+          next-server = "192.168.200.10";
+          boot-file-name = "/bootloaders/netboot.xyz-arm64.efi";
+          only-if-required = true;
+        }
+        {
+          name = "http_efi_amd64";
+          test = "option[93].hex == 0x0010"; #x86_64
+          boot-file-name = "http://technetium.seaofdirac.org/bootloaders/netboot.xyz.efi";
+          only-if-required = true;
+        }
+        {
+          name = "http_efi_arm64";
+          test = "option[93].hex == 0x0013"; #ARM64
+          boot-file-name = "http://technetium.seaofdirac.org/bootloaders/netboot.xyz-arm64.efi";
+          only-if-required = true;
+        }
+      ];
+      */
       dhcp-ddns.enable-updates = true;
       ddns-override-client-update = true;
       interfaces-config.interfaces = ["enp4s0f0/2601:5cd:c100:3940::10"];

@@ -170,18 +170,16 @@
             */
           ];
           reservations = [
-            /*
             {
-              hw-address = "f0:ad:4e:08:60:f8"
-              ip-address = "192.168.205.10";
-              hostname = "v5.lab.seaofdirac.org.";
-            }
-            {
-              hw-address = "f0:ad:4e:09:08:f0"
+              hw-address = "f0:ad:4e:08:60:f8";
               ip-address = "192.168.205.20";
-              hostname = "v7.lab.seaofdirac.org.";
+              hostname = "coffee-control-01.lab.seaofdirac.org.";
             }
-            */
+            {
+              hw-address = "f0:ad:4e:09:08:f0";
+              ip-address = "192.168.205.30";
+              hostname = "coffee-worker-01.lab.seaofdirac.org.";
+            }
           ];
           pools = [
             {

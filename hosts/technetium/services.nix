@@ -4,6 +4,7 @@
   ...
 }: {
   imports = [
+    ./jellyfin.nix
     ./kea.nix
     ./nextcloud.nix
     ./nginx.nix

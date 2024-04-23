@@ -35,6 +35,22 @@
   hardware = {
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     enableRedistributableFirmware = true;
+    /*
+    # Xeon doesn't have GPU, does it have hardware encoders?
+    opengl = {
+      enable = true;
+      extraPackages = builtins.attrValues {
+        inherit
+          (pkgs)
+          intel-media-driver
+          vaapiIntel
+          vaapiVdpau
+          libvdpau-va-gl
+          intel-compute-runtime
+          ;
+      };
+    };
+    */
   };
 
   # Overwrite default

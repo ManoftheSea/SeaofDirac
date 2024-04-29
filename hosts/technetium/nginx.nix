@@ -12,7 +12,7 @@
     virtualHosts."${config.networking.hostName}.seaofdirac.org" = {
       http2 = true;
       enableACME = true;
-      forceSSL = true;
+      forceSSL = false;
       root = "/var/lib/tftp";
     };
   };

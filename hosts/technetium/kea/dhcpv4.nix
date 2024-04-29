@@ -5,10 +5,17 @@
       authoritative = true;
       client-classes = [
         {
-          name = "ipxe_efi_amd64";
-          test = "option[93].hex == 0x0009"; #x86_64
+          name = "ipxe_x86_pc"; #x86 BIOS
+          test = "option[93].hex == 0x0000";
           next-server = "192.168.200.10";
           boot-file-name = "/bootloaders/netboot.xyz.kpxe";
+          only-if-required = true;
+        }
+        {
+          name = "ipxe_efi_amd64";
+          test = "option[93].hex == 0x0007"; #x86_64 UEFI (RFC says bytecode)
+          next-server = "192.168.200.10";
+          boot-file-name = "/bootloaders/netboot.xyz.efi";
           only-if-required = true;
         }
         {
@@ -20,13 +27,19 @@
         }
         {
           name = "http_efi_amd64";
-          test = "option[93].hex == 0x0010"; #x86_64
+          test = "option[93].hex == 0x0010"; #x86_64 HTTPBoot
           boot-file-name = "http://technetium.seaofdirac.org/bootloaders/netboot.xyz.efi";
           only-if-required = true;
+          option-data = [
+            {
+              name = "vendor-class-identifier";
+              data = "HTTPClient";
+            }
+          ];
         }
         {
           name = "http_efi_arm64";
-          test = "option[93].hex == 0x0013"; #ARM64
+          test = "option[93].hex == 0x0013"; #ARM64 HTTPBoot
           #boot-file-name = "http://technetium.seaofdirac.org/bootloaders/netboot.xyz-arm64.efi";
           only-if-required = true;
         }
@@ -171,12 +184,12 @@
           ];
           reservations = [
             {
-              hw-address = "f0:ad:4e:08:60:f8";
+              hw-address = "00:22:4d:d0:62:1c";
               ip-address = "192.168.205.20";
               hostname = "coffee-control-01.lab.seaofdirac.org.";
             }
             {
-              hw-address = "f0:ad:4e:09:08:f0";
+              hw-address = "6c:2b:59:61:7b:c2";
               ip-address = "192.168.205.30";
               hostname = "coffee-worker-01.lab.seaofdirac.org.";
             }

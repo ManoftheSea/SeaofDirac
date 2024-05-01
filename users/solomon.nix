@@ -3,10 +3,10 @@
   pkgs,
   ...
 }: {
-  users.users.benjamin = {
+  users.users.solomon = {
     isNormalUser = true;
-    hashedPassword = "$y$j9T$4NrdHmxqFppno3lIQ/RPR0$b3kYL4d0aBIMV.K0IQQX4QEgjf4a85yFzUFAwlv5r6B";
-    home = "/home/benjamin";
+    hashedPassword = "$y$j9T$pGtwwUj4Gzy47NMnlm.jK1$UffzcX0YWmVPXuuE27y64VNljY2zpNkhz9zek3iDT76";
+    home = "/home/solomon";
     extraGroups =
       ["dialout" "video" "input"]
       ++ pkgs.lib.optional config.hardware.sane.enable "scanner"

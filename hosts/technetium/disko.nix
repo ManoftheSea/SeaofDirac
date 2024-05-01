@@ -66,6 +66,20 @@
       raidpool = {
         type = "lvm_vg";
         lvs = {
+          media-library = {
+            size = "2T";
+            lvm_type = "raid5";
+            extraArgs = [
+              "-i 3"
+              "--raidintegrity y"
+            ];
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/var/lib/media-library";
+              mountOptions = ["nodev" "noexec" "relatime"];
+            };
+          };
           nix = {
             size = "100G";
             lvm_type = "raid1";

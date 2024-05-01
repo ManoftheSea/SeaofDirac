@@ -7,8 +7,8 @@ pre-commit:
 
     statix-lint:
       glob: "*.nix"
-      run: nix run --inputs-from . nixpkgs#statix -- check
+      run: statix check
 
     deadnix-lint:
       glob: "*.nix"
-      run: nix run --inputs-from . nixpkgs#deadnix -- -f
+      run: deadnix -f

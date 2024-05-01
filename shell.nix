@@ -19,6 +19,7 @@ in {
       inherit
         (pkgs)
         age
+        deadnix
         deploy-rs
         git
         home-manager
@@ -26,6 +27,7 @@ in {
         nix
         sops
         ssh-to-age
+        statix
         ;
     };
   };

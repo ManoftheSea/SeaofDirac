@@ -9,6 +9,7 @@
     ./disko.nix
     ./network.nix
     ./services.nix
+    ./unfree.nix
   ];
 
   hardware = {
@@ -53,6 +54,7 @@
 
   programs = {
     dconf.enable = true;
+    steam.enable = true;
   };
 
   security.polkit.enable = true;

@@ -6,7 +6,7 @@
     "xhci_pci"
   ];
   boot.loader.grub = {
+    device = "/dev/sda";
     enable = true;
-    device = "/dev/vda";
   };
 }

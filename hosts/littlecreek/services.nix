@@ -1,12 +1,12 @@
 {config, ...}: {
-  security.acme.defaults = {
-    credentialsFile = config.sops.secrets.rfc2136_secret.path;
+  security.acme.certs."${config.networking.hostName}.seaofdirac.org" = {
     dnsProvider = "rfc2136";
+    extraDomainNames = [
+      "mta-sts.seaofdirac.org"
+    ];
+    inherit (config.services.nginx) group;
+    webroot = null;
   };
-  security.acme.certs."littlecreek.seaofdirac.org".extraDomainNames = [
-    "mta-sts.seaofdirac.org"
-  ];
-
   services = {
     nginx = {
       recommendedTlsSettings = true;

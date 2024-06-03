@@ -2,8 +2,10 @@
   config,
   pkgs,
   ...
-}: {
-  security.acme.certs."technetium.seaofdirac.org".extraDomainNames = [
+}: let
+  myFQDN = "technetium.seaofdirac.org";
+in {
+  security.acme.certs.${myFQDN}.extraDomainNames = [
     "${config.services.nextcloud.hostName}"
   ];
 
@@ -30,9 +32,8 @@
     };
 
     nginx.virtualHosts.${config.services.nextcloud.hostName} = {
-      acmeRoot = null;
-      enableACME = true;
       forceSSL = true;
+      useACMEHost = myFQDN;
     };
 
     postgresql = {

@@ -1,7 +1,11 @@
 {config, ...}: {
   networking.firewall.allowedTCPPorts = [80 443];
 
-  security.acme.certs."technetium.seaofdirac.org".group = config.services.nginx.group;
+  security.acme.certs."${config.networking.hostName}.seaofdirac.org" = {
+    dnsProvider = "rfc2136";
+    inherit (config.services.nginx) group;
+    webroot = null;
+  };
 
   services.nginx = {
     clientMaxBodySize = "25m";

@@ -30,12 +30,16 @@
     fqdn = "littlecreek.seaofdirac.org";
   };
 
-  services.nginx = {
-    enable = true;
-    virtualHosts."mta-sts.seaofdirac.org" = {
-      useACMEHost = "littlecreek.seaofdirac.org";
-      forceSSL = true;
-      root = "/var/www/mta-sts.seaofdirac.org";
+  services = {
+    dovecot2.sieve.extensions = ["fileinto"]; # fix for dovecot change in 24.05
+
+    nginx = {
+      enable = true;
+      virtualHosts."mta-sts.seaofdirac.org" = {
+        useACMEHost = "littlecreek.seaofdirac.org";
+        forceSSL = true;
+        root = "/var/www/mta-sts.seaofdirac.org";
+      };
     };
   };
 

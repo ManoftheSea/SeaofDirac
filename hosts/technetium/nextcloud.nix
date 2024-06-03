@@ -25,7 +25,7 @@
       #};
       https = true;
       hostName = "nextcloud.seaofdirac.org";
-      package = pkgs.nextcloud28;
+      package = pkgs.nextcloud29;
       # phpOptions = { upload_max_filesize = "1G"; post_max_size = "1G"; };
     };
 

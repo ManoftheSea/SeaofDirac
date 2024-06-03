@@ -6,6 +6,11 @@
       nssmdns6 = true;
       openFirewall = true;
     };
+    desktopManager.plasma6.enable = true;
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
     hardware.bolt.enable = true;
     libinput.enable = true;
     openssh.enable = true;
@@ -16,11 +21,5 @@
       drivers = [pkgs.hplip];
     };
     resolved.enable = true;
-
-    xserver = {
-      enable = true;
-      desktopManager.plasma6.enable = true;
-      displayManager.sddm.enable = true;
-    };
   };
 }

@@ -63,10 +63,12 @@ in {
       ./crunchbits/default.nix
       ./common/core/base.nix
       ./common/core/flakes.nix
+      ./common/core/no-nixpkgs.nix
       ./common/server/base.nix
       ./common/server/harden-network.nix
       ./common/server/security.nix
       ./common/acme.nix
+      ./common/impermanence.nix
       ../users/root.nix
     ];
   };
@@ -79,9 +81,11 @@ in {
       ./littlecreek/default.nix
       ./common/core/base.nix
       ./common/core/flakes.nix
+      ./common/core/no-nixpkgs.nix
       ./common/server/base.nix
       ./common/server/harden-network.nix
       ./common/server/security.nix
+      ./common/impermanence.nix
       ./common/acme.nix
       ../users/root.nix
     ];
@@ -100,6 +104,7 @@ in {
       ./common/server/security.nix
       ./common/acme.nix
       ./common/certificates.nix
+      ./common/impermanence.nix
       ./common/usbguard.nix
       ../users/root.nix
     ];

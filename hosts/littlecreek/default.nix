@@ -28,7 +28,5 @@
     age.sshKeyPaths = ["/var/lib/ssh/ssh_host_ed25519_key"];
   };
 
-  system.activationScripts.persistent-directories = ''
-    mkdir -pm 0755 /var/lib/ssh
-  '';
+  system.stateVersion = "24.05";
 }

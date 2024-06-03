@@ -52,7 +52,5 @@
     secrets.rfc2136_secret = {};
   };
 
-  system.activationScripts.persistent-directories = ''
-    mkdir -pm 0755 /var/lib/ssh
-  '';
+  system.stateVersion = "24.05";
 }

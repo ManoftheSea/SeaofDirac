@@ -68,11 +68,7 @@
     };
   };
 
-  system.activationScripts.persistent-directories = ''
-    mkdir -pm 0755 /var/lib/ssh
-  '';
-
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
   time.timeZone = "UTC";
 
   virtualisation.libvirtd.enable = true;

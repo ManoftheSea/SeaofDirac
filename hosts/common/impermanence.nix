@@ -1,6 +1,11 @@
-_: {
-  # Maybe add some test to see if NetworkManager is being used?
-  environment.etc."NetworkManager/system-connections".source = "/var/lib/NetworkManager/system-connections/";
+{
+  config,
+  lib,
+  ...
+}: {
+  environment.etc = lib.mkIf config.networking.networkmanager.enable {
+    "NetworkManager/system-connections".source = "/var/lib/NetworkManager/system-connections/";
+  };
 
   services.openssh = {
     hostKeys = [
@@ -11,8 +16,16 @@ _: {
     ];
   };
 
-  system.activationScripts.persistent-directories = ''
-    mkdir -pm 0700 /var/lib/NetworkManager/system-connections
-    mkdir -pm 0755 /var/lib/ssh
-  '';
+  system.activationScripts = lib.mkMerge [
+    (lib.mkIf config.networking.networkmanager.enable {
+      persist-nm = ''
+        mkdir -pm 0700 /var/lib/NetworkManager/system-connections
+      '';
+    })
+    (lib.mkIf config.services.openssh.enable {
+      persist-sshkey = ''
+        mkdir -pm 0755 /var/lib/ssh
+      '';
+    })
+  ];
 }

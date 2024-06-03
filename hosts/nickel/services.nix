@@ -6,6 +6,7 @@
       openFirewall = true;
     };
     hardware.bolt.enable = true;
+    libinput.enable = true;
     openssh.enable = true;
     pcscd.enable = true;
     power-profiles-daemon.enable = false;
@@ -19,7 +20,6 @@
       enable = true;
       desktopManager.plasma6.enable = true;
       displayManager.sddm.enable = true;
-      libinput.enable = true;
     };
   };
 }

@@ -3,7 +3,9 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  myfactorio = import ./factorio.nix {inherit pkgs;};
+in {
   imports = [
     ./bootloader.nix
     ./disko.nix
@@ -48,6 +50,9 @@
         vim
         virt-manager
         wget
+        ;
+      inherit
+        myfactorio
         ;
     };
   };

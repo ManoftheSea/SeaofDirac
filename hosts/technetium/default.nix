@@ -9,6 +9,7 @@
     ./disko.nix
     ./network.nix
     ./services.nix
+    ./unfree.nix
   ];
 
   environment = {

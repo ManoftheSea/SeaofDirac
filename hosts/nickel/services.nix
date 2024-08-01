@@ -9,6 +9,7 @@
     desktopManager.plasma6.enable = true;
     displayManager.sddm = {
       enable = true;
+      theme = "elarun";
       wayland.enable = true;
     };
     hardware.bolt.enable = true;

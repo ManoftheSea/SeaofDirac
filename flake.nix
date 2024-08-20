@@ -56,6 +56,7 @@
     devShells = forAllSystems (system: import ./shell.nix (inputs // {inherit system;}));
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
     nixosConfigurations = import ./hosts inputs;
+    overlays = import ./overlays/factorio.nix {};
 
     # Deploy-rs uses "outputs.deploy" and "outputs.checks"
     deploy = {

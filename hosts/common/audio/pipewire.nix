@@ -3,6 +3,12 @@
   lib,
   ...
 }: {
+  environment.systemPackages = [
+    pkgs.alsa-utils
+    pkgs.pavucontrol
+  ];
+
+  hardware.pulseaudio.enable = false;
   security.rtkit.enable = lib.mkDefault true;
 
   services.pipewire = {
@@ -10,9 +16,7 @@
     alsa.enable = true;
     pulse.enable = true;
     jack.enable = true;
-
-    # config.pipewire = { };
-    wireplumber.extraConfig = {
+    wireplumber.extraConfig.bluetoothEnhancements = {
       "monitor.bluez.properties" = {
         "bluez5.enable-sbc-xq" = true;
         "bluez5.enable-msbc" = true;
@@ -26,6 +30,4 @@
       };
     };
   };
-
-  environment.systemPackages = [pkgs.pavucontrol];
 }

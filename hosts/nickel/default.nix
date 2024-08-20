@@ -3,9 +3,7 @@
   lib,
   pkgs,
   ...
-}: let
-  myfactorio = import ./factorio.nix {inherit pkgs;};
-in {
+}: {
   imports = [
     ./bootloader.nix
     ./disko.nix
@@ -32,6 +30,7 @@ in {
       inherit
         (pkgs)
         dnsutils
+        factorio
         file
         git
         gptfdisk
@@ -51,9 +50,9 @@ in {
         virt-manager
         wget
         ;
-      inherit
-        myfactorio
-        ;
+      #inherit
+      #  myfactorio
+      #  ;
     };
   };
 
@@ -70,7 +69,7 @@ in {
     secrets.sssd_envfile = {};
   };
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 
   virtualisation = {
     libvirtd.enable = true;

@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./bootloader.nix
     ./disko.nix
@@ -12,20 +7,8 @@
     ./services.nix
   ];
 
-  hardware = {
-    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
-    sane = {
-      enable = true;
-      extraBackends = [pkgs.hplip];
-    };
-    usb-modeswitch.enable = true;
-  };
-
   environment = {
-    etc = {
-      "machine-id".text = "2904306768fd4a8185f3660916616816";
-    };
+    etc."machine-id".text = "2904306768fd4a8185f3660916616816";
     systemPackages = builtins.attrValues {
       inherit
         (pkgs)
@@ -51,19 +34,31 @@
     };
   };
 
+  hardware = {
+    sane = {
+      enable = true;
+      extraBackends = [pkgs.hplip];
+    };
+    usb-modeswitch.enable = true;
+  };
+
   programs = {
     dconf.enable = true;
-    neovim = {
-      enable = true;
-      viAlias = true;
-      vimAlias = true;
-    };
     sway.enable = true;
   };
 
   security.polkit.enable = true;
+  systemd.sysusers.enable = true;
 
-  system.stateVersion = "23.11";
+  system = {
+    etc.overlay = {
+      enable = true;
+      mutable = false;
+    };
+    stateVersion = "24.05";
+  };
+
+  users.mutableUsers = false;
 
   virtualisation = {
     libvirtd.enable = true;
@@ -72,5 +67,4 @@
   };
 
   zramSwap.enable = true;
-  # zramSwap.memoryPercent = 50;
 }

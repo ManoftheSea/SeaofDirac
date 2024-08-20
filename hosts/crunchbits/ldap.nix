@@ -12,6 +12,7 @@ in
 
     services.openldap = {
       enable = true;
+      mutableConfig = false;
       urlList = ["ldap://" "ldapi:///"];
 
       settings = {

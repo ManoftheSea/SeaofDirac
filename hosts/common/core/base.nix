@@ -15,7 +15,7 @@
 
   security.rtkit.enable = lib.mkDefault true;
 
-  system.stateVersion = lib.mkDefault "23.05";
+  system.stateVersion = lib.mkDefault "24.05";
 
   time.timeZone = lib.mkDefault "America/New_York";
 }

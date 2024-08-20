@@ -1,4 +1,5 @@
 {
+  self,
   disko,
   nixos-hardware,
   nixpkgs,
@@ -36,6 +37,7 @@ in {
       ./nickel/default.nix
       disko.nixosModules.disko
       sops-nix.nixosModules.sops
+      {nixpkgs.overlays = builtins.attrValues self.overlays;}
       ./common/audio/pipewire.nix
       ./common/core/base.nix
       ./common/core/cache.nix
@@ -97,6 +99,7 @@ in {
       disko.nixosModules.disko
       sops-nix.nixosModules.sops
       ./technetium/default.nix
+      {nixpkgs.overlays = builtins.attrValues self.overlays;}
       ./common/core/base.nix
       ./common/core/flakes.nix
       ./common/hardware/efi.nix

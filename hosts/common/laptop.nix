@@ -3,8 +3,6 @@
   lib,
   ...
 }: {
-  environment.systemPackages = with pkgs; [];
-
   fonts.fontconfig.enable = true; # enable user fonts
 
   hardware = {
@@ -12,7 +10,6 @@
       enable = lib.mkDefault true;
       powerOnBoot = lib.mkDefault true;
     };
-
     enableRedistributableFirmware = lib.mkDefault true;
   };
 

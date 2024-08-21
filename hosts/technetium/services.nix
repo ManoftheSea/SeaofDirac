@@ -8,6 +8,7 @@
     ./garage.nix
     ./jellyfin.nix
     ./kea.nix
+    ./logging
     ./nextcloud.nix
     ./nginx.nix
     ./tftp.nix

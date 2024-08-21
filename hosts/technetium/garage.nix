@@ -5,7 +5,7 @@
 }: {
   networking.firewall.allowedTCPPorts = [
     3900 # garage S3
-    # 3901 # garage cluster
+    # 3901 # garage intra-cluster
   ];
 
   services.garage = {

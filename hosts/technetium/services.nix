@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./factorio-headless.nix
+    ./garage.nix
     ./jellyfin.nix
     ./kea.nix
     ./nextcloud.nix

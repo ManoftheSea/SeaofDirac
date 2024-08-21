@@ -19,13 +19,11 @@
                   mountOptions = ["relatime" "noexec"];
                 };
               };
-              nix-small = {
+              lv_member = {
                 size = "100%";
                 content = {
-                  type = "filesystem";
-                  format = "ext4";
-                  mountpoint = "/nix-small";
-                  mountOptions = ["noatime"];
+                  type = "lvm_pv";
+                  vg = "metapool";
                 };
               };
             };
@@ -66,6 +64,21 @@
       raidpool = {
         type = "lvm_vg";
         lvs = {
+          garage-data = {
+            size = "1T";
+            lvm_type = "raid1"; #actually raid10
+            extraArgs = [
+              "-i 2" # 2 stripes
+              "-m 1" # 1 *extra* copy
+              "--raidintegrity y"
+            ];
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/var/lib/private/garage/data";
+              mountOptions = ["nodev" "noexec" "relatime"];
+            };
+          };
           media-library = {
             size = "2T";
             lvm_type = "raid5";
@@ -139,6 +152,20 @@
               type = "filesystem";
               format = "ext4";
               mountpoint = "/var/lib/nextcloud";
+              mountOptions = ["nodev" "noexec" "relatime"];
+            };
+          };
+        };
+      }; # end raidpool
+      metapool = {
+        type = "lvm_vg";
+        lvs = {
+          garage-meta = {
+            size = "10G";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/var/lib/private/garage/meta";
               mountOptions = ["nodev" "noexec" "relatime"];
             };
           };

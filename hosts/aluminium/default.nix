@@ -58,7 +58,7 @@
     stateVersion = "24.05";
   };
 
-  users.mutableUsers = false;
+  # users.mutableUsers = false;
 
   virtualisation = {
     libvirtd.enable = true;

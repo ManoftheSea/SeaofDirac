@@ -9,7 +9,7 @@
         "usb_storage"
         "xhci_pci"
       ];
-      systemd.enable = true;
+      # systemd.enable = true;
     };
 
     kernelModules = ["kvm-intel"];

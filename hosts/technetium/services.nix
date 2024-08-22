@@ -9,6 +9,7 @@
     ./jellyfin.nix
     ./kea.nix
     ./logging
+    ./logging/prometheus.nix
     ./nextcloud.nix
     ./nginx.nix
     ./tftp.nix

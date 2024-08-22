@@ -53,6 +53,7 @@
             grant singularity.seaofdirac.org. name _acme-challenge.matrix.seaofdirac.org. TXT;
             grant singularity.seaofdirac.org. name _acme-challenge.seaofdirac.org. TXT;
             grant technetium.seaofdirac.org. name _acme-challenge.technetium.seaofdirac.org. TXT;
+            grant technetium.seaofdirac.org. name _acme-challenge.grafana.seaofdirac.org. TXT;
             grant technetium.seaofdirac.org. name _acme-challenge.nextcloud.seaofdirac.org. TXT;
           };
         '';

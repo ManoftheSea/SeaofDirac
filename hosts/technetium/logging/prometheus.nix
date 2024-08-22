@@ -50,8 +50,16 @@
               target_label = "unit";
             }
             {
-              source_labels = ["__journal__priority_keyword"];
+              source_labels = ["__journal_priority_keyword"];
+              target_label = "priority";
+            }
+            {
+              source_labels = ["__journal_syslog_message_severity"];
               target_label = "level";
+            }
+            {
+              source_labels = ["__journal_syslog_message_facility"];
+              target_label = "facility";
             }
           ];
         }

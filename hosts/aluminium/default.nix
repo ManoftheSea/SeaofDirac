@@ -48,17 +48,8 @@
   };
 
   security.polkit.enable = true;
-  systemd.sysusers.enable = true;
 
-  system = {
-    etc.overlay = {
-      enable = true;
-      mutable = false;
-    };
-    stateVersion = "24.05";
-  };
-
-  # users.mutableUsers = false;
+  system.stateVersion = "24.05";
 
   virtualisation = {
     libvirtd.enable = true;

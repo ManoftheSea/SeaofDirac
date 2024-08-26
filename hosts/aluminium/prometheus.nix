@@ -1,10 +1,10 @@
 {
   services.prometheus = {
-    enable = true;
+    enable = false;
     port = 9001;
 
     exporters.node = {
-      enable = true;
+      enable = false;
       port = 9100;
       enabledCollectors = [
         "logind"

@@ -22,6 +22,14 @@
           }
         ];
       }
+      {
+        job_name = "garage";
+        static_configs = [
+          {
+            targets = ["localhost:3903"];
+          }
+        ];
+      }
     ];
   };
 

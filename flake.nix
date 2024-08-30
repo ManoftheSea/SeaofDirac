@@ -26,9 +26,13 @@
 
     # Declarative mail server with postfix and dovecot
     snm = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-23.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.utils.follows = "deploy-rs/utils";
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.05";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        nixpkgs-24_05.follows = "nixpkgs";
+        utils.follows = "deploy-rs/utils";
+        flake-compat.follows = "deploy-rs/flake-compat";
+      };
     };
 
     # Secrets management. TODO ./docs/secrets.md

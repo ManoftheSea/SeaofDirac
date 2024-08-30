@@ -16,6 +16,7 @@
       kernelModules = [
         "dm-raid"
         "dm-integrity"
+        "raid10"
       ];
     };
 

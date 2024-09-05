@@ -62,6 +62,19 @@
     nixosConfigurations = import ./hosts inputs;
     nixosModules = import ./modules inputs;
     overlays = import ./overlays/factorio.nix {};
+    packages.x86_64-linux.appliance_1 = let
+      inherit (self.nixosConfigurations.usb) config;
+      inherit (nixpkgs.legacyPackages.x86_64-linux) pkgs;
+    in
+      pkgs.runCommand "update-${config.system.image.version}" {
+        nativeBuildInputs = [pkgs.xz];
+      } ''
+        mkdir -p $out
+        xz -1 -cz ${config.system.build.uki}/${config.system.boot.loader.ukiFile} \
+          > $out/${config.system.boot.loader.ukiFile}.xz
+        xz -1 -cz ${config.system.build.image}/${config.boot.uki.name}_${config.system.image.version}.store.raw \
+          > $out/store_${config.system.image.version}.img.xz
+      '';
 
     # Deploy-rs uses "outputs.deploy" and "outputs.checks"
     deploy = {

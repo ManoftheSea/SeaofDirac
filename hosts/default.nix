@@ -54,6 +54,15 @@ in {
       ../users/root.nix
     ];
   };
+  usb = lib.nixosSystem {
+    system = "x86_64-linux";
+    specialArgs = inputs;
+    modules = [
+      ./usb
+      ../users/root.nix
+      ../users/derek.nix
+    ];
+  };
 
   # server systems
   crunchbits = lib.nixosSystem {

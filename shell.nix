@@ -31,4 +31,19 @@ in {
         ;
     };
   };
+  kvm = let
+    qemu-efi = pkgs.writeShellApplication {
+      name = "qemu-efi";
+      runtimeInputs = [pkgs.qemu_kvm];
+      text = ''
+        qemu-system-x86_64 -smp 2 -m 2048 \
+          -machine q35,accel=kvm -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
+          -snapshot \
+          -serial stdio "$@"
+      '';
+    };
+  in
+    pkgs.mkShellNoCC {
+      packages = [qemu-efi];
+    };
 }

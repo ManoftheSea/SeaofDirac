@@ -13,7 +13,14 @@
 
   boot = {
     enableContainers = false;
-    initrd.systemd.enable = true;
+    initrd = {
+      kernelModules = ["ext4"];
+      systemd = {
+        enable = true;
+        emergencyAccess = true;
+        root = "gpt-auto";
+      };
+    };
     kernelParams = ["console=ttyS0"];
     loader.grub.enable = false;
     tmp.cleanOnBoot = true;
@@ -41,16 +48,6 @@
   };
 
   fileSystems = {
-    "/" = {
-      fsType = "tmpfs";
-      options = ["size=20%"];
-    };
-    "/nix/store" = let
-      partConf = config.image.repart.partitions."store".repartConfig;
-    in {
-      fsType = partConf.Format;
-      device = "/dev/disk/by-partlabel/${partConf.Label}";
-    };
     # Discoverable partitions should enable /efi, /boot, and /var
   };
 

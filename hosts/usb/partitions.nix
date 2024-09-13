@@ -35,39 +35,30 @@
           Type = "xbootldr";
         };
       };
-      "root" = {
+      "root".repartConfig = {
+        Format = "ext4";
+        Label = "root";
+        Minimize = "off";
+        ReadOnly = "no";
+        SizeMaxBytes = "100M";
+        SizeMinBytes = "100M";
+        SplitName = "-";
+        Type = "root";
+      };
+      "store" = {
         storePaths = [config.system.build.toplevel];
+        stripNixStorePrefix = true;
         repartConfig = {
           Format = "ext4";
           Label = "store_${config.system.image.version}";
           Minimize = "off";
           ReadOnly = "no";
           SizeMaxBytes = "4G";
-          SizeMinBytes = "1G";
+          SizeMinBytes = "4G";
           SplitName = "store";
-          Type = "root";
+          Type = "linux-generic";
         };
       };
-      #"root-verity".repartConfig = {
-      #  Label = "verity_${config.system.image.version}";
-      #  SizeMaxBytes = "512M";
-      #  SizeMinBytes = "64M";
-      #  Type = "root-verity";
-      #};
-      "root-empty".repartConfig = {
-        Label = "_empty";
-        Minimize = "off";
-        SizeMaxBytes = "4G";
-        SizeMinBytes = "1G";
-        SplitName = "-";
-        Type = "root";
-      };
-      #"root-empty-verity".repartConfig = {
-      #  SizeMaxBytes = "512M";
-      #  SizeMinBytes = "64M";
-      #  SplitName = "-";
-      #  Type = "root-verity";
-      #};
       "var".repartConfig = {
         FactoryReset = "yes";
         Format = "ext4";

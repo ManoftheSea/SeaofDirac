@@ -7,6 +7,7 @@
   imports = [
     "${modulesPath}/image/repart.nix"
     "${modulesPath}/profiles/minimal.nix"
+    ./network.nix
     ./partitions.nix
     ./sysupdate.nix
   ];
@@ -14,18 +15,32 @@
   boot = {
     enableContainers = false;
     initrd = {
+      availableKernelModules = [
+        "ahci"
+        "sd_mod"
+        "usbhid"
+        "usb_storage"
+        "xhci_pci"
+      ];
       kernelModules = ["ext4"];
       systemd = {
         enable = true;
         emergencyAccess = true;
-        root = "gpt-auto";
       };
     };
-    kernelParams = ["console=ttyS0"];
+    kernelParams = [
+      "console=ttyS0,115200"
+      "console=tty0"
+    ];
     loader.grub.enable = false;
-    tmp.cleanOnBoot = true;
-    uki.name = "appliance";
+    tmp = {
+      cleanOnBoot = true;
+      useTmpfs = true;
+    };
+    uki.name = "collector";
   };
+
+  documentation.enable = false;
 
   environment = {
     defaultPackages = [];
@@ -41,6 +56,7 @@
         nvme-cli
         pciutils
         psmisc
+        tcpdump
         usbutils
         wget
         ;
@@ -49,18 +65,37 @@
 
   fileSystems = {
     # Discoverable partitions should enable /efi, /boot, and /var
+    "/" = let
+      partConf = config.image.repart.partitions."root".repartConfig;
+    in {
+      fsType = partConf.Format;
+      device = "/dev/disk/by-partlabel/${partConf.Label}";
+    };
+    "/var" = let
+      partConf = config.image.repart.partitions."var".repartConfig;
+    in {
+      fsType = partConf.Format;
+      device = "/dev/disk/by-partlabel/${partConf.Label}";
+    };
+    "/nix/store" = let
+      partConf = config.image.repart.partitions."store".repartConfig;
+    in {
+      fsType = partConf.Format;
+      device = "/dev/disk/by-partlabel/${partConf.Label}";
+    };
   };
 
-  networking = {
-    useNetworkd = true;
-    firewall.enable = false;
+  hardware = {
+    cpu.intel.updateMicrocode = true;
+    enableRedistributableFirmware = true;
   };
 
+  networking.hostName = "collector";
   nix.enable = false;
 
   programs = {
     bash.promptInit = ''
-      export PS1="\u@\h (version ${config.system.image.version}) $ "
+      export PS1="[\u@\h:\w]\$ "
     '';
     command-not-found.enable = false;
     less.lessopen = null;
@@ -81,10 +116,7 @@
     switch.enable = false;
   };
 
-  systemd = {
-    network.wait-online.enable = false;
-    sysusers.enable = true;
-  };
+  systemd.sysusers.enable = true;
 
   zramSwap = {
     enable = true;

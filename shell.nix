@@ -25,6 +25,7 @@ in {
         home-manager
         lefthook
         nix
+        nix-output-monitor
         sops
         ssh-to-age
         statix

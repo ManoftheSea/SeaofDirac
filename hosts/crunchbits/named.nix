@@ -20,7 +20,7 @@
     '';
 
     zones = {
-      "seaofdirac.org" = {
+      "${config.networking.domain}" = {
         file = "/var/dns/seaofdirac.org.db";
         master = false;
         masters = [

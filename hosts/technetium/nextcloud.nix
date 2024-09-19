@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  myFQDN = "technetium.seaofdirac.org";
+  myFQDN = config.networking.fqdn;
 in {
   security.acme.certs.${myFQDN}.extraDomainNames = [
     "${config.services.nextcloud.hostName}"
@@ -26,7 +26,7 @@ in {
       #  mail_sendmailmode = "pipe";
       #};
       https = true;
-      hostName = "nextcloud.seaofdirac.org";
+      hostName = "nextcloud.${config.networking.domain}";
       package = pkgs.nextcloud29;
       # phpOptions = { upload_max_filesize = "1G"; post_max_size = "1G"; };
     };

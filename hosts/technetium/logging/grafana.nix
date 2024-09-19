@@ -1,8 +1,7 @@
 {config, ...}: let
-  hostName = "technetium.seaofdirac.org";
-  grafanaDomain = "grafana.seaofdirac.org";
+  grafanaDomain = "grafana.${config.networking.domain}";
 in {
-  security.acme.certs.${hostName}.extraDomainNames = [
+  security.acme.certs.${config.networking.fqdn}.extraDomainNames = [
     grafanaDomain
   ];
 
@@ -15,7 +14,7 @@ in {
 
   services.nginx.virtualHosts.${grafanaDomain} = {
     onlySSL = true;
-    useACMEHost = hostName;
+    useACMEHost = config.networking.fqdn;
     locations."/" = {
       proxyPass = "http://127.0.0.1:${toString config.services.grafana.settings.server.http_port}";
       proxyWebsockets = true;

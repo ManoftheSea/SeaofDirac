@@ -1,9 +1,12 @@
-{config, ...}: {
+{config, ...}: let
+  myDomain = config.networking.domain;
+in {
   mailserver = {
+    inherit (config.networking) fqdn;
     enable = true;
 
     certificateScheme = "acme";
-    domains = ["seaofdirac.org"];
+    domains = ["${myDomain}"];
     fullTextSearch = {
       enable = true;
       # index new email as they arrive
@@ -27,7 +30,6 @@
       "jessica@seaofdirac.org".hashedPasswordFile = config.sops.secrets.derek_password.path;
       "nextcloud@seaofdirac.org".hashedPasswordFile = config.sops.secrets.nextcloud_password.path;
     };
-    fqdn = "littlecreek.seaofdirac.org";
   };
 
   services = {
@@ -35,10 +37,10 @@
 
     nginx = {
       enable = true;
-      virtualHosts."mta-sts.seaofdirac.org" = {
-        useACMEHost = "littlecreek.seaofdirac.org";
+      virtualHosts."mta-sts.${myDomain}" = {
+        useACMEHost = "${config.networking.fqdn}";
         forceSSL = true;
-        root = "/var/www/mta-sts.seaofdirac.org";
+        root = "/var/www/mta-sts.${config.networking.domain}";
       };
     };
   };

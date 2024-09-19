@@ -1,5 +1,6 @@
 {
   networking = {
+    domain = "seaofdirac.org";
     firewall = {
       enable = true;
       allowPing = true;

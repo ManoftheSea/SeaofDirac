@@ -8,7 +8,7 @@
     pkgs.jellyfin-ffmpeg
   ];
 
-  security.acme.certs."${config.networking.hostName}.seaofdirac.org" = {
+  security.acme.certs."${config.networking.fqdn}" = {
     postRun = ''
       ${pkgs.openssl}/bin/openssl pkcs12 -export -out cert.p12 -in cert.pem -inkey key.pem -passout pass:
       chown acme:nginx cert.p12
@@ -25,8 +25,8 @@
 
   systemd.services.jellyfin = {
     serviceConfig.LoadCredential = [
-      "cert.p12:/var/lib/acme/${config.networking.hostName}.seaofdirac.org/cert.p12"
+      "cert.p12:/var/lib/acme/${config.networking.fqdn}/cert.p12"
     ];
-    wants = ["acme-${config.networking.hostName}.seaofdirac.org.service"];
+    wants = ["acme-${config.networking.fqdn}.service"];
   };
 }

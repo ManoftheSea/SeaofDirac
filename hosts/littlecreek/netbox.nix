@@ -1,21 +1,21 @@
 {config, ...}: {
   networking.firewall.allowedTCPPorts = [80 443];
 
-  security.acme.certs."littlecreek.seaofdirac.org".extraDomainNames = ["netbox.seaofdirac.org"];
+  security.acme.certs."${config.networking.fqdn}".extraDomainNames = ["netbox.${config.networking.domain}"];
 
   services.netbox = {
     enable = true;
-    extraConfig = "CSRF_TRUSTED_ORIGINS = [\"https://netbox.seaofdirac.org\"]";
+    extraConfig = "CSRF_TRUSTED_ORIGINS = [\"https://netbox.${config.networking.domain}\"]";
     secretKeyFile = config.sops.secrets.netbox_password.path;
   };
 
-  services.nginx.virtualHosts."netbox.seaofdirac.org" = {
+  services.nginx.virtualHosts."netbox.${config.networking.domain}" = {
     locations = {
       "/".proxyPass = "http://[::1]:8001";
       "/static/".alias = "${config.services.netbox.dataDir}/static/";
     };
     forceSSL = true;
-    useACMEHost = "littlecreek.seaofdirac.org";
+    useACMEHost = "${config.networking.fqdn}";
   };
 
   sops.secrets.netbox_password = {

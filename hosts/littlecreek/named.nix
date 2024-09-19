@@ -31,8 +31,8 @@
     '';
 
     zones = {
-      "seaofdirac.org" = {
-        file = "/var/dns/seaofdirac.org.db";
+      "${config.networking.domain}" = {
+        file = "/var/dns/${config.networking.domain}.db";
         master = true;
         slaves = [
           "homenets"

@@ -1,19 +1,20 @@
 {config, ...}: {
-  security.acme.certs."${config.networking.hostName}.seaofdirac.org" = {
+  security.acme.certs."${config.networking.fqdn}" = {
     dnsProvider = "rfc2136";
     extraDomainNames = [
-      "mta-sts.seaofdirac.org"
+      "mta-sts.${config.networking.domain}"
     ];
     inherit (config.services.nginx) group;
     webroot = null;
   };
+
   services = {
     nginx = {
       recommendedTlsSettings = true;
       recommendedOptimisation = true;
       recommendedGzipSettings = true;
       virtualHosts = {
-        "littlecreek.seaofdirac.org" = {
+        "${config.networking.fqdn}" = {
           enableACME = true;
           acmeRoot = null;
         };
@@ -26,6 +27,7 @@
         type = "ed25519";
       }
     ];
+
     qemuGuest.enable = true;
   };
 

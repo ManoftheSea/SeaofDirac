@@ -22,8 +22,11 @@
     networks = {
       ens3 = {
         matchConfig.Name = "ens3";
-        address = ["2001:550:5a00:b28c::1/64"];
-        gateway = ["fe80::6ef0:49ff:fee2:9df6"];
+        address = [
+          "38.45.65.88/24"
+          "2001:550:5a00:b28c::1/64"
+        ];
+        gateway = ["38.45.65.1"];
         networkConfig = {
           DHCP = "yes";
           IPv6AcceptRA = true;

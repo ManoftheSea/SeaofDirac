@@ -48,9 +48,26 @@ in {
       ./common/impermanence.nix
       ./common/laptop.nix
       ./common/usbguard.nix
-      ../users/derek.nix
+      ../users/root.nix
       ../users/benjamin.nix
-      ../users/solomon.nix
+    ];
+  };
+  tin = lib.nixosSystem {
+    system = "x86_64-linux";
+    specialArgs = inputs;
+    modules = [
+      ./tin/default.nix
+      disko.nixosModules.disko
+      sops-nix.nixosModules.sops
+      {nixpkgs.overlays = builtins.attrValues self.overlays;}
+      ./common/audio/pipewire.nix
+      ./common/core/base.nix
+      ./common/core/cache.nix
+      ./common/core/flakes.nix
+      ./common/graphical/intel-gpu.nix
+      ./common/hardware/efi.nix
+      ./common/impermanence.nix
+      ./common/laptop.nix
       ../users/root.nix
     ];
   };

@@ -1,6 +1,7 @@
 {
-  pkgs,
+  config,
   lib,
+  pkgs,
   ...
 }: {
   fonts.fontconfig.enable = true; # enable user fonts
@@ -10,6 +11,7 @@
       enable = lib.mkDefault true;
       powerOnBoot = lib.mkDefault true;
     };
+    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     enableRedistributableFirmware = lib.mkDefault true;
   };
 

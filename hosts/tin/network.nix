@@ -11,15 +11,7 @@
         5355 # LLMNR
       ];
     };
-    hostName = "nickel";
-    networkmanager.enable = true;
+    hostName = "tin";
     nftables.enable = true;
-
-    # wireless = {
-    #   enable = true;
-    #   extraConfig = ''
-    #     ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=wheel
-    #   '';
-    # };
   };
 }

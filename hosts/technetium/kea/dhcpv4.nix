@@ -140,6 +140,11 @@
               ip-address = "192.168.102.50";
               hostname = "nickel.users.seaofdirac.org.";
             }
+            {
+              hw-address = "38:00:25:ce:da:8d";
+              ip-address = "192.168.102.51";
+              hostname = "tin.users.seaofdirac.org.";
+            }
           ];
           subnet = "192.168.102.0/24";
         }

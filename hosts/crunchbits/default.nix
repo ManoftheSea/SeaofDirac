@@ -3,7 +3,6 @@
     ./disko.nix
     ./named.nix
     ./network.nix
-    ./services.nix
     ./ldap.nix
   ];
 

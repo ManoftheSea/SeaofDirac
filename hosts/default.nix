@@ -69,6 +69,7 @@ in {
       ./common/impermanence.nix
       ./common/laptop.nix
       ../users/root.nix
+      ../users/solomon.nix
     ];
   };
 

@@ -20,7 +20,6 @@ in {
       ./common/core/base.nix
       ./common/core/cache.nix
       ./common/core/flakes.nix
-      ./common/graphical/intel-gpu.nix
       ./common/hardware/efi.nix
       ./common/hardware/virt-manager.nix
       ./common/impermanence.nix

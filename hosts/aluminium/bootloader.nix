@@ -14,6 +14,5 @@
 
     kernelModules = ["kvm-intel"];
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = ["module_blacklist=hid_sensor_hub"];
   };
 }

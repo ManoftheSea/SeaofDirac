@@ -35,6 +35,7 @@
   };
 
   hardware = {
+    intelgpu.driver = "xe";
     sane = {
       enable = true;
       extraBackends = [pkgs.hplip];

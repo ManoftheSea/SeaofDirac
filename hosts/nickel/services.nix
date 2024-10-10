@@ -22,5 +22,9 @@
       drivers = [pkgs.hplip];
     };
     resolved.enable = true;
+    udev.extraRules = ''
+      # Logitech receiver
+      ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="046d", ATTR{idProduct}=="c534", ATTR{power/autosuspend}="-1"
+    '';
   };
 }

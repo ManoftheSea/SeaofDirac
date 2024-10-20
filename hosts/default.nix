@@ -49,6 +49,7 @@ in {
       ./common/usbguard.nix
       ../users/root.nix
       ../users/benjamin.nix
+      ../users/solomon.nix
     ];
   };
   tin = lib.nixosSystem {
@@ -68,6 +69,7 @@ in {
       ./common/impermanence.nix
       ./common/laptop.nix
       ../users/root.nix
+      ../users/benjamin.nix
       ../users/solomon.nix
     ];
   };

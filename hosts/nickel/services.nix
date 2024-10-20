@@ -23,7 +23,8 @@
     };
     resolved.enable = true;
     udev.extraRules = ''
-      # Logitech receiver
+      # Logitech receivers
+      ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="046d", ATTR{idProduct}=="c52b", ATTR{power/autosuspend}="-1"
       ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="046d", ATTR{idProduct}=="c534", ATTR{power/autosuspend}="-1"
     '';
   };

@@ -66,8 +66,10 @@ in {
       ./common/core/flakes.nix
       ./common/graphical/intel-gpu.nix
       ./common/hardware/efi.nix
+      ./common/hardware/virt-manager.nix
       ./common/impermanence.nix
       ./common/laptop.nix
+      ./common/usbguard.nix
       ../users/root.nix
       ../users/benjamin.nix
       ../users/solomon.nix

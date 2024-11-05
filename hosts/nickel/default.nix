@@ -43,9 +43,6 @@
         virt-manager
         wget
         ;
-      #inherit
-      #  myfactorio
-      #  ;
     };
   };
 

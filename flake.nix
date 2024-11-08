@@ -3,8 +3,8 @@
 
   inputs = {
     ### Official NixOS Package Sources ###
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    #nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Official hardware configurations
     nixos-hardware.url = "github:nixos/nixos-hardware/master";

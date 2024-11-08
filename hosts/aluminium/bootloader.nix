@@ -12,6 +12,7 @@
       # systemd.enable = true;
     };
 
+    kernel.sysctl."kernel.dmesg_restrict" = false;
     kernelModules = ["kvm-intel"];
     kernelPackages = pkgs.linuxPackages_latest;
   };

@@ -3,7 +3,7 @@
 
   inputs = {
     ### Official NixOS Package Sources ###
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     #nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Official hardware configurations
@@ -39,7 +39,7 @@
     sops-nix = {
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-stable.follows = "nixpkgs";
+      #inputs.nixpkgs-stable.follows = "nixpkgs";
     };
   };
 

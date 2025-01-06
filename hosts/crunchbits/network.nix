@@ -29,10 +29,8 @@
       networkConfig.LinkLocalAddressing = "ipv6";
       routes = [
         {
-          routeConfig = {
-            Gateway = "2606:a8c0:3::1";
-            GatewayOnLink = true;
-          };
+          Gateway = "2606:a8c0:3::1";
+          GatewayOnLink = true;
         }
       ];
     };

@@ -27,7 +27,7 @@ in {
       #};
       https = true;
       hostName = "nextcloud.${config.networking.domain}";
-      package = pkgs.nextcloud29;
+      package = pkgs.nextcloud30;
       # phpOptions = { upload_max_filesize = "1G"; post_max_size = "1G"; };
     };
 

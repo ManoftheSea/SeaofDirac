@@ -49,3 +49,9 @@ creation_rules:
     - age:
       - *user_derek
       - *host_technetium
+  - path_regex: hosts/secrets/bind\.yaml$
+    key_groups:
+    - age:
+      - *user_derek
+      - *host_castor
+      - *host_pollux

@@ -16,8 +16,16 @@
     ];
   };
 
-  systemd.tmpfiles.rules = [
-    (lib.mkIf config.networking.networkmanager.enable "d /var/lib/NetworkManager/system-connections 0700")
-    (lib.mkIf config.services.openssh.enable "d /var/lib/ssh 0750 ${config.users.users.sshd.name} ${config.users.users.sshd.group}")
+  systemd.tmpfiles.settings = lib.mkMerge [
+    (lib.mkIf config.networking.networkmanager.enable {
+      nm-system-connections."/var/lib/NetworkManager/system-connections".d.mode = "0700";
+    })
+    (lib.mkIf config.services.openssh.enable {
+      openssh."/var/lib/ssh".d = {
+        inherit (config.users.users.sshd) group;
+        user = config.users.users.sshd.name;
+        mode = "0750";
+      };
+    })
   ];
 }

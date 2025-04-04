@@ -18,7 +18,7 @@ in {
       nixos-hardware.nixosModules.framework-12th-gen-intel
       ./common/audio/pipewire.nix
       ./common/core/base.nix
-      ./common/core/cache.nix
+      #./common/core/cache.nix
       ./common/core/flakes.nix
       ./common/hardware/efi.nix
       ./common/hardware/virt-manager.nix
@@ -39,7 +39,7 @@ in {
       {nixpkgs.overlays = builtins.attrValues self.overlays;}
       ./common/audio/pipewire.nix
       ./common/core/base.nix
-      ./common/core/cache.nix
+      #./common/core/cache.nix
       ./common/core/flakes.nix
       ./common/graphical/intel-gpu.nix
       ./common/hardware/efi.nix
@@ -62,7 +62,7 @@ in {
       {nixpkgs.overlays = builtins.attrValues self.overlays;}
       ./common/audio/pipewire.nix
       ./common/core/base.nix
-      ./common/core/cache.nix
+      #./common/core/cache.nix
       ./common/core/flakes.nix
       ./common/graphical/intel-gpu.nix
       ./common/hardware/efi.nix
@@ -95,6 +95,22 @@ in {
       ../users/root.nix
     ];
   };
+  castor = lib.nixosSystem {
+    system = "aarch64-linux";
+    specialArgs = inputs;
+    modules = [
+      ./castor
+      sops-nix.nixosModules.sops
+      disko.nixosModules.disko
+      ./common/core/base.nix
+      ./common/core/flakes.nix
+      ./common/hardware/efi.nix
+      ./common/server/base.nix
+      ./common/server/harden-network.nix
+      ./common/server/security.nix
+      ../users/root.nix
+    ];
+  };
   littlecreek = lib.nixosSystem {
     system = "x86_64-linux";
     specialArgs = inputs;
@@ -110,6 +126,22 @@ in {
       ./common/server/security.nix
       ./common/impermanence.nix
       ./common/acme.nix
+      ../users/root.nix
+    ];
+  };
+  pollux = lib.nixosSystem {
+    system = "aarch64-linux";
+    specialArgs = inputs;
+    modules = [
+      ./pollux
+      disko.nixosModules.disko
+      sops-nix.nixosModules.sops
+      ./common/core/base.nix
+      ./common/core/flakes.nix
+      ./common/hardware/efi.nix
+      ./common/server/base.nix
+      ./common/server/harden-network.nix
+      ./common/server/security.nix
       ../users/root.nix
     ];
   };

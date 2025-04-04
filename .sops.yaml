@@ -1,12 +1,24 @@
 keys:
   - &user_derek       age1m9lkn3stwwkgdrrhvt2npqs6hhvpceduwz4csrzgwlypde4jd3usphxwca
   - &user_derek_yk    age1yubikey1qtsz0xkjqqxvm4uev2d6fpkdvu5zmx9v8th8dfzpdtcx23qedk832f7nf8v
+  - &host_castor age1hkvdleqqs4w65rmqx2hyahr5gjak5m90agfnpju2psf75qg2fgcs4266dq
   - &host_crunchbits  age1kf2f7dh5tqur8lszqa6jsa7efn00krk6g0hzwx7apprx62q6ru2qm0fr3g
   - &host_littlecreek age1lttery3xgzrze6757s8mmg48slu27jwhawjhn98tyx0ft2fekd3qyuhmy0
   - &host_nickel      age1nnsgzkz2wjwkm6ky5deztag73w5k25kk3myndpxpmyfrm6lkny6q5gkzpm
+  - &host_pollux age1ctes29mnyzr9jwnknl69rgerkv8ztpnlqg7dvd47y6rllx2nc46qw4yc2j
   - &host_technetium  age1tzrqdxvp9mqwqq2p8xf3zfn7pstp4e054m5w03c62j6rqth2p9qq2tf044
 
 creation_rules:
+  - path_regex: hosts/castor/secrets\.yaml$
+    key_groups:
+    - age:
+      - *user_derek
+      - *host_castor
+  - path_regex: hosts/castor/kea/.*\.json
+    key_groups:
+    - age:
+      - *user_derek
+      - *host_castor
   - path_regex: hosts/crunchbits/secrets\.yaml$
     key_groups:
     - age:
@@ -22,6 +34,16 @@ creation_rules:
     - age:
       - *user_derek
       - *host_nickel
+  - path_regex: hosts/pollux/secrets\.yaml$
+    key_groups:
+    - age:
+      - *user_derek
+      - *host_pollux
+  - path_regex: hosts/pollux/kea/.*\.json
+    key_groups:
+    - age:
+      - *user_derek
+      - *host_pollux
   - path_regex: hosts/technetium/secrets\.yaml$
     key_groups:
     - age:

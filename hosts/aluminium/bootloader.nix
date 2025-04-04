@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   boot = {
+    binfmt.emulatedSystems = ["aarch64-linux"];
     initrd = {
       availableKernelModules = [
         "nvme"

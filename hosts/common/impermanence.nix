@@ -16,16 +16,8 @@
     ];
   };
 
-  system.activationScripts = lib.mkMerge [
-    (lib.mkIf config.networking.networkmanager.enable {
-      persist-nm = ''
-        mkdir -pm 0700 /var/lib/NetworkManager/system-connections
-      '';
-    })
-    (lib.mkIf config.services.openssh.enable {
-      persist-sshkey = ''
-        mkdir -pm 0755 /var/lib/ssh
-      '';
-    })
+  systemd.tmpfiles.rules = [
+    (lib.mkIf config.networking.networkmanager.enable "d /var/lib/NetworkManager/system-connections 0700")
+    (lib.mkIf config.services.openssh.enable "d /var/lib/ssh 0750 ${config.users.users.sshd.name} ${config.users.users.sshd.group}")
   ];
 }

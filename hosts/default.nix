@@ -108,6 +108,7 @@ in {
       ./common/server/base.nix
       ./common/server/harden-network.nix
       ./common/server/security.nix
+      ./common/impermanence.nix
       ../users/root.nix
     ];
   };
@@ -142,6 +143,7 @@ in {
       ./common/server/base.nix
       ./common/server/harden-network.nix
       ./common/server/security.nix
+      ./common/impermanence.nix
       ../users/root.nix
     ];
   };

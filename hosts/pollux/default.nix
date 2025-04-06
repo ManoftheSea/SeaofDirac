@@ -2,8 +2,8 @@
 {pkgs, ...}: {
   imports = [
     ./disko.nix
-    ./services.nix
     ./network.nix
+    ./services
   ];
 
   environment = {

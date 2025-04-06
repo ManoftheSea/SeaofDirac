@@ -14,7 +14,7 @@ creation_rules:
     - age:
       - *user_derek
       - *host_castor
-  - path_regex: hosts/castor/kea/.*\.json
+  - path_regex: hosts/castor/services/kea/.*\.json
     key_groups:
     - age:
       - *user_derek
@@ -39,7 +39,7 @@ creation_rules:
     - age:
       - *user_derek
       - *host_pollux
-  - path_regex: hosts/pollux/kea/.*\.json
+  - path_regex: hosts/pollux/services/kea/.*\.json
     key_groups:
     - age:
       - *user_derek

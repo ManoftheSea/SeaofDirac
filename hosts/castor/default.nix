@@ -3,7 +3,7 @@
   imports = [
     ./disko.nix
     ./network.nix
-    ./services.nix
+    ./services
   ];
 
   environment = {

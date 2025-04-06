@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./bind
     ./kea
   ];
 }

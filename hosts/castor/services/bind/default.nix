@@ -115,10 +115,13 @@
       }));
 
   # These are required in 24.11, but part of the definition in unstable (20250405)
-  systemd.services.bind.serviceConfig = {
+  systemd.services.bind.serviceConfig = lib.mkIf config.services.bind.enable {
     AmbientCapabilities = "CAP_NET_BIND_SERVICE";
     CapabilityBoundingSet = "CAP_NET_BIND_SERVICE";
-    User = lib.mkIf config.services.bind.enable "named";
+    ConfigurationDirectory = "bind";
+    RuntimeDirectory = "named";
+    RuntimeDirectoryPreserve = "yes";
+    User = "named";
   };
 
   systemd.tmpfiles.settings = lib.mkIf config.services.bind.enable {

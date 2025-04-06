@@ -15,7 +15,7 @@
       configFile = "/run/credentials/kea-dhcp4-server.service/dhcpv4.conf";
     };
     dhcp6 = {
-      enable = false;
+      enable = true;
       configFile = "/run/credentials/kea-dhcp6-server.service/dhcpv6.conf";
     };
     dhcp-ddns = {

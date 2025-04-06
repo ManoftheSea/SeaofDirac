@@ -27,21 +27,24 @@
   sops.secrets = {
     kea-dhcpv4 = {
       format = "json";
-      sopsFile = ./dhcpv4.json;
       key = "";
       mode = "0440";
+      reloadUnits = ["kea-dhcp4-server.service"];
+      sopsFile = ./dhcpv4.json;
     };
     kea-dhcpv6 = {
       format = "json";
-      sopsFile = ./dhcpv6.json;
       key = "";
       mode = "0440";
+      reloadUnits = ["kea-dhcp6-server.service"];
+      sopsFile = ./dhcpv6.json;
     };
     kea-ddns = {
       format = "json";
-      sopsFile = ./dhcp-ddns.json;
       key = "";
       mode = "0440";
+      reloadUnits = ["kea-dhcp-ddns-server.service"];
+      sopsFile = ./dhcp-ddns.json;
     };
   };
 

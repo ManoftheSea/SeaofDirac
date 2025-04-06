@@ -36,6 +36,7 @@ in {
       include "${config.sops.secrets."bind/config/acls".path}";
       include "${config.sops.secrets."bind/config/controls".path}";
       include "${config.sops.secrets."bind/config/masters".path}";
+      include "${config.sops.secrets."bind/rndc_keys/aluminium".path}";
     '';
 
     zones =
@@ -60,6 +61,7 @@ in {
         "bind/config/acls"
         "bind/config/controls"
         "bind/config/masters"
+        "bind/rndc_keys/aluminium"
       ] (_: {
         owner = config.users.users.named.name;
         sopsFile = "${self}/hosts/secrets/bind.yaml";

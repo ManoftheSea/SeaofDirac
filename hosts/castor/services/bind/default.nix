@@ -37,77 +37,68 @@
       include "${config.sops.secrets."bind/rndc_keys/ddns-key".path}";
     '';
 
-    zones = {
-      "${config.networking.domain}" = {
-        file = "/var/dns/${config.networking.domain}.db";
+    zones =
+      lib.mapAttrs (_zoneName: zoneAttrs: {
+        inherit (zoneAttrs) extraConfig file;
         master = true;
         slaves = ["trusted"];
-        extraConfig = ''
-          update-policy {
-            grant aluminium zonesub any;
-          };
-        '';
+      }) {
+        "${config.networking.domain}" = {
+          file = "/var/dns/${config.networking.domain}.db";
+          extraConfig = ''
+            update-policy {
+              grant aluminium zonesub any;
+            };
+          '';
+        };
+        "users.${config.networking.domain}" = {
+          file = "/var/dns/users.${config.networking.domain}.db";
+          extraConfig = ''
+            update-policy {
+              grant ddns-key.seaofdirac.org. zonesub any;
+              grant ddns.technetium.seaofdirac.org. subdomain users.seaofdirac.org. any;
+            };
+          '';
+        };
+        "0.1.c.d.c.5.0.1.0.6.2.ip6.arpa" = {
+          file = "/var/dns/2601.5cd.c10-pd-reverse.db";
+          extraConfig = ''
+            update-policy {
+              grant ddns-key.seaofdirac.org. zonesub any;
+            };
+          '';
+        };
+        "168.192.in-addr.arpa" = {
+          file = "/var/dns/192.168.db";
+          extraConfig = ''
+            update-policy {
+              grant ddns-key.seaofdirac.org. zonesub any;
+            };
+          '';
+        };
+        "20.172.in-addr.arpa" = {
+          file = "/var/dns/172.20.db";
+          extraConfig = ''
+            update-policy {
+              grant ddns-key.seaofdirac.org. zonesub any;
+            };
+          '';
+        };
+        "10.in-addr.arpa" = {
+          file = "/var/dns/10.db";
+          extraConfig = ''
+            update-policy {
+              grant ddns-key.seaofdirac.org. zonesub any;
+            };
+          '';
+        };
+        "rpz.blocklist" = {
+          file = "/var/dns/rpz.blocklist";
+          extraConfig = ''
+            update-policy {};
+          '';
+        };
       };
-      "users.${config.networking.domain}" = {
-        file = "/var/dns/users.${config.networking.domain}.db";
-        master = true;
-        slaves = ["trusted"];
-        extraConfig = ''
-          update-policy {
-            grant ddns-key.seaofdirac.org. zonesub any;
-            grant ddns.technetium.seaofdirac.org. subdomain users.seaofdirac.org. any;
-          };
-        '';
-      };
-      "0.1.c.d.c.5.0.1.0.6.2.ip6.arpa" = {
-        file = "/var/dns/2601.5cd.c10-pd-reverse.db";
-        master = true;
-        slaves = ["trusted"];
-        extraConfig = ''
-          update-policy {
-            grant ddns-key.seaofdirac.org. zonesub any;
-          };
-        '';
-      };
-      "168.192.in-addr.arpa" = {
-        file = "/var/dns/192.168.db";
-        master = true;
-        slaves = ["trusted"];
-        extraConfig = ''
-          update-policy {
-            grant ddns-key.seaofdirac.org. zonesub any;
-          };
-        '';
-      };
-      "20.172.in-addr.arpa" = {
-        file = "/var/dns/172.20.db";
-        master = true;
-        slaves = ["trusted"];
-        extraConfig = ''
-          update-policy {
-            grant ddns-key.seaofdirac.org. zonesub any;
-          };
-        '';
-      };
-      "10.in-addr.arpa" = {
-        file = "/var/dns/10.db";
-        master = true;
-        slaves = ["trusted"];
-        extraConfig = ''
-          update-policy {
-            grant ddns-key.seaofdirac.org. zonesub any;
-          };
-        '';
-      };
-      "rpz.blocklist" = {
-        file = "/var/dns/rpz.blocklist";
-        master = true;
-        slaves = ["trusted"];
-        extraConfig = ''
-          update-policy {};
-        '';
-      };
-    };
   };
 
   sops.secrets =

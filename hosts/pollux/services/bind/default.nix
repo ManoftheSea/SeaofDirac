@@ -47,7 +47,7 @@ in {
       }) {
         "${config.networking.domain}" = "${zonefilesDir}/${config.networking.domain}.db";
         "users.${config.networking.domain}" = "${zonefilesDir}/users.${config.networking.domain}.db";
-        "0.1.c.d.c.5.0.1.0.6.2.ip6.arpa" = "${zonefilesDir}/2601.5cd.c10-pd-reverse.db";
+        "0.1.c.d.c.5.0.1.0.6.2.ip6.arpa" = "${zonefilesDir}/2601.5c-pd-reverse.db";
         "168.192.in-addr.arpa" = "${zonefilesDir}/192.168.db";
         "20.172.in-addr.arpa" = "${zonefilesDir}/172.20.db";
         "10.in-addr.arpa" = "${zonefilesDir}/10.db";

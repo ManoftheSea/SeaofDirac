@@ -60,8 +60,8 @@
             };
           '';
         };
-        "0.1.c.d.c.5.0.1.0.6.2.ip6.arpa" = {
-          file = "/var/dns/2601.5cd.c10-pd-reverse.db";
+        "c.5.0.1.0.6.2.ip6.arpa" = {
+          file = "/var/dns/2601.5c-pd-reverse.db";
           extraConfig = ''
             update-policy {
               grant ddns-key.seaofdirac.org. zonesub any;

@@ -47,9 +47,10 @@
             grant gravity.seaofdirac.org. name _acme-challenge.gravity.seaofdirac.org. TXT;
             grant littlecreek.seaofdirac.org. name _acme-challenge.littlecreek.seaofdirac.org. TXT;
             grant littlecreek.seaofdirac.org. name _acme-challenge.mta-sts.seaofdirac.org. TXT;
-            grant singularity.seaofdirac.org. name _acme-challenge.singularity.seaofdirac.org. TXT;
             grant singularity.seaofdirac.org. name _acme-challenge.element.seaofdirac.org. TXT;
+            grant singularity.seaofdirac.org. name _acme-challenge.jitsi.seaofdirac.org. TXT;
             grant singularity.seaofdirac.org. name _acme-challenge.matrix.seaofdirac.org. TXT;
+            grant singularity.seaofdirac.org. name _acme-challenge.singularity.seaofdirac.org. TXT;
             grant singularity.seaofdirac.org. name _acme-challenge.seaofdirac.org. TXT;
             grant technetium.seaofdirac.org. name _acme-challenge.technetium.seaofdirac.org. TXT;
             grant technetium.seaofdirac.org. name _acme-challenge.grafana.seaofdirac.org. TXT;

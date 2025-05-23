@@ -17,7 +17,7 @@ _: {
             "stable": {
               "name": "factorio-headless_linux_2.0.43.tar.xz",
               "needsAuth": false,
-              "sha256": "05v4hlnlsp8y60hy3k9aj4srwmka6b6qpmivjbzfiifw8ap04q9a",
+              "sha256": "sha256-vebhZzMMRDnOffOsUZ6kRRICWO9nbx9q0x0MKBbTruM=",
               "tarDirectory": "x64",
               "url": "https://factorio.com/get-download/2.0.43/headless/linux64",
               "version": "2.0.43"

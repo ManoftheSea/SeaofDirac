@@ -7,6 +7,7 @@ keys:
   - &host_nickel      age1nnsgzkz2wjwkm6ky5deztag73w5k25kk3myndpxpmyfrm6lkny6q5gkzpm
   - &host_pollux age1ctes29mnyzr9jwnknl69rgerkv8ztpnlqg7dvd47y6rllx2nc46qw4yc2j
   - &host_technetium  age1tzrqdxvp9mqwqq2p8xf3zfn7pstp4e054m5w03c62j6rqth2p9qq2tf044
+  - &host_un100d-01   age1rflmwxsm8elq69cq6t9edejhq8rhyl0lvtfwqtcuvgu78c6ld4qsqlt5rh
 
 creation_rules:
   - path_regex: hosts/castor/secrets\.yaml$
@@ -44,11 +45,11 @@ creation_rules:
     - age:
       - *user_derek
       - *host_pollux
-  - path_regex: hosts/technetium/secrets\.yaml$
+  - path_regex: hsots/un100d-01/secrets\.yaml$
     key_groups:
     - age:
       - *user_derek
-      - *host_technetium
+      - *host_un100d-01
   - path_regex: hosts/secrets/bind\.yaml$
     key_groups:
     - age:

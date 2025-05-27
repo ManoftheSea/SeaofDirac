@@ -14,6 +14,7 @@
     systemPackages = builtins.attrValues {
       inherit
         (pkgs)
+        bind
         lm_sensors
         powertop
         tcpdump

@@ -9,7 +9,6 @@
     home = "/home/benjamin";
     extraGroups =
       ["dialout" "video" "input"]
-      ++ pkgs.lib.optional config.hardware.sane.enable "scanner"
-      ++ pkgs.lib.optional config.hardware.pulseaudio.enable "audio";
+      ++ pkgs.lib.optional config.hardware.sane.enable "scanner";
   };
 }

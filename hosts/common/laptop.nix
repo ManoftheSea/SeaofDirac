@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }: {
   fonts.fontconfig.enable = true; # enable user fonts
@@ -43,8 +42,6 @@
     locate = {
       enable = true;
       interval = "daily";
-      localuser = null;
-      package = pkgs.plocate;
     };
     power-profiles-daemon.enable = false; # conflict with tlp
     resolved = {

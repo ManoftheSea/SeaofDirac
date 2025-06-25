@@ -1,4 +1,8 @@
-{config, ...}: let
+{
+  config,
+  lib,
+  ...
+}: let
   myDomain = config.networking.domain;
 in {
   mailserver = {
@@ -18,16 +22,15 @@ in {
     localDnsResolver = false;
     loginAccounts = {
       "derek@seaofdirac.org" = {
-        hashedPasswordFile = config.sops.secrets.derek_password.path;
+        hashedPasswordFile = config.sops.secrets."dovecot_users/derek".path;
         aliases = [
           "root@seaofdirac.org"
           "postmaster@seaofdirac.org"
           "security@seaofdirac.org"
         ];
       };
-      "benjamin@seaofdirac.org".hashedPasswordFile = config.sops.secrets.benjamin_password.path;
-      "jessica@seaofdirac.org".hashedPasswordFile = config.sops.secrets.derek_password.path;
-      "nextcloud@seaofdirac.org".hashedPasswordFile = config.sops.secrets.nextcloud_password.path;
+      "benjamin@seaofdirac.org".hashedPasswordFile = config.sops.secrets."dovecot_users/benjamin".path;
+      "ruckus@seaofdirac.org".hashedPasswordFile = config.sops.secrets."dovecot_users/ruckus".path;
     };
   };
 
@@ -44,11 +47,16 @@ in {
     };
   };
 
-  sops.secrets = {
-    benjamin_password.owner = config.users.users.dovecot2.name;
-    derek_password.owner = config.users.users.dovecot2.name;
-    nextcloud_password.owner = config.users.users.dovecot2.name;
-  };
+  sops.secrets = let
+    dovecot_keys = [
+      "dovecot_users/benjamin"
+      "dovecot_users/derek"
+      "dovecot_users/ruckus"
+    ];
+  in
+    lib.genAttrs dovecot_keys (_: {
+      owner = config.users.users.dovecot2.name;
+    });
 
   systemd.services.dovecot2.serviceConfig.SupplementaryGroups = [config.users.groups.keys.name];
 }

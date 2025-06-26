@@ -8,7 +8,7 @@
     ./bootloader.nix
     ./disko.nix
     ./network.nix
-    ./services.nix
+    ./services
     ./unfree.nix
   ];
 

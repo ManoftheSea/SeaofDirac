@@ -45,7 +45,7 @@ creation_rules:
     - age:
       - *user_derek
       - *host_pollux
-  - path_regex: hsots/un100d-01/secrets\.yaml$
+  - path_regex: hosts/un100d-01/secrets\.yaml$
     key_groups:
     - age:
       - *user_derek

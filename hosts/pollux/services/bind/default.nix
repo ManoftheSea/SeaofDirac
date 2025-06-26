@@ -35,15 +35,15 @@ in {
     extraConfig = ''
       include "${config.sops.secrets."bind/config/acls".path}";
       include "${config.sops.secrets."bind/config/controls".path}";
-      include "${config.sops.secrets."bind/config/masters".path}";
-      include "${config.sops.secrets."bind/rndc_keys/aluminium".path}";
+      include "${config.sops.secrets."bind/config/primaries".path}";
+      include "${config.sops.secrets."bind/rndc_keys".path}";
     '';
 
     zones =
       lib.mapAttrs (_zoneName: fileLocation: {
         file = fileLocation;
         master = false;
-        masters = ["internal-masters"];
+        masters = ["internal-primaries"];
       }) {
         "${config.networking.domain}" = "${zonefilesDir}/${config.networking.domain}.db";
         "users.${config.networking.domain}" = "${zonefilesDir}/users.${config.networking.domain}.db";
@@ -60,8 +60,8 @@ in {
     (lib.genAttrs [
         "bind/config/acls"
         "bind/config/controls"
-        "bind/config/masters"
-        "bind/rndc_keys/aluminium"
+        "bind/config/primaries"
+        "bind/rndc_keys"
       ] (_: {
         owner = config.users.users.named.name;
         sopsFile = "${self}/hosts/secrets/bind.yaml";

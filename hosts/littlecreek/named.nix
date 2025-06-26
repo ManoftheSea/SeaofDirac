@@ -20,12 +20,8 @@
     '';
     # "dns64", allow-recusion, allow-query
     extraConfig = ''
-      include "${config.sops.secrets."bind/acme_keys/crunchbits".path}";
-      include "${config.sops.secrets."bind/acme_keys/gravity".path}";
-      include "${config.sops.secrets."bind/acme_keys/littlecreek".path}";
-      include "${config.sops.secrets."bind/acme_keys/singularity".path}";
-      include "${config.sops.secrets."bind/acme_keys/technetium".path}";
-      include "${config.sops.secrets."bind/rndc_keys/aluminium".path}";
+      include "${config.sops.secrets."bind/acme_keys".path}";
+      include "${config.sops.secrets."bind/rndc_keys".path}";
       include "${config.sops.secrets."bind/config/acls".path}";
       include "${config.sops.secrets."bind/config/controls".path}";
     '';
@@ -42,19 +38,20 @@
         extraConfig = ''
           update-policy {
             grant aluminium zonesub any;
+            grant castor.seaofdirac.org. name _acme-challenge.castor.seaofdirac.org. TXT;
             grant crunchbits.seaofdirac.org. name _acme-challenge.crunchbits.seaofdirac.org. TXT;
             grant gravity.seaofdirac.org. name gravity.seaofdirac.org. ANY;
             grant gravity.seaofdirac.org. name _acme-challenge.gravity.seaofdirac.org. TXT;
             grant littlecreek.seaofdirac.org. name _acme-challenge.littlecreek.seaofdirac.org. TXT;
             grant littlecreek.seaofdirac.org. name _acme-challenge.mta-sts.seaofdirac.org. TXT;
+            grant pollux.seaofdirac.org. name _acme-challenge.pollux.seaofdirac.org. TXT;
             grant singularity.seaofdirac.org. name _acme-challenge.element.seaofdirac.org. TXT;
             grant singularity.seaofdirac.org. name _acme-challenge.jitsi.seaofdirac.org. TXT;
             grant singularity.seaofdirac.org. name _acme-challenge.matrix.seaofdirac.org. TXT;
             grant singularity.seaofdirac.org. name _acme-challenge.singularity.seaofdirac.org. TXT;
             grant singularity.seaofdirac.org. name _acme-challenge.seaofdirac.org. TXT;
-            grant technetium.seaofdirac.org. name _acme-challenge.technetium.seaofdirac.org. TXT;
-            grant technetium.seaofdirac.org. name _acme-challenge.grafana.seaofdirac.org. TXT;
-            grant technetium.seaofdirac.org. name _acme-challenge.nextcloud.seaofdirac.org. TXT;
+            grant un100d-01.seaofdirac.org. name _acme-challenge.un100d-01.seaofdirac.org. TXT;
+            grant un100d-02.seaofdirac.org. name _acme-challenge.un100d-02.seaofdirac.org. TXT;
           };
         '';
       };
@@ -63,12 +60,8 @@
 
   sops.secrets =
     lib.genAttrs [
-      "bind/acme_keys/crunchbits"
-      "bind/acme_keys/gravity"
-      "bind/acme_keys/littlecreek"
-      "bind/acme_keys/singularity"
-      "bind/acme_keys/technetium"
-      "bind/rndc_keys/aluminium"
+      "bind/acme_keys"
+      "bind/rndc_keys"
       "bind/config/acls"
       "bind/config/controls"
     ] (_: {

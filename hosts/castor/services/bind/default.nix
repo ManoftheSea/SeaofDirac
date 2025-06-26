@@ -33,13 +33,19 @@
     extraConfig = ''
       include "${config.sops.secrets."bind/config/acls".path}";
       include "${config.sops.secrets."bind/config/controls".path}";
-      include "${config.sops.secrets."bind/rndc_keys/aluminium".path}";
-      include "${config.sops.secrets."bind/rndc_keys/ddns-key".path}";
+      include "${config.sops.secrets."bind/ddns-keys".path}";
+      include "${config.sops.secrets."bind/rndc_keys".path}";
     '';
 
     zones =
       lib.mapAttrs (_zoneName: zoneAttrs: {
-        inherit (zoneAttrs) extraConfig file;
+        inherit (zoneAttrs) file;
+        extraConfig =
+          ''
+            notify explicit;
+            also-notify { 192.168.200.4; };
+          ''
+          + zoneAttrs.extraConfig;
         master = true;
         slaves = ["trusted"];
       }) {
@@ -55,8 +61,8 @@
           file = "/var/dns/users.${config.networking.domain}.db";
           extraConfig = ''
             update-policy {
-              grant ddns-key.seaofdirac.org. zonesub any;
-              grant ddns.technetium.seaofdirac.org. subdomain users.seaofdirac.org. any;
+              grant ddns.castor.seaofdirac.org. zonesub any;
+              grant ddns.pollux.seaofdirac.org. zonesub any;
             };
           '';
         };
@@ -64,7 +70,8 @@
           file = "/var/dns/2601.5c-pd-reverse.db";
           extraConfig = ''
             update-policy {
-              grant ddns-key.seaofdirac.org. zonesub any;
+              grant ddns.castor.seaofdirac.org. zonesub any;
+              grant ddns.pollux.seaofdirac.org. zonesub any;
             };
           '';
         };
@@ -72,7 +79,8 @@
           file = "/var/dns/192.168.db";
           extraConfig = ''
             update-policy {
-              grant ddns-key.seaofdirac.org. zonesub any;
+              grant ddns.castor.seaofdirac.org. zonesub any;
+              grant ddns.pollux.seaofdirac.org. zonesub any;
             };
           '';
         };
@@ -80,7 +88,8 @@
           file = "/var/dns/172.20.db";
           extraConfig = ''
             update-policy {
-              grant ddns-key.seaofdirac.org. zonesub any;
+              grant ddns.castor.seaofdirac.org. zonesub any;
+              grant ddns.pollux.seaofdirac.org. zonesub any;
             };
           '';
         };
@@ -88,7 +97,8 @@
           file = "/var/dns/10.db";
           extraConfig = ''
             update-policy {
-              grant ddns-key.seaofdirac.org. zonesub any;
+              grant ddns.castor.seaofdirac.org. zonesub any;
+              grant ddns.pollux.seaofdirac.org. zonesub any;
             };
           '';
         };
@@ -104,11 +114,10 @@
   sops.secrets =
     lib.mkIf config.services.bind.enable
     (lib.genAttrs [
-        "bind/rndc_keys/aluminium"
-        "bind/rndc_keys/ddns-key"
-        "bind/rndc_keys/technetium"
         "bind/config/acls"
         "bind/config/controls"
+        "bind/ddns-keys"
+        "bind/rndc_keys"
       ] (_: {
         owner = config.users.users.named.name;
         sopsFile = "${self}/hosts/secrets/bind.yaml";

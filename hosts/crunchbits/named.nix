@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  lib,
+  ...
+}: {
   networking.firewall = {
     allowedTCPPorts = [
       53 # named
@@ -11,7 +15,7 @@
   services.bind = {
     enable = true;
     extraConfig = ''
-      include "${config.sops.secrets."bind/rndc_keys/aluminium".path}";
+      include "${config.sops.secrets."bind/rndc_keys".path}";
       include "${config.sops.secrets."bind/config/acls".path}";
       include "${config.sops.secrets."bind/config/controls".path}";
     '';
@@ -31,9 +35,13 @@
     };
   };
 
-  sops.secrets = {
-    "bind/rndc_keys/aluminium".owner = config.users.users.named.name;
-    "bind/config/acls".owner = config.users.users.named.name;
-    "bind/config/controls".owner = config.users.users.named.name;
-  };
+  # Let bind access its secrets
+  sops.secrets =
+    lib.genAttrs [
+      "bind/rndc_keys"
+      "bind/config/acls"
+      "bind/config/controls"
+    ] (_: {
+      owner = config.users.users.named.name;
+    });
 }

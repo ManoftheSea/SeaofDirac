@@ -39,6 +39,9 @@ in {
       include "${config.sops.secrets."bind/rndc_keys".path}";
     '';
 
+    listenOn = ["!127.0.0.0/8" "192.168.0.0/16"];
+    listenOnIpv6 = ["!::1" "any"];
+
     zones =
       lib.mapAttrs (_zoneName: fileLocation: {
         file = fileLocation;
@@ -46,9 +49,11 @@ in {
         masters = ["internal-primaries"];
       }) {
         "${config.networking.domain}" = "${zonefilesDir}/${config.networking.domain}.db";
-        "users.${config.networking.domain}" = "${zonefilesDir}/users.${config.networking.domain}.db";
-        "0.1.c.d.c.5.0.1.0.6.2.ip6.arpa" = "${zonefilesDir}/2601.5c-pd-reverse.db";
+        "ddns.${config.networking.domain}" = "${zonefilesDir}/ddns.${config.networking.domain}.db";
+        "c.5.0.1.0.6.2.ip6.arpa" = "${zonefilesDir}/2601.5c-pd-reverse.db";
         "168.192.in-addr.arpa" = "${zonefilesDir}/192.168.db";
+        "101.168.192.in-addr.arpa" = "${zonefilesDir}/192.168.101.db";
+        "102.168.192.in-addr.arpa" = "${zonefilesDir}/192.168.102.db";
         "20.172.in-addr.arpa" = "${zonefilesDir}/172.20.db";
         "10.in-addr.arpa" = "${zonefilesDir}/10.db";
         "rpz.blocklist" = "${zonefilesDir}/rpz.blocklist";

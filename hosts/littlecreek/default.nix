@@ -2,10 +2,8 @@
   imports = [
     ./bootloader.nix
     ./filesystem.nix
-    ./mailserver.nix
-    ./named.nix
+    ./services
     ./network.nix
-    ./services.nix
   ];
 
   environment = {

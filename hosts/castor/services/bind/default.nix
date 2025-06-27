@@ -37,17 +37,14 @@
       include "${config.sops.secrets."bind/rndc_keys".path}";
     '';
 
+    listenOn = ["!127.0.0.0/8" "192.168.0.0/16"];
+    listenOnIpv6 = ["!::1" "any"];
+
     zones =
       lib.mapAttrs (_zoneName: zoneAttrs: {
         inherit (zoneAttrs) file;
-        extraConfig =
-          ''
-            notify explicit;
-            also-notify { 192.168.200.4; };
-          ''
-          + zoneAttrs.extraConfig;
         master = true;
-        slaves = ["trusted"];
+        slaves = ["trusted"]; # Acts as allow-transfer, doesn't notify
       }) {
         "${config.networking.domain}" = {
           file = "/var/dns/${config.networking.domain}.db";
@@ -57,10 +54,11 @@
             };
           '';
         };
-        "users.${config.networking.domain}" = {
-          file = "/var/dns/users.${config.networking.domain}.db";
+        "ddns.${config.networking.domain}" = {
+          file = "/var/dns/ddns.${config.networking.domain}.db";
           extraConfig = ''
             update-policy {
+              grant aluminium zonesub any;
               grant ddns.castor.seaofdirac.org. zonesub any;
               grant ddns.pollux.seaofdirac.org. zonesub any;
             };
@@ -70,8 +68,7 @@
           file = "/var/dns/2601.5c-pd-reverse.db";
           extraConfig = ''
             update-policy {
-              grant ddns.castor.seaofdirac.org. zonesub any;
-              grant ddns.pollux.seaofdirac.org. zonesub any;
+              grant aluminium zonesub any;
             };
           '';
         };
@@ -79,6 +76,25 @@
           file = "/var/dns/192.168.db";
           extraConfig = ''
             update-policy {
+              grant aluminium zonesub any;
+            };
+          '';
+        };
+        "101.168.192.in-addr.arpa" = {
+          file = "/var/dns/192.168.101.db";
+          extraConfig = ''
+            update-policy {
+              grant aluminium zonesub any;
+              grant ddns.castor.seaofdirac.org. zonesub any;
+              grant ddns.pollux.seaofdirac.org. zonesub any;
+            };
+          '';
+        };
+        "102.168.192.in-addr.arpa" = {
+          file = "/var/dns/192.168.102.db";
+          extraConfig = ''
+            update-policy {
+              grant aluminium zonesub any;
               grant ddns.castor.seaofdirac.org. zonesub any;
               grant ddns.pollux.seaofdirac.org. zonesub any;
             };
@@ -88,8 +104,7 @@
           file = "/var/dns/172.20.db";
           extraConfig = ''
             update-policy {
-              grant ddns.castor.seaofdirac.org. zonesub any;
-              grant ddns.pollux.seaofdirac.org. zonesub any;
+              grant aluminium zonesub any;
             };
           '';
         };
@@ -97,8 +112,7 @@
           file = "/var/dns/10.db";
           extraConfig = ''
             update-policy {
-              grant ddns.castor.seaofdirac.org. zonesub any;
-              grant ddns.pollux.seaofdirac.org. zonesub any;
+              grant aluminium zonesub any;
             };
           '';
         };

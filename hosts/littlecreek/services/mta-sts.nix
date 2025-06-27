@@ -1,6 +1,5 @@
 {config, ...}: {
   security.acme.certs."${config.networking.fqdn}" = {
-    dnsProvider = "rfc2136";
     extraDomainNames = [
       "mta-sts.${config.networking.domain}"
     ];

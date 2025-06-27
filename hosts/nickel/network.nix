@@ -1,6 +1,6 @@
 {
   networking = {
-    domain = "users.seaofdirac.org";
+    domain = "internal.seaofdirac.org";
     firewall = {
       allowedTCPPorts = [
         22 # SSH

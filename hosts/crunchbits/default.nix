@@ -1,9 +1,8 @@
 {pkgs, ...}: {
   imports = [
     ./disko.nix
-    ./named.nix
     ./network.nix
-    ./ldap.nix
+    ./services
   ];
 
   boot = {

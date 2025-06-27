@@ -26,6 +26,9 @@
       include "${config.sops.secrets."bind/config/controls".path}";
     '';
 
+    listenOn = ["!127.0.0.0/8" "192.168.0.0/16"];
+    listenOnIpv6 = ["!::1" "2000::/16" "fd00::/16" "fe80::/16"];
+
     zones = {
       "${config.networking.domain}" = {
         file = "/var/dns/${config.networking.domain}.db";

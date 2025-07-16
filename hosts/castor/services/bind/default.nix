@@ -3,7 +3,10 @@
   config,
   lib,
   ...
-}: {
+}: let
+  inherit (config.networking) domain;
+  zonefilesDir = "/var/dns";
+in {
   networking.firewall = lib.mkIf config.services.bind.enable {
     allowedTCPPorts = [
       53 # named
@@ -20,7 +23,7 @@
       "internal"
     ];
     extraOptions = ''
-      response-policy { zone "rpz.blocklist"; };
+      response-policy { zone "blocklist.rpz"; zone "seaofdirac.org.rpz";};
 
       dns64 64:ff9b::/96 {
         clients { !translator; dns64-good-clients; };
@@ -47,7 +50,7 @@
         slaves = ["trusted"]; # Acts as allow-transfer, doesn't notify
       }) {
         "${config.networking.domain}" = {
-          file = "/var/dns/${config.networking.domain}.db";
+          file = "${zonefilesDir}/${config.networking.domain}.db";
           extraConfig = ''
             update-policy {
               grant aluminium zonesub any;
@@ -55,7 +58,7 @@
           '';
         };
         "ddns.${config.networking.domain}" = {
-          file = "/var/dns/ddns.${config.networking.domain}.db";
+          file = "${zonefilesDir}/ddns.${config.networking.domain}.db";
           extraConfig = ''
             update-policy {
               grant aluminium zonesub any;
@@ -65,7 +68,7 @@
           '';
         };
         "c.5.0.1.0.6.2.ip6.arpa" = {
-          file = "/var/dns/2601.5c-pd-reverse.db";
+          file = "${zonefilesDir}/2601.5c-pd-reverse.db";
           extraConfig = ''
             update-policy {
               grant aluminium zonesub any;
@@ -73,7 +76,7 @@
           '';
         };
         "168.192.in-addr.arpa" = {
-          file = "/var/dns/192.168.db";
+          file = "${zonefilesDir}/192.168.db";
           extraConfig = ''
             update-policy {
               grant aluminium zonesub any;
@@ -81,7 +84,7 @@
           '';
         };
         "101.168.192.in-addr.arpa" = {
-          file = "/var/dns/192.168.101.db";
+          file = "${zonefilesDir}/192.168.101.db";
           extraConfig = ''
             update-policy {
               grant aluminium zonesub any;
@@ -91,7 +94,7 @@
           '';
         };
         "102.168.192.in-addr.arpa" = {
-          file = "/var/dns/192.168.102.db";
+          file = "${zonefilesDir}/192.168.102.db";
           extraConfig = ''
             update-policy {
               grant aluminium zonesub any;
@@ -101,7 +104,7 @@
           '';
         };
         "20.172.in-addr.arpa" = {
-          file = "/var/dns/172.20.db";
+          file = "${zonefilesDir}/172.20.db";
           extraConfig = ''
             update-policy {
               grant aluminium zonesub any;
@@ -109,19 +112,15 @@
           '';
         };
         "10.in-addr.arpa" = {
-          file = "/var/dns/10.db";
+          file = "${zonefilesDir}/10.db";
           extraConfig = ''
             update-policy {
               grant aluminium zonesub any;
             };
           '';
         };
-        "rpz.blocklist" = {
-          file = "/var/dns/rpz.blocklist";
-          extraConfig = ''
-            update-policy {};
-          '';
-        };
+        "blocklist.rpz".file = "${zonefilesDir}/blocklist.rpz";
+        "seaofdirac.org.rpz".file = "${zonefilesDir}/seaofdirac.org.rpz";
       };
   };
 
@@ -148,7 +147,7 @@
   };
 
   systemd.tmpfiles.settings = lib.mkIf config.services.bind.enable {
-    bind-zones."/var/dns".d = {
+    bind-zones."${zonefilesDir}".d = {
       group = "named";
       mode = "750";
       user = "named";

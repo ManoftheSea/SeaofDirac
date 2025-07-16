@@ -1,7 +1,7 @@
 _: {
   imports = [
     ./factorio-headless.nix
-    # ./unbound.nix
+    ./web-services
   ];
 
   networking.firewall.allowedTCPPorts = [8080];

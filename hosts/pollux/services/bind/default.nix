@@ -22,7 +22,7 @@ in {
       "internal"
     ];
     extraOptions = ''
-      response-policy { zone "rpz.blocklist"; };
+      response-policy { zone "blocklist.rpz"; zone "seaofdirac.org.rpz";};
 
       dns64 64:ff9b::/96 {
         clients { !translator; dns64-good-clients; };
@@ -56,7 +56,8 @@ in {
         "102.168.192.in-addr.arpa" = "${zonefilesDir}/192.168.102.db";
         "20.172.in-addr.arpa" = "${zonefilesDir}/172.20.db";
         "10.in-addr.arpa" = "${zonefilesDir}/10.db";
-        "rpz.blocklist" = "${zonefilesDir}/rpz.blocklist";
+        "blocklist.rpz" = "${zonefilesDir}/blocklist.rpz";
+        "seaofdirac.org.rpz" = "${zonefilesDir}/seaofdirac.org.rpz";
       };
   };
 

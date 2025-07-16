@@ -42,6 +42,7 @@
           update-policy {
             grant aluminium zonesub any;
             grant castor.seaofdirac.org. name _acme-challenge.castor.seaofdirac.org. TXT;
+            grant castor.seaofdirac.org. name _acme-challenge.castor.internal.seaofdirac.org. TXT;
             grant crunchbits.seaofdirac.org. name _acme-challenge.crunchbits.seaofdirac.org. TXT;
             grant gravity.seaofdirac.org. name gravity.seaofdirac.org. ANY;
             grant gravity.seaofdirac.org. name _acme-challenge.gravity.seaofdirac.org. TXT;
@@ -54,6 +55,7 @@
             grant singularity.seaofdirac.org. name _acme-challenge.singularity.seaofdirac.org. TXT;
             grant singularity.seaofdirac.org. name _acme-challenge.seaofdirac.org. TXT;
             grant un100d-01.seaofdirac.org. name _acme-challenge.un100d-01.seaofdirac.org. TXT;
+            grant un100d-01.seaofdirac.org. name _acme-challenge.netbox.seaofdirac.org. TXT;
             grant un100d-02.seaofdirac.org. name _acme-challenge.un100d-02.seaofdirac.org. TXT;
           };
         '';

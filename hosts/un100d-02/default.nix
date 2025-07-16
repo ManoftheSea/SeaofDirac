@@ -49,7 +49,6 @@
     };
   };
 
-  system.stateVersion = "24.05";
   time.timeZone = "UTC";
 
   virtualisation.libvirtd.enable = true;

@@ -23,7 +23,10 @@ in {
       "internal"
     ];
     extraOptions = ''
-      response-policy { zone "blocklist.rpz"; zone "seaofdirac.org.rpz";};
+      response-policy {
+        zone "local.rpz";
+        zone "blocklist.rpz";
+      };
 
       dns64 64:ff9b::/96 {
         clients { !translator; dns64-good-clients; };
@@ -36,8 +39,8 @@ in {
     extraConfig = ''
       include "${config.sops.secrets."bind/config/acls".path}";
       include "${config.sops.secrets."bind/config/controls".path}";
-      include "${config.sops.secrets."bind/ddns-keys".path}";
-      include "${config.sops.secrets."bind/rndc_keys".path}";
+      include "${config.sops.secrets."bind/keys/ddns".path}";
+      include "${config.sops.secrets."bind/keys/rndc".path}";
     '';
 
     listenOn = ["!127.0.0.0/8" "192.168.0.0/16"];
@@ -120,7 +123,7 @@ in {
           '';
         };
         "blocklist.rpz".file = "${zonefilesDir}/blocklist.rpz";
-        "seaofdirac.org.rpz".file = "${zonefilesDir}/seaofdirac.org.rpz";
+        "local.rpz".file = "${zonefilesDir}/local.rpz";
       };
   };
 
@@ -129,8 +132,8 @@ in {
     (lib.genAttrs [
         "bind/config/acls"
         "bind/config/controls"
-        "bind/ddns-keys"
-        "bind/rndc_keys"
+        "bind/keys/ddns"
+        "bind/keys/rndc"
       ] (_: {
         owner = config.users.users.named.name;
         sopsFile = "${self}/hosts/secrets/bind.yaml";

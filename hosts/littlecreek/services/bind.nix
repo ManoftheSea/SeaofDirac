@@ -3,6 +3,8 @@
   lib,
   ...
 }: {
+  environment.systemPackages = lib.mkIf config.services.bind.enable [config.services.bind.package];
+
   networking.firewall = {
     allowedTCPPorts = [
       53 # named
@@ -12,6 +14,7 @@
       53 # named
     ];
   };
+
   services.bind = {
     enable = true;
     cacheNetworks = ["127.0.0.0/24" "::1"];

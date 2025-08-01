@@ -29,72 +29,8 @@ in {
       ../users/root.nix
     ];
   };
-  nickel = lib.nixosSystem {
-    system = "x86_64-linux";
-    specialArgs = inputs;
-    modules = [
-      ./nickel/default.nix
-      disko.nixosModules.disko
-      sops-nix.nixosModules.sops
-      {nixpkgs.overlays = builtins.attrValues self.overlays;}
-      ./common/audio/pipewire.nix
-      ./common/core/base.nix
-      #./common/core/cache.nix
-      ./common/core/flakes.nix
-      ./common/graphical/intel-gpu.nix
-      ./common/hardware/efi.nix
-      ./common/hardware/virt-manager.nix
-      ./common/impermanence.nix
-      ./common/laptop.nix
-      ./common/usbguard.nix
-      ../users/root.nix
-      ../users/benjamin.nix
-      ../users/solomon.nix
-    ];
-  };
-  tin = lib.nixosSystem {
-    system = "x86_64-linux";
-    specialArgs = inputs;
-    modules = [
-      ./tin/default.nix
-      disko.nixosModules.disko
-      sops-nix.nixosModules.sops
-      {nixpkgs.overlays = builtins.attrValues self.overlays;}
-      ./common/audio/pipewire.nix
-      ./common/core/base.nix
-      #./common/core/cache.nix
-      ./common/core/flakes.nix
-      ./common/graphical/intel-gpu.nix
-      ./common/hardware/efi.nix
-      ./common/hardware/virt-manager.nix
-      ./common/impermanence.nix
-      ./common/laptop.nix
-      ./common/usbguard.nix
-      ../users/root.nix
-      ../users/benjamin.nix
-      ../users/solomon.nix
-    ];
-  };
 
   # server systems
-  crunchbits = lib.nixosSystem {
-    system = "x86_64-linux";
-    specialArgs = inputs;
-    modules = [
-      disko.nixosModules.disko
-      sops-nix.nixosModules.sops
-      ./crunchbits/default.nix
-      ./common/core/base.nix
-      ./common/core/flakes.nix
-      ./common/core/no-nixpkgs.nix
-      ./common/server/base.nix
-      ./common/server/harden-network.nix
-      ./common/server/security.nix
-      ./common/acme.nix
-      ./common/impermanence.nix
-      ../users/root.nix
-    ];
-  };
   castor = lib.nixosSystem {
     system = "aarch64-linux";
     specialArgs = inputs;
@@ -185,26 +121,6 @@ in {
       ../users/root.nix
     ];
   };
-  technetium = lib.nixosSystem {
-    system = "x86_64-linux";
-    specialArgs = inputs;
-    modules = [
-      disko.nixosModules.disko
-      sops-nix.nixosModules.sops
-      ./technetium/default.nix
-      {nixpkgs.overlays = builtins.attrValues self.overlays;}
-      ./common/core/base.nix
-      ./common/core/flakes.nix
-      ./common/hardware/efi.nix
-      ./common/server/harden-network.nix
-      ./common/server/security.nix
-      ./common/acme.nix
-      ./common/certificates.nix
-      ./common/impermanence.nix
-      ./common/usbguard.nix
-      ../users/root.nix
-    ];
-  };
   un100d-01 = lib.nixosSystem {
     system = "x86_64-linux";
     specialArgs = inputs;
@@ -219,7 +135,6 @@ in {
       ./common/server/harden-network.nix
       ./common/server/security.nix
       ./common/acme.nix
-      ./common/certificates.nix
       ./common/impermanence.nix
       ./common/usbguard.nix
       ../users/root.nix
@@ -239,7 +154,6 @@ in {
       ./common/server/harden-network.nix
       ./common/server/security.nix
       ./common/acme.nix
-      ./common/certificates.nix
       ./common/impermanence.nix
       ./common/usbguard.nix
       ../users/root.nix

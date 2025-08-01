@@ -2,7 +2,9 @@
   config,
   lib,
   ...
-}: {
+}: let
+  genGrantToSelfStrings = host: "grant ${host}.seaofdirac.org. name _acme-challenge.${host}.seaofdirac.org. TXT;";
+in {
   environment.systemPackages = lib.mkIf config.services.bind.enable [config.services.bind.package];
 
   networking.firewall = {
@@ -23,8 +25,8 @@
     '';
     # "dns64", allow-recusion, allow-query
     extraConfig = ''
-      include "${config.sops.secrets."bind/acme_keys".path}";
-      include "${config.sops.secrets."bind/rndc_keys".path}";
+      include "${config.sops.secrets."bind/keys/acme-challenge".path}";
+      include "${config.sops.secrets."bind/keys/rndc".path}";
       include "${config.sops.secrets."bind/config/acls".path}";
       include "${config.sops.secrets."bind/config/controls".path}";
     '';
@@ -40,36 +42,48 @@
           "homenets"
           "216.126.233.180"
           "2606:a8c0:3:35c::/64"
+          "216.158.230.86"
         ];
-        extraConfig = ''
-          update-policy {
-            grant aluminium zonesub any;
-            grant castor.seaofdirac.org. name _acme-challenge.castor.seaofdirac.org. TXT;
-            grant castor.seaofdirac.org. name _acme-challenge.castor.internal.seaofdirac.org. TXT;
-            grant crunchbits.seaofdirac.org. name _acme-challenge.crunchbits.seaofdirac.org. TXT;
-            grant gravity.seaofdirac.org. name gravity.seaofdirac.org. ANY;
-            grant gravity.seaofdirac.org. name _acme-challenge.gravity.seaofdirac.org. TXT;
-            grant littlecreek.seaofdirac.org. name _acme-challenge.littlecreek.seaofdirac.org. TXT;
-            grant littlecreek.seaofdirac.org. name _acme-challenge.mta-sts.seaofdirac.org. TXT;
-            grant pollux.seaofdirac.org. name _acme-challenge.pollux.seaofdirac.org. TXT;
-            grant singularity.seaofdirac.org. name _acme-challenge.element.seaofdirac.org. TXT;
-            grant singularity.seaofdirac.org. name _acme-challenge.jitsi.seaofdirac.org. TXT;
-            grant singularity.seaofdirac.org. name _acme-challenge.matrix.seaofdirac.org. TXT;
-            grant singularity.seaofdirac.org. name _acme-challenge.singularity.seaofdirac.org. TXT;
-            grant singularity.seaofdirac.org. name _acme-challenge.seaofdirac.org. TXT;
-            grant un100d-01.seaofdirac.org. name _acme-challenge.un100d-01.seaofdirac.org. TXT;
-            grant un100d-01.seaofdirac.org. name _acme-challenge.netbox.seaofdirac.org. TXT;
-            grant un100d-02.seaofdirac.org. name _acme-challenge.un100d-02.seaofdirac.org. TXT;
-          };
-        '';
+        extraConfig =
+          ''
+            update-policy {
+              grant aluminium zonesub any;
+              grant gravity.seaofdirac.org. name gravity.seaofdirac.org. ANY;
+
+              grant castor.seaofdirac.org. name _acme-challenge.castor.internal.seaofdirac.org. TXT;
+              grant littlecreek.seaofdirac.org. name _acme-challenge.mta-sts.seaofdirac.org. TXT;
+              grant singularity.seaofdirac.org. name _acme-challenge.element.seaofdirac.org. TXT;
+              grant singularity.seaofdirac.org. name _acme-challenge.jitsi.seaofdirac.org. TXT;
+              grant singularity.seaofdirac.org. name _acme-challenge.matrix.seaofdirac.org. TXT;
+              grant singularity.seaofdirac.org. name _acme-challenge.seaofdirac.org. TXT;
+              grant un100d-01.seaofdirac.org. name _acme-challenge.netbox.seaofdirac.org. TXT;
+
+          ''
+          + lib.concatStrings (
+            map genGrantToSelfStrings [
+              "castor"
+              "crunchbits"
+              "gravity"
+              "interserver-c01"
+              "interserver-s01"
+              "littlecreek"
+              "pollux"
+              "singularity"
+              "un100d-01"
+              "un100d-02"
+            ]
+          )
+          + ''
+            };
+          '';
       };
     };
   };
 
   sops.secrets =
     lib.genAttrs [
-      "bind/acme_keys"
-      "bind/rndc_keys"
+      "bind/keys/acme-challenge"
+      "bind/keys/rndc"
       "bind/config/acls"
       "bind/config/controls"
     ] (_: {

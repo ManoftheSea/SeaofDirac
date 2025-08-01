@@ -113,6 +113,42 @@ in {
       ../users/root.nix
     ];
   };
+  interserver-c01 = lib.nixosSystem {
+    system = "x86_64-linux";
+    specialArgs = inputs;
+    modules = [
+      disko.nixosModules.disko
+      sops-nix.nixosModules.sops
+      ./interserver-c01/default.nix
+      ./common/core/base.nix
+      ./common/core/flakes.nix
+      ./common/core/no-nixpkgs.nix
+      ./common/server/base.nix
+      ./common/server/harden-network.nix
+      ./common/server/security.nix
+      ./common/acme.nix
+      ./common/impermanence.nix
+      ../users/root.nix
+    ];
+  };
+  interserver-s01 = lib.nixosSystem {
+    system = "x86_64-linux";
+    specialArgs = inputs;
+    modules = [
+      disko.nixosModules.disko
+      sops-nix.nixosModules.sops
+      ./interserver-s01/default.nix
+      ./common/core/base.nix
+      ./common/core/flakes.nix
+      ./common/core/no-nixpkgs.nix
+      ./common/server/base.nix
+      ./common/server/harden-network.nix
+      ./common/server/security.nix
+      ./common/acme.nix
+      ./common/impermanence.nix
+      ../users/root.nix
+    ];
+  };
   littlecreek = lib.nixosSystem {
     system = "x86_64-linux";
     specialArgs = inputs;

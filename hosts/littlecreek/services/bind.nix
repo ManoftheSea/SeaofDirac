@@ -52,6 +52,7 @@ in {
 
               grant castor.seaofdirac.org. name _acme-challenge.castor.internal.seaofdirac.org. TXT;
               grant littlecreek.seaofdirac.org. name _acme-challenge.mta-sts.seaofdirac.org. TXT;
+              grant littlecreek.seaofdirac.org. name _acme-challenge.seaofdirac.org. TXT;
               grant singularity.seaofdirac.org. name _acme-challenge.element.seaofdirac.org. TXT;
               grant singularity.seaofdirac.org. name _acme-challenge.jitsi.seaofdirac.org. TXT;
               grant singularity.seaofdirac.org. name _acme-challenge.matrix.seaofdirac.org. TXT;

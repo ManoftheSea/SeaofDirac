@@ -5,6 +5,7 @@
     ./network.nix
     ./prometheus.nix
     ./services.nix
+    ./unfree.nix
   ];
 
   environment.etc."machine-id".text = "2904306768fd4a8185f3660916616816";
@@ -43,6 +44,7 @@
 
   programs = {
     dconf.enable = true;
+    steam.enable = true;
     sway.enable = true;
   };
 

@@ -20,6 +20,7 @@
   };
 
   hardware.enableRedistributableFirmware = true;
+  services.qemuGuest.enable = true;
 
   sops = {
     defaultSopsFile = ./secrets.yaml;

@@ -34,18 +34,7 @@ in {
     };
   };
 
-  services = {
-    dovecot2.sieve.extensions = ["fileinto"]; # fix for dovecot change in 24.05
-
-    nginx = {
-      enable = true;
-      virtualHosts."mta-sts.${myDomain}" = {
-        useACMEHost = "${config.networking.fqdn}";
-        forceSSL = true;
-        root = "/var/www/mta-sts.${config.networking.domain}";
-      };
-    };
-  };
+  services.dovecot2.sieve.extensions = ["fileinto"]; # fix for dovecot change in 24.05
 
   sops.secrets = let
     dovecot_keys = [

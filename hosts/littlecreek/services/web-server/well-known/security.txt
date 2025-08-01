@@ -1,0 +1,4 @@
+Contact: mailto:security@seaofdirac.org
+Encryption: https://seaofdirac.org/.well-known/openpgpkey/h8d3wsbmcaw6pch613h9jqhsjw17s1ie
+Canonical: https://seaofdirac.org/.well-known/security.txt
+

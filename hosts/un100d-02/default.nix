@@ -36,23 +36,14 @@
     enableRedistributableFirmware = true;
   };
 
-  # Overwrite default
-  nix = {
-    gc.options = "";
-  };
-
   sops = {
     defaultSopsFile = ./secrets.yaml;
     age.sshKeyPaths = ["/var/lib/ssh/ssh_host_ed25519_key"];
-    secrets = {
-      # rfc2136_secret = {}; # @TODO
-    };
+    # secrets.rfc2136_secret = {}; # @TODO
   };
 
   time.timeZone = "UTC";
-
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
-
   zramSwap.enable = true;
 }

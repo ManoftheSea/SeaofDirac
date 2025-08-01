@@ -14,5 +14,4 @@ in {
   };
 
   sops.secrets.rfc2136_secret = {};
-  systemd.services.nginx.serviceConfig.SupplementaryGroups = [config.users.groups.netbox.name];
 }

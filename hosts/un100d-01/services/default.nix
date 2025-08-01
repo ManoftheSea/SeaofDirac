@@ -4,8 +4,6 @@ _: {
     ./web-services
   ];
 
-  networking.firewall.allowedTCPPorts = [8080];
-
   services = {
     fstrim.enable = true;
 

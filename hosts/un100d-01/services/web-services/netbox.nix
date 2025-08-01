@@ -26,7 +26,7 @@ in {
         "/static/".alias = "${config.services.netbox.dataDir}/static/";
       };
       forceSSL = true;
-      useACMEHost = "${fqdn}";
+      useACMEHost = fqdn;
     };
 
     postgresql.enable = lib.mkForce false;
@@ -40,4 +40,6 @@ in {
       owner = config.users.users.netbox.name;
       group = config.users.groups.netbox.name;
     });
+
+  systemd.services.nginx.serviceConfig.SupplementaryGroups = [config.users.groups.netbox.name];
 }

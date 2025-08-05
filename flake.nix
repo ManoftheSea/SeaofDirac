@@ -78,8 +78,9 @@
           (lib.filterAttrs (n: _v: n != "aluminium") self.nixosConfigurations)
         )
         {
-          crunchbits.fastConnect = false;
           littlecreek.fastConnect = false;
+          interserver-c01.fastConnect = false;
+          interserver-s01.fastConnect = false;
         };
     };
 

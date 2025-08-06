@@ -24,7 +24,7 @@
     '';
 
     listenOn = ["!127.0.0.0/8" "any"];
-    #listenOnIpv6 = ["!::1" "any"];
+    listenOnIpv6 = ["!::1" "any"];
 
     zones = {
       "${config.networking.domain}" = {

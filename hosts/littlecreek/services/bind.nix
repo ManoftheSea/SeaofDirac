@@ -3,7 +3,7 @@
   lib,
   ...
 }: let
-  genGrantToSelfStrings = host: "grant ${host}.seaofdirac.org. name _acme-challenge.${host}.seaofdirac.org. TXT;";
+  genGrantToSelfStrings = host: "    grant ${host}.seaofdirac.org. name _acme-challenge.${host}.seaofdirac.org. TXT;\n";
 in {
   environment.systemPackages = lib.mkIf config.services.bind.enable [config.services.bind.package];
 
@@ -40,24 +40,25 @@ in {
         master = true;
         slaves = [
           "homenets"
-          "216.126.233.180"
-          "2606:a8c0:3:35c::/64"
           "216.158.230.86"
+          "2604:a00:50:210:216:3eff:fe2f:8f09"
         ];
         extraConfig =
           ''
+            dnssec-policy default;
+            key-directory "/var/dns/DNSSEC-keys/";
             update-policy {
-              grant aluminium zonesub any;
-              grant gravity.seaofdirac.org. name gravity.seaofdirac.org. ANY;
+                grant aluminium zonesub any;
+                grant gravity.seaofdirac.org. name gravity.seaofdirac.org. ANY;
 
-              grant castor.seaofdirac.org. name _acme-challenge.castor.internal.seaofdirac.org. TXT;
-              grant littlecreek.seaofdirac.org. name _acme-challenge.mta-sts.seaofdirac.org. TXT;
-              grant littlecreek.seaofdirac.org. name _acme-challenge.seaofdirac.org. TXT;
-              grant singularity.seaofdirac.org. name _acme-challenge.element.seaofdirac.org. TXT;
-              grant singularity.seaofdirac.org. name _acme-challenge.jitsi.seaofdirac.org. TXT;
-              grant singularity.seaofdirac.org. name _acme-challenge.matrix.seaofdirac.org. TXT;
-              grant singularity.seaofdirac.org. name _acme-challenge.seaofdirac.org. TXT;
-              grant un100d-01.seaofdirac.org. name _acme-challenge.netbox.seaofdirac.org. TXT;
+                grant castor.seaofdirac.org. name _acme-challenge.castor.internal.seaofdirac.org. TXT;
+                grant littlecreek.seaofdirac.org. name _acme-challenge.mta-sts.seaofdirac.org. TXT;
+                grant littlecreek.seaofdirac.org. name _acme-challenge.seaofdirac.org. TXT;
+                grant singularity.seaofdirac.org. name _acme-challenge.element.seaofdirac.org. TXT;
+                grant singularity.seaofdirac.org. name _acme-challenge.jitsi.seaofdirac.org. TXT;
+                grant singularity.seaofdirac.org. name _acme-challenge.matrix.seaofdirac.org. TXT;
+                grant singularity.seaofdirac.org. name _acme-challenge.seaofdirac.org. TXT;
+                grant un100d-01.seaofdirac.org. name _acme-challenge.netbox.seaofdirac.org. TXT;
 
           ''
           + lib.concatStrings (
@@ -74,9 +75,7 @@ in {
               "un100d-02"
             ]
           )
-          + ''
-            };
-          '';
+          + "  };\n";
       };
     };
   };

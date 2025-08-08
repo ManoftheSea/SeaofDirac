@@ -19,6 +19,7 @@ in {
   security.acme.certs."${fqdn}".extraDomainNames = ["${domain}"];
 
   services.nginx.virtualHosts."${domain}" = {
+    extraConfig = "add_header Strict-Transport-Security \"max-age=300;\" always;";
     forceSSL = true;
     useACMEHost = fqdn;
     locations = {

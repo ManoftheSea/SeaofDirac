@@ -14,6 +14,7 @@ in {
   security.acme.certs."${fqdn}".extraDomainNames = ["mta-sts.${domain}"];
 
   services.nginx.virtualHosts."mta-sts.${domain}" = {
+    extraConfig = "add_header Strict-Transport-Security \"max-age=300;\" always;";
     forceSSL = true;
     locations."= /.well-known/mta-sts.txt".extraConfig = ''
       default_type text/plain;

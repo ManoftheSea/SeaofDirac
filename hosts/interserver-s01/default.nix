@@ -47,6 +47,5 @@
   sops = {
     defaultSopsFile = ./secrets.yaml;
     age.sshKeyPaths = ["/var/lib/ssh/ssh_host_ed25519_key"];
-    secrets.rfc2136_secret = {};
   };
 }

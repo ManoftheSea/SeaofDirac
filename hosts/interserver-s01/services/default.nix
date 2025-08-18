@@ -3,5 +3,6 @@ _: {
     ./logging
     ./garage.nix
     ./nginx.nix
+    ./prometheus.nix
   ];
 }

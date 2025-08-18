@@ -15,6 +15,7 @@
         kvstore.store = "inmemory";
       };
     };
+    ingester.chunk_encoding = "zstd";
     schema_config.configs = [
       {
         from = "2025-08-15";

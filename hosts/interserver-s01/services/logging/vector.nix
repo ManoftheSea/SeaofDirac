@@ -1,27 +1,32 @@
 _: {
-  networking.firewall.allowedUDPPorts = [514];
-
   services.vector = {
     enable = true;
     settings = {
-      sources = {
-        syslog-udp-listener = {
-          type = "syslog";
-          address = "[::]:514";
-          mode = "udp";
-        };
+      sources.host_journald = {
+        type = "journald";
+        current_boot_only = true;
+        since_now = true;
+        include_units = [
+          "acme-interserver-s01.seaofdirac.org"
+          "garage"
+          "grafana"
+          "loki"
+          "nginx"
+        ];
       };
       sinks.loki = {
         type = "loki";
-        inputs = ["syslog-udp-listener"];
+        inputs = ["host_journald"];
         endpoint = "http://localhost:3100";
         encoding.codec = "json";
         labels = {
-          source = "syslog";
-          protocol = "udp";
+          host = "{{ host }}";
+          source = "journald";
           transport = "vector";
         };
       };
     };
   };
+
+  systemd.services.vector.serviceConfig.SupplementaryGroups = ["systemd-journal"];
 }

@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  networking.firewall.allowedTCPPorts = [3900];
+  # networking.firewall.allowedTCPPorts = [3900];
 
   services.garage = {
     enable = true;

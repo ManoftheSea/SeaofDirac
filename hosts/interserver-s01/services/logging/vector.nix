@@ -1,5 +1,4 @@
 _: {
-  networking.firewall.allowedTCPPorts = [514];
   networking.firewall.allowedUDPPorts = [514];
 
   services.vector = {

@@ -13,10 +13,10 @@
 		},
 		"hooks-libraries": [
 			{
-				"library": "ENC[AES256_GCM,data:wm41GBW6a2HQEKoe8AC/2c0TZ3u9nrn1tFd2AcMuhmVT8AtIXpgsqIHpMAHbOczLRWTzBVn9K3d+vA==,iv:WC1AgCRp8dSP/Vg/udqPHXbz7l+ppNvL+lmdV3G+vB8=,tag:JXF/BJZcjH7+anOYivU7lw==,type:str]"
+				"library": "ENC[AES256_GCM,data:KOR6cPVPBZdpVqcDhdDYF10mF8Ve+n2ocMZhc1xQi9FTYPhMIgJtn0Tma9HgTg0AmOjvmKVza3IipnVSBBk6L73l5VXcZoR3qUIH9EJvWOp/2yarPZtpkqg=,iv:1efPZlOCd4iMKxsXniL0DmA75ZYEdkajipR5yQUlb7s=,tag:egr8UkOb/O+o88r5DYC+rg==,type:str]"
 			},
 			{
-				"library": "ENC[AES256_GCM,data:Rrp4j/+LUaB8B/T8W577QVwlaeSmY0bQYy92/YqqFVpWl3b8Vm4X1fVYh9KruZCUHDY=,iv:bWecNBSTpzKTxMTquCbdRSrBlW33ffwWExrrOPlRH7c=,tag:lmLc08RZMB7LWe/ABz2J/Q==,type:str]",
+				"library": "ENC[AES256_GCM,data:iR7dEbAWyW2bVUEQuggAWCU1U7Bd32eVs8hQHBdcte/tU6cWNslxvwIs+hUClrqiAf/z4kpWGWgWJamv/u9dDhTtIdZ0HqPEUtM/3yUy4Cb6,iv:3Ar0ipILURmDwMdT6Lv/Re6/yU6T6QYU0/iw+dhRsQM=,tag:CfRYiGfRfrtGnUv4dywrCA==,type:str]",
 				"parameters": {
 					"high-availability": [
 						{
@@ -96,8 +96,8 @@
 				"enc": "-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBmWUIxQUZIYlArcVZaRVNZ\nYzZZbHI3a2Q3RzAyWEtYaE9YTlVFU0d4ZWhNCmd3aXB4V0JMcVZxM2RCdGN6dURX\nOUFFdng0YWlTRVVSSTZ6V0U1bG1QWXMKLS0tIFVWOWpDNmgzcjh4OG8zZlRKanhF\nWW1QRkpkSU14b3E0MFlERWx5OTlDQUEKqyq0waaC2rpTKCoLAGSBM+Qyv+/0rsc1\nU0qELBLsDnbcNHyuw6EnRFbLwqI6NZ/nq5cBDhZGsq5+UGEqqX128w==\n-----END AGE ENCRYPTED FILE-----\n"
 			}
 		],
-		"lastmodified": "2025-06-30T20:47:07Z",
-		"mac": "ENC[AES256_GCM,data:pntRqtfzdmYXTB7+vmcPCXZ9v0TzNvp7VR1lSiEQCx51/4T0C550fVIKLj1kpM1U4TM9qhkh3KZVhY2Wx3CXBNaD4e1RElFtgbfKdxiogBkNBDWkX22T2ohtel9PbC/Uatermp8OwnndmIvVdJNsPKXk6jcjl98a4aCP50tSRMM=,iv:sfTQzyb8DQzadNmpk2IlHPRkpt3aGViWPS8W5PTj48A=,tag:FwOBFs2iszGCiylZJjXOMg==,type:str]",
+		"lastmodified": "2025-08-19T19:55:51Z",
+		"mac": "ENC[AES256_GCM,data:BCPEYSo8n3Mpw42dxcZJIZDn4xjmBMnLMKTTZhKL4xpoMseEIlD8wqZPicQNCqR9sC4l1ZxvL29hDzsXEUgqfmzAmMkYEiOzGumeXG3Tq7hdbR+t/8UsmWGv7K1r6KLF0FnWXdlMtPcTAz5DhXXfQG2LoFmY+olm2wC+XkfejKI=,iv:ybBPhLIwNcM4xbDgL2/AbYUQWGV+gQse67FqwFdr3d4=,tag:xyYo/xgb44IVgYcYNSH8GA==,type:str]",
 		"unencrypted_suffix": "_unencrypted",
 		"version": "3.10.2"
 	}

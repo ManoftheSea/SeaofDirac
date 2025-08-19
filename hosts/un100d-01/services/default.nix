@@ -1,6 +1,7 @@
 _: {
   imports = [
     ./factorio-headless.nix
+    ./vector.nix
     ./web-services
   ];
 

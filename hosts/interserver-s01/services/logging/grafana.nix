@@ -9,13 +9,16 @@ in {
     settings.server.domain = grafanaDomain;
   };
 
-  services.nginx.virtualHosts.${grafanaDomain} = {
-    locations."/" = {
-      proxyPass = "http://localhost:${toString config.services.grafana.settings.server.http_port}";
-      proxyWebsockets = true;
-      recommendedProxySettings = true;
+  services.nginx = {
+    upstreams.grafana.servers."localhost:${toString config.services.grafana.settings.server.http_port}" = {};
+    virtualHosts.${grafanaDomain} = {
+      locations."/" = {
+        proxyPass = "http://grafana";
+        proxyWebsockets = true;
+        recommendedProxySettings = true;
+      };
+      onlySSL = true;
+      useACMEHost = fqdn;
     };
-    onlySSL = true;
-    useACMEHost = fqdn;
   };
 }

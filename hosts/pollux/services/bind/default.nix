@@ -51,8 +51,8 @@ in {
         master = false;
         masters = ["internal-primaries"];
       }) {
-        "${config.networking.domain}" = "${zonefilesDir}/${config.networking.domain}.db";
-        "ddns.${config.networking.domain}" = "${zonefilesDir}/ddns.${config.networking.domain}.db";
+        "internal.${config.networking.domain}" = "${zonefilesDir}/internal.${config.networking.domain}.db";
+        "ddns.internal.${config.networking.domain}" = "${zonefilesDir}/ddns.internal.${config.networking.domain}.db";
         "c.5.0.1.0.6.2.ip6.arpa" = "${zonefilesDir}/2601.5c-pd-reverse.db";
         "168.192.in-addr.arpa" = "${zonefilesDir}/192.168.db";
         "101.168.192.in-addr.arpa" = "${zonefilesDir}/192.168.101.db";

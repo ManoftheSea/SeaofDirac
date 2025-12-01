@@ -52,16 +52,16 @@ in {
         master = true;
         slaves = ["trusted"]; # Acts as allow-transfer, doesn't notify
       }) {
-        "internal.${config.networking.domain}" = {
-          file = "${zonefilesDir}/internal.${config.networking.domain}.db";
+        "internal.${domain}" = {
+          file = "${zonefilesDir}/internal.${domain}.db";
           extraConfig = ''
             update-policy {
               grant aluminium zonesub any;
             };
           '';
         };
-        "ddns.internal.${config.networking.domain}" = {
-          file = "${zonefilesDir}/ddns.internal.${config.networking.domain}.db";
+        "ddns.internal.${domain}" = {
+          file = "${zonefilesDir}/ddns.internal.${domain}.db";
           extraConfig = ''
             update-policy {
               grant aluminium zonesub any;

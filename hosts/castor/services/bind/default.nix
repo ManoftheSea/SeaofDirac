@@ -70,6 +70,14 @@ in {
             };
           '';
         };
+        "iot.${domain}" = {
+          file = "${zonefilesDir}/iot.${domain}.db";
+          extraConfig = ''
+            update-policy {
+              grant aluminium zonesub any;
+            };
+          '';
+        };
         "c.5.0.1.0.6.2.ip6.arpa" = {
           file = "${zonefilesDir}/2601.5c-pd-reverse.db";
           extraConfig = ''
@@ -108,6 +116,14 @@ in {
         };
         "20.172.in-addr.arpa" = {
           file = "${zonefilesDir}/172.20.db";
+          extraConfig = ''
+            update-policy {
+              grant aluminium zonesub any;
+            };
+          '';
+        };
+        "21.172.in-addr.arpa" = {
+          file = "${zonefilesDir}/172.21.db";
           extraConfig = ''
             update-policy {
               grant aluminium zonesub any;

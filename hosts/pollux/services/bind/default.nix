@@ -54,11 +54,13 @@ in {
       }) {
         "internal.${domain}" = "${zonefilesDir}/internal.${domain}.db";
         "ddns.internal.${domain}" = "${zonefilesDir}/ddns.internal.${domain}.db";
+        "iot.${domain}" = "${zonefilesDir}/iot.${domain}.db";
         "c.5.0.1.0.6.2.ip6.arpa" = "${zonefilesDir}/2601.5c-pd-reverse.db";
         "168.192.in-addr.arpa" = "${zonefilesDir}/192.168.db";
         "101.168.192.in-addr.arpa" = "${zonefilesDir}/192.168.101.db";
         "102.168.192.in-addr.arpa" = "${zonefilesDir}/192.168.102.db";
         "20.172.in-addr.arpa" = "${zonefilesDir}/172.20.db";
+        "21.172.in-addr.arpa" = "${zonefilesDir}/172.21.db";
         "10.in-addr.arpa" = "${zonefilesDir}/10.db";
         "blocklist.rpz" = "${zonefilesDir}/blocklist.rpz";
         "local.rpz" = "${zonefilesDir}/local.rpz";

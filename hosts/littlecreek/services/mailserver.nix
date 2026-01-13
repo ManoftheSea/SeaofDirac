@@ -32,9 +32,8 @@ in {
       "benjamin@seaofdirac.org".hashedPasswordFile = config.sops.secrets."dovecot_users/benjamin".path;
       "ruckus@seaofdirac.org".hashedPasswordFile = config.sops.secrets."dovecot_users/ruckus".path;
     };
+    stateVersion = 3; # After migration script 20260112
   };
-
-  services.dovecot2.sieve.extensions = ["fileinto"]; # fix for dovecot change in 24.05
 
   sops.secrets = let
     dovecot_keys = [
@@ -47,5 +46,5 @@ in {
       owner = config.users.users.dovecot2.name;
     });
 
-  systemd.services.dovecot2.serviceConfig.SupplementaryGroups = [config.users.groups.keys.name];
+  systemd.services.dovecot.serviceConfig.SupplementaryGroups = [config.users.groups.keys.name];
 }

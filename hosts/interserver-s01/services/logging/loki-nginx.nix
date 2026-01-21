@@ -6,7 +6,7 @@ in {
     virtualHosts.${fqdn} = {
       locations."/" = {
         extraConfig = ''
-          allow 73.31.234.197;
+          allow 73.147.172.220;
           allow 2601:5cc:4a00:61d0::/60;
           deny  all;
         '';
@@ -14,7 +14,7 @@ in {
         proxyWebsockets = true;
         recommendedProxySettings = true;
       };
-      onlySSL = true;
+      #onlySSL = true;
     };
   };
 }

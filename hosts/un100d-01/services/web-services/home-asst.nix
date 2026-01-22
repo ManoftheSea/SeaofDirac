@@ -21,10 +21,11 @@ in {
         # Components required to complete the onboarding
         "analytics"
         "google_translate"
+        "isal"
         "met"
         "radio_browser"
         "shopping_list"
-        "isal"
+        "zwave_js"
       ];
       extraPackages = p: [p.psycopg2];
     };

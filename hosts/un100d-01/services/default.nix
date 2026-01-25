@@ -1,8 +1,10 @@
 _: {
   imports = [
     ./factorio-headless.nix
+    ./postgresql.nix
     ./vector.nix
     ./web-services
+    ./zwave-js.nix
   ];
 
   services = {

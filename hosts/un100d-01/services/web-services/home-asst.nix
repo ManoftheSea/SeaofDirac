@@ -20,6 +20,7 @@ in {
       extraComponents = [
         # Components required to complete the onboarding
         "analytics"
+        "esphome"
         "google_translate"
         "isal"
         "met"
@@ -40,17 +41,6 @@ in {
       };
       forceSSL = true;
       useACMEHost = fqdn;
-    };
-
-    postgresql = {
-      enable = true;
-      ensureDatabases = ["hass"];
-      ensureUsers = [
-        {
-          name = "hass";
-          ensureDBOwnership = true;
-        }
-      ];
     };
   };
 }

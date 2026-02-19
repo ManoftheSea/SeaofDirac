@@ -2,10 +2,22 @@
   # inherit (config.networking) domain fqdn;
   domain = "seaofdirac.org";
   fqdn = "${config.networking.hostName}.${domain}";
+  hostnameForHA = "home";
 in {
-  security.acme.certs."${fqdn}".extraDomainNames = ["home.${domain}"];
+  security.acme.certs."${fqdn}".extraDomainNames = ["${hostnameForHA}.${domain}"];
 
   services = {
+    ddclient = {
+      enable = true;
+      domains = ["${hostnameForHA}.${domain}"];
+      passwordFile = config.sops.secrets.ddclient.path;
+      protocol = "nsupdate";
+      server = "ns1.seaofdirac.org";
+      usev4 = "";
+      usev6 = "webv6, webv6=ipify-ipv6";
+      zone = "seaofdirac.org";
+    };
+
     home-assistant = {
       enable = true;
       config = {
@@ -31,7 +43,7 @@ in {
       extraPackages = p: [p.psycopg2];
     };
 
-    nginx.virtualHosts."home.${domain}" = {
+    nginx.virtualHosts."${hostnameForHA}.${domain}" = {
       extraConfig = ''
         proxy_buffering off;
       '';
@@ -43,4 +55,6 @@ in {
       useACMEHost = fqdn;
     };
   };
+
+  sops.secrets.ddclient = {};
 }

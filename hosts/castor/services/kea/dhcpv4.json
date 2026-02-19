@@ -59,35 +59,6 @@
 		"dhcp-ddns": {
 			"enable-updates": "ENC[AES256_GCM,data:8B+75Q==,iv:S1aZd0BNG/Ncg5gBxn2ZdO8Cie2u8bxSmdoMQUhusuA=,tag:rPyNjDBe+V29L/Mr65+ieQ==,type:bool]"
 		},
-		"hooks-libraries": [
-			{
-				"library": "ENC[AES256_GCM,data:hVKSx4hvdp7rg9FFHEoaPdlmLlZS1n64095ofYkIsUECNZpoyn+s5af2FlU4RK8em6hz1uutEWB+Y4ahdo3bfDlGZJLP/4RCe3iMc4+kwUNNgUphVroxAdI=,iv:/JR+UOWfcdlc7uqxx8g8emHEBYnjKmUUMOVQJyYRews=,tag:kvDRhny6Yn2tdIIISRa4ng==,type:str]"
-			},
-			{
-				"library": "ENC[AES256_GCM,data:3aeZmhiAxE18I4bJFgBJvVy66Yt6amRuLGMw0rw4Aa+mCRm1ivQyCjvjQk8rT8WhnVbTNV5cVoLJwQE6u/isblE5P47VY17TxnVxBk8BEKrK,iv:pesiAC7oIoT+LtL52HRYziCq5KCrT/lDyuLaS/crQPg=,tag:SOU4UZIz3F20csG0X3sb6Q==,type:str]",
-				"parameters": {
-					"high-availability": [
-						{
-							"this-server-name": "ENC[AES256_GCM,data:yLy2s079,iv:CEsEllN7VbU1Zh4hqUqdtLxuPic6dP3k4DxzZ7q0PGA=,tag:wdNz9J3002Tn2k+8SQvn0g==,type:str]",
-							"mode": "ENC[AES256_GCM,data:1ci6ER4S2DeE8B8=,iv:FBykxVgoKrfkdyLTm1iq0k+8du1RS6PHNcM8oNwtzNo=,tag:92NIlAro4+7aVz4rkqL0vQ==,type:str]",
-							"max-unacked-clients": "ENC[AES256_GCM,data:EA==,iv:NJMieSNzroee8oB0V9csaGDSHBNOBJHkUmBKCFhvfUs=,tag:uNf/sdaody+UH8SUBi6i4A==,type:float]",
-							"peers": [
-								{
-									"name": "ENC[AES256_GCM,data:tblzyDhK,iv:+BUFNUHT70i8A+oEUz3GiOYtkw37W+kF86npHOTIKWU=,tag:aCfZfW9Hr/Y6Vx7eU0zjQQ==,type:str]",
-									"url": "ENC[AES256_GCM,data:cGh6JGL/sUjgCjwcEsT/SoRjDdBURxErztQ=,iv:+QApCvBlU5Ux8Pv6Qy9Zdt9dI4KJoaLJtgVdr8Q4Ze0=,tag:4ljlfdNJkJkDPnDKQ59ZYg==,type:str]",
-									"role": "ENC[AES256_GCM,data:e+Gdklir/g==,iv:qVu98/Rq3948Rs6KUZNM1vt+GXeNNBe6oWL7QprYN/4=,tag:PAfA5rbVJ7Be96tPSPeNEw==,type:str]"
-								},
-								{
-									"name": "ENC[AES256_GCM,data:apZKxFN2,iv:NXzxx3KQSayOyEAeNigPNatkmDcwn9K7dMmWnSGo6sk=,tag:3I4VUJlPRt2Y2CvWuFFOWg==,type:str]",
-									"url": "ENC[AES256_GCM,data:fqElPlOI7QhNEyINKLeewwhvEaCuuBYcPA4=,iv:yzBtyW4ya0AwzX2WcwbLhjefLiB9jW8AqPWtMkOk5pU=,tag:p5SPpkt5sns7A76Hyth3dg==,type:str]",
-									"role": "ENC[AES256_GCM,data:DuXfWhsNRA==,iv:rqbs/B5Kg3wcqArtJzpGZZ7s1J+5HMENQNEuO7Cv45k=,tag:j97wzYtZ4d/vCURDeLQ26Q==,type:str]"
-								}
-							]
-						}
-					]
-				}
-			}
-		],
 		"interfaces-config": {
 			"dhcp-socket-type": "ENC[AES256_GCM,data:LjOe,iv:86Pxn7Odu8m2Ayu+s/EYzopQFZPpxvFIe4jA2XqBKWs=,tag:xhGKm3l2Ec9O7ooPm9WIAQ==,type:str]",
 			"interfaces": [
@@ -382,8 +353,8 @@
 				"enc": "-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBObGowbnlwemFBYzBTTHQ2\nUDU1NkpwMC9IdlduME8rTG1YWFg3WloySlhNCit5dis0UWdLM0NzcVQ3Nmt5eklM\nd1J5MHc4M2EvaFpKQkNkWDE4cHdBMEkKLS0tIHphSGNzMVB5YVlXS3JBVXlqcjh4\nS1RVdUdTMS9QUkJ2VTZ1WmFjRFcza0kK7e0DIj4Csrjh0M5lrJgb3QEJ0mcXQZno\ntORFbXk1a6+RSXYP+jBsnGXnLoxpb3ELTqHsrOlHhnzlwMBqbJ+hRA==\n-----END AGE ENCRYPTED FILE-----\n"
 			}
 		],
-		"lastmodified": "2026-01-13T00:37:09Z",
-		"mac": "ENC[AES256_GCM,data:Fbx4alfNA5VMPcNWurJ7VAcAnWRx/gCTpPTdxTuobjQ7T0EalCXGxoy//rD35Vn//s2ZVmM41aKiqBSblzcVXReA/G+06MnPnlcHFHn5hrOv6ovsKEQwiIR0a4uhtyU7jzaktebJOogAMuYnqOER7DUpyb0D6/KhBMkfQvDiKv8=,iv:f1YoLMinzpCmbA7OP+d1ZuFQkVhbIHgWhCUbTPQ1lUI=,tag:ui6nrfdwVxXgZ4t4wEtL6g==,type:str]",
+		"lastmodified": "2026-02-18T20:29:26Z",
+		"mac": "ENC[AES256_GCM,data:UsfwOsnwUufMvGUCIZsOJOnKL00a/6X+03PtDCIG4mwfFYVLoDWoB2ttLgO2YM6uJulWK4l9RnY/nvlHgXx1YIc0dOyaVNO64AFISCtdArcDtZngzjeYLu+8r0WIo3sbIyRuHnMOAUoJi9cdUMqKhoPbnnwygnQXqZYX/LEkS54=,iv:9PB+aoWcocysjgddjivPCXnm9uzxxP9ZFBlxxS2fw7M=,tag:f8NvyHAFGyff2FUYdU7z7Q==,type:str]",
 		"unencrypted_suffix": "_unencrypted",
 		"version": "3.11.0"
 	}

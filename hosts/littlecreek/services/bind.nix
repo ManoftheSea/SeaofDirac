@@ -59,6 +59,7 @@ in {
                 grant singularity.seaofdirac.org. name _acme-challenge.jitsi.seaofdirac.org. TXT;
                 grant singularity.seaofdirac.org. name _acme-challenge.matrix.seaofdirac.org. TXT;
                 grant singularity.seaofdirac.org. name _acme-challenge.seaofdirac.org. TXT;
+                grant un100d-01.seaofdirac.org. name home.seaofdirac.org. ANY;
                 grant un100d-01.seaofdirac.org. name _acme-challenge.home.seaofdirac.org. TXT;
                 grant un100d-01.seaofdirac.org. name _acme-challenge.netbox.seaofdirac.org. TXT;
 

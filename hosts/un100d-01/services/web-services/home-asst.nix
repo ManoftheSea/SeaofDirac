@@ -13,7 +13,7 @@ in {
       passwordFile = config.sops.secrets.ddclient.path;
       protocol = "nsupdate";
       server = "ns1.seaofdirac.org";
-      usev4 = "";
+      usev4 = "disabled";
       usev6 = "webv6, webv6=ipify-ipv6";
       zone = "seaofdirac.org";
     };
@@ -22,6 +22,7 @@ in {
       enable = true;
       config = {
         default_config = {};
+        "automation ui" = "!include automations.yaml";
         http = {
           server_host = "::1";
           trusted_proxies = ["::1"];
@@ -30,7 +31,6 @@ in {
         recorder.db_url = "postgresql://@/hass";
       };
       extraComponents = [
-        # Components required to complete the onboarding
         "analytics"
         "esphome"
         "google_translate"
@@ -38,6 +38,7 @@ in {
         "met"
         "radio_browser"
         "shopping_list"
+        "zha"
         "zwave_js"
       ];
       extraPackages = p: [p.psycopg2];

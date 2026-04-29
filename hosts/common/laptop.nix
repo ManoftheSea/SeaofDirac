@@ -3,7 +3,10 @@
   lib,
   ...
 }: {
-  fonts.fontconfig.enable = true; # enable user fonts
+  fonts = {
+    fontconfig.enable = true; # enable user fonts
+    fontDir.enable = true;
+  };
 
   hardware = {
     bluetooth = {

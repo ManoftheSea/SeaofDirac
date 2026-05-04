@@ -21,7 +21,7 @@ in {
       #./common/core/cache.nix
       ./common/core/flakes.nix
       ./common/hardware/efi.nix
-      #./common/hardware/virt-manager.nix
+      ./common/hardware/virt-manager.nix
       ./common/impermanence.nix
       ./common/laptop.nix
       ./common/usbguard.nix

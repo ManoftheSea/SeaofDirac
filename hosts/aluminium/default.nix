@@ -50,12 +50,5 @@
 
   security.polkit.enable = true;
 
-  virtualisation = {
-    # disabled these, might remove later
-    libvirtd.enable = false;
-    spiceUSBRedirection.enable = false;
-    docker.enable = false;
-  };
-
   zramSwap.enable = true;
 }

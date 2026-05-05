@@ -2,6 +2,7 @@
   imports = [
     ./bootloader.nix
     ./disko.nix
+    ./hamradio.nix
     ./network.nix
     ./prometheus.nix
     ./services.nix

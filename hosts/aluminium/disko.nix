@@ -100,6 +100,15 @@ _: {
               mountOptions = ["nodev" "noexec" "relatime"];
             };
           };
+          VMs = {
+            size = "400G";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/var/lib/libvirt/images";
+              mountOptions = ["nodev" "noexec" "relatime"];
+            };
+          };
         }; # lvs
       }; # privpool
     }; # lvm_vg

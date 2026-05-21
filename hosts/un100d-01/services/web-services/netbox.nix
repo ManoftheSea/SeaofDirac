@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   # inherit (config.networking) domain fqdn;
@@ -16,8 +17,18 @@ in {
         with open("/run/secrets/netbox/password", "r") as file:
           DATABASE["PASSWORD"] = file.readline()
       '';
+      package = pkgs.netbox_4_4;
+      plugins = p: [
+        p.netbox-topology-views
+      ];
       secretKeyFile = "/run/secrets/netbox/secret";
-      settings.DATABASE.HOST = lib.mkForce "castor.internal.seaofdirac.org";
+      settings = {
+        DATABASE.HOST = lib.mkForce "castor.internal.seaofdirac.org";
+        ENFORCE_GLOBAL_UNIQUE = false;
+        PLUGINS = [
+          "netbox_topology_views"
+        ];
+      };
     };
 
     nginx.virtualHosts."netbox.${domain}" = {

@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  self,
   ...
 }: let
   # inherit (config.networking) domain fqdn;
@@ -17,15 +18,19 @@ in {
         with open("/run/secrets/netbox/password", "r") as file:
           DATABASE["PASSWORD"] = file.readline()
       '';
-      package = pkgs.netbox_4_4;
+      package = self.packages.${pkgs.system}.netbox_4_4;
       plugins = p: [
+        p.netbox-dns
         p.netbox-topology-views
+        self.packages.${pkgs.system}.python.pkgs.netbox-acls
       ];
       secretKeyFile = "/run/secrets/netbox/secret";
       settings = {
         DATABASE.HOST = lib.mkForce "castor.internal.seaofdirac.org";
         ENFORCE_GLOBAL_UNIQUE = false;
         PLUGINS = [
+          "netbox_acls"
+          "netbox_dns"
           "netbox_topology_views"
         ];
       };

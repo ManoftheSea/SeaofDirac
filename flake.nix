@@ -59,7 +59,12 @@
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
     nixosConfigurations = import ./hosts inputs;
     nixosModules = import ./modules inputs;
-    overlays = import ./overlays/factorio.nix {};
+    overlays = import ./overlays {};
+    packages = forAllSystems (system:
+      import ./pkgs {
+        inherit self;
+        pkgs = import nixpkgs {inherit system;};
+      });
 
     # Deploy-rs uses "outputs.deploy" and "outputs.checks"
     deploy = {

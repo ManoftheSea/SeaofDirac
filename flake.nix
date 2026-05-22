@@ -79,7 +79,14 @@
             inherit hostname;
             profiles.system.path = deploy-rs.lib.${nixosConfig.config.nixpkgs.system}.activate.nixos nixosConfig;
           })
-          (lib.filterAttrs (n: _v: n != "aluminium") self.nixosConfigurations)
+          (lib.filterAttrs (n: _v:
+            ! builtins.elem n [
+              # filter out system that don't deploy
+              "aluminium"
+              "pollux"
+              "un100d-02"
+            ])
+          self.nixosConfigurations)
         )
         {
           littlecreek.fastConnect = false;

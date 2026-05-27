@@ -8,7 +8,7 @@
   services.garage = {
     enable = true;
     environmentFile = config.sops.secrets.garage-env.path;
-    package = pkgs.garage_1_x;
+    package = pkgs.garage_1;
     settings = {
       admin.api_bind_addr = "[::1]:3903";
       replication_factor = 1;

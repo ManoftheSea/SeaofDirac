@@ -12,7 +12,7 @@
     power-profiles-daemon.enable = false;
     printing = {
       enable = true;
-      drivers = [pkgs.hplip];
+      drivers = [pkgs.epson-escpr2];
     };
     resolved.enable = true;
     udev.extraRules = ''

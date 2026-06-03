@@ -9,18 +9,7 @@ in {
     inherit (config.networking) fqdn;
     enable = true;
 
-    certificateScheme = "acme";
-    domains = ["${myDomain}"];
-    fullTextSearch = {
-      enable = true;
-      # index new email as they arrive
-      autoIndex = true;
-      # this only applies to plain text attachments, binary attachments are never indexed
-      enforced = "body";
-    };
-    indexDir = "/var/lib/dovecot/indices";
-    localDnsResolver = false;
-    loginAccounts = {
+    accounts = {
       "derek@seaofdirac.org" = {
         hashedPasswordFile = config.sops.secrets."dovecot_users/derek".path;
         aliases = [
@@ -32,7 +21,16 @@ in {
       "benjamin@seaofdirac.org".hashedPasswordFile = config.sops.secrets."dovecot_users/benjamin".path;
       "ruckus@seaofdirac.org".hashedPasswordFile = config.sops.secrets."dovecot_users/ruckus".path;
     };
+    domains = ["${myDomain}"];
+    fullTextSearch = {
+      enable = true;
+      # index new email as they arrive
+      autoIndex = true;
+    };
+    indexDir = "/var/lib/dovecot/indices";
+    localDnsResolver = false;
     stateVersion = 3; # After migration script 20260112
+    x509.useACMEHost = config.mailserver.fqdn;
   };
 
   sops.secrets = let

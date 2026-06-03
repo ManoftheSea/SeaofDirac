@@ -20,6 +20,7 @@ in {
   services.bind = {
     enable = true;
     cacheNetworks = ["127.0.0.0/24" "::1"];
+    checkConfig = false;
     extraOptions = ''
       allow-transfer { none; };
     '';

@@ -7,6 +7,7 @@ in {
   services.grafana = {
     enable = true;
     settings.server.domain = grafanaDomain;
+    settings.security.secret_key = config.sops.secrets.grafana-key.path;
   };
 
   services.nginx = {
@@ -21,4 +22,6 @@ in {
       useACMEHost = fqdn;
     };
   };
+
+  sops.secrets.grafana-key = {};
 }

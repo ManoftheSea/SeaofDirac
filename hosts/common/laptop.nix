@@ -47,12 +47,7 @@
       interval = "daily";
     };
     power-profiles-daemon.enable = false; # conflict with tlp
-    resolved = {
-      extraConfig = ''
-        # No need when using Avahi
-        MulticastDNS = no
-      '';
-    };
+    resolved.settings.Resolve.MulticastDNS = false; # No need when using Avahi
     tlp = {
       enable = true;
       settings = {

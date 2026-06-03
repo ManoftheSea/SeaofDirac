@@ -7,7 +7,7 @@
   };
 in {
   inherit python;
-  netbox_4_4 = pkgs.netbox_4_4.override {
+  netbox_4_5 = pkgs.netbox_4_5.override {
     python3 = python;
   };
 }

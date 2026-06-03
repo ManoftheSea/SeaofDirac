@@ -14,6 +14,7 @@
   };
   services.bind = {
     enable = true;
+    checkConfig = false;
     extraConfig = ''
       include "${config.sops.secrets."bind/rndc_keys".path}";
       include "${config.sops.secrets."bind/config/acls".path}";

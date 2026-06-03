@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  self,
   ...
 }: let
   # inherit (config.networking) domain fqdn;
@@ -14,10 +13,11 @@ in {
   services = {
     netbox = {
       enable = true;
+      apiTokenPeppersFile = config.sops.secrets."netbox/peppers".path;
       extraConfig =
         ''
           with open("/run/secrets/netbox/password", "r") as file:
-            DATABASE["PASSWORD"] = file.readline()
+            DATABASES["default"]["PASSWORD"] = file.readline()
 
         ''
         + ''
@@ -50,18 +50,18 @@ in {
           JINJA2_FILTERS = {"list_to_ranges": list_to_ranges}
 
         '';
-      package = self.packages.${pkgs.system}.netbox_4_4;
+      package = pkgs.netbox_4_5; #self.packages.${pkgs.system}.netbox_4_5;
       plugins = p: [
         p.netbox-dns
         p.netbox-topology-views
-        self.packages.${pkgs.system}.python.pkgs.netbox-acls
+        #self.packages.${pkgs.system}.python.pkgs.netbox-acls
       ];
-      secretKeyFile = "/run/secrets/netbox/secret";
+      secretKeyFile = config.sops.secrets."netbox/secret".path;
       settings = {
-        DATABASE.HOST = lib.mkForce "castor.internal.seaofdirac.org";
+        DATABASES."default".HOST = lib.mkForce "castor.internal.seaofdirac.org";
         ENFORCE_GLOBAL_UNIQUE = false;
         PLUGINS = [
-          "netbox_acls"
+          #"netbox_acls"
           "netbox_dns"
           "netbox_topology_views"
         ];
@@ -84,6 +84,7 @@ in {
     lib.genAttrs [
       "netbox/secret"
       "netbox/password"
+      "netbox/peppers"
     ] (_: {
       owner = config.users.users.netbox.name;
       group = config.users.groups.netbox.name;

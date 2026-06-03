@@ -3,7 +3,7 @@
 
   inputs = {
     ### Official NixOS Package Sources ###
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     #nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Official hardware configurations
@@ -26,7 +26,7 @@
 
     # Declarative mail server with postfix and dovecot
     snm = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.11";
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-26.05";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "deploy-rs/flake-compat";

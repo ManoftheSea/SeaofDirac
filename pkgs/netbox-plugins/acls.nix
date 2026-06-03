@@ -7,7 +7,7 @@
   django,
   python,
 }: let
-  version = "1.9.1";
+  version = "2.0.1";
 in
   buildPythonPackage {
     inherit version;
@@ -19,8 +19,8 @@ in
     src = fetchFromGitHub {
       owner = "netbox-community";
       repo = "netbox-acls";
-      hash = "sha256-2phJIbWxVEQ3+3PQFPQj7MS39Svho+I/XWJ3JNgEQJk=";
-      tag = version;
+      hash = "sha256-5uIPApTyWv8BV3mKf1cNUxHgvmkMVJBlqtdezOltqck=";
+      tag = "v${version}";
     };
 
     build-system = [setuptools];
@@ -39,7 +39,7 @@ in
     meta = {
       description = "Netbox plugin for managing Access Lists";
       homepage = "https://github.com/netbox-community/netbox-acls";
-      changelog = "https://github.com/netbox-community/netbox-acls/releases/tag/${version}";
+      changelog = "https://github.com/netbox-community/netbox-acls/releases/tag/v${version}";
       license = lib.licenses.asl20;
       platforms = lib.platforms.linux;
       maintainers = [];

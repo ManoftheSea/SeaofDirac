@@ -85,6 +85,7 @@ in {
             };
           '';
         };
+        # IPv6 reverse zones
         "c.5.0.1.0.6.2.ip6.arpa" = {
           file = "${zonefilesDir}/2601.5c-pd-reverse.db";
           extraConfig = ''
@@ -93,6 +94,15 @@ in {
             };
           '';
         };
+        "d.f.ip6.arpa" = {
+          file = "${zonefilesDir}/ula.db";
+          extraConfig = ''
+            update-policy {
+              grant aluminium zonesub any;
+            };
+          '';
+        };
+        # IPv4 reverse zones
         "168.192.in-addr.arpa" = {
           file = "${zonefilesDir}/192.168.db";
           extraConfig = ''
@@ -145,6 +155,7 @@ in {
             };
           '';
         };
+        # Utility zones
         "blocklist.rpz".file = "${zonefilesDir}/blocklist.rpz";
         "local.rpz".file = "${zonefilesDir}/local.rpz";
       };

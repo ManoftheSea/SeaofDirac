@@ -6,6 +6,12 @@
 }: let
   inherit (config.networking) domain;
   zonefilesDir = "/var/dns";
+  bindSecrets = [
+    "bind/config/acls"
+    "bind/config/controls"
+    "bind/keys/ddns"
+    "bind/keys/rndc"
+  ];
 in {
   networking.firewall = lib.mkIf config.services.bind.enable {
     allowedTCPPorts = [
@@ -146,24 +152,22 @@ in {
 
   sops.secrets =
     lib.mkIf config.services.bind.enable
-    (lib.genAttrs [
-        "bind/config/acls"
-        "bind/config/controls"
-        "bind/keys/ddns"
-        "bind/keys/rndc"
-      ] (_: {
-        owner = config.users.users.named.name;
-        sopsFile = "${self}/hosts/secrets/bind.yaml";
-      }));
+    (lib.genAttrs bindSecrets (_: {
+      owner = config.users.users.named.name;
+      sopsFile = "${self}/hosts/secrets/bind.yaml";
+    }));
 
   # These are required in 24.11, but part of the definition in unstable (20250405)
-  systemd.services.bind.serviceConfig = lib.mkIf config.services.bind.enable {
-    AmbientCapabilities = "CAP_NET_BIND_SERVICE";
-    CapabilityBoundingSet = "CAP_NET_BIND_SERVICE";
-    ConfigurationDirectory = "bind";
-    RuntimeDirectory = "named";
-    RuntimeDirectoryPreserve = "yes";
-    User = "named";
+  systemd.services.bind = lib.mkIf config.services.bind.enable {
+    serviceConfig = {
+      AmbientCapabilities = "CAP_NET_BIND_SERVICE";
+      CapabilityBoundingSet = "CAP_NET_BIND_SERVICE";
+      ConfigurationDirectory = "bind";
+      RuntimeDirectory = "named";
+      RuntimeDirectoryPreserve = "yes";
+      User = "named";
+    };
+    restartTriggers = builtins.map (secret: builtins.getAttr "sopsFileHash" (builtins.getAttr secret config.sops.secrets)) bindSecrets;
   };
 
   systemd.tmpfiles.settings = lib.mkIf config.services.bind.enable {

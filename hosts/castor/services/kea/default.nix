@@ -49,8 +49,17 @@
   };
 
   systemd.services = {
-    kea-dhcp4-server.serviceConfig.LoadCredential = "dhcpv4.conf:${config.sops.secrets.kea-dhcpv4.path}";
-    kea-dhcp6-server.serviceConfig.LoadCredential = "dhcpv6.conf:${config.sops.secrets.kea-dhcpv6.path}";
-    kea-dhcp-ddns-server.serviceConfig.LoadCredential = "dhcp-ddns.conf:${config.sops.secrets.kea-ddns.path}";
+    kea-dhcp4-server = {
+      serviceConfig.LoadCredential = "dhcpv4.conf:${config.sops.secrets.kea-dhcpv4.path}";
+      restartTriggers = [config.sops.secrets.kea-dhcpv4.sopsFileHash];
+    };
+    kea-dhcp6-server = {
+      serviceConfig.LoadCredential = "dhcpv6.conf:${config.sops.secrets.kea-dhcpv6.path}";
+      restartTriggers = [config.sops.secrets.kea-dhcpv6.sopsFileHash];
+    };
+    kea-dhcp-ddns-server = {
+      serviceConfig.LoadCredential = "dhcp-ddns.conf:${config.sops.secrets.kea-ddns.path}";
+      restartTriggers = [config.sops.secrets.kea-ddns.sopsFileHash];
+    };
   };
 }

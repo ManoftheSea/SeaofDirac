@@ -5,17 +5,21 @@
   ...
 }: let
   inherit (config.networking) domain;
-  zonefilesDir = "/var/dns";
   bindSecrets = [
     "bind/config/acls"
     "bind/config/controls"
     "bind/keys/ddns"
     "bind/keys/rndc"
   ];
+  certFQDN = "${config.networking.hostName}.${domain}";
+  mkAddrList = myList: builtins.toString (builtins.map (addr: addr + ";") myList);
+  zonefilesDir = "/var/dns";
 in {
   networking.firewall = lib.mkIf config.services.bind.enable {
     allowedTCPPorts = [
       53 # named
+      443 # DNS-over-HTTPS
+      853 # DNS-over-TLS
       953 # rndc
     ];
     allowedUDPPorts = [
@@ -42,16 +46,29 @@ in {
         break-dnssec yes;
         recursive-only yes;
       };
+
+      listen-on port 443 tls internal-tls-policy http default {${mkAddrList config.services.bind.listenOn}};
+      listen-on port 853 tls internal-tls-policy {${mkAddrList config.services.bind.listenOn}};
+      listen-on-v6 port 443 tls internal-tls-policy http default {${mkAddrList config.services.bind.listenOnIpv6}};
+      listen-on-v6 port 853 tls internal-tls-policy {${mkAddrList config.services.bind.listenOnIpv6}};
+      query-source-v6 address 2601:5cc:4a02:b620::3;
     '';
     extraConfig = ''
+      tls internal-tls-policy {
+        key-file "/run/credentials/bind.service/key.pem";
+        cert-file "/run/credentials/bind.service/fullchain.pem";
+        protocols { TLSv1.3; };
+        session-tickets no;
+      };
+
       include "${config.sops.secrets."bind/config/acls".path}";
       include "${config.sops.secrets."bind/config/controls".path}";
       include "${config.sops.secrets."bind/keys/ddns".path}";
       include "${config.sops.secrets."bind/keys/rndc".path}";
     '';
 
-    listenOn = ["!127.0.0.0/8" "192.168.0.0/16"];
-    listenOnIpv6 = ["!::1" "any"];
+    listenOn = ["any"];
+    listenOnIpv6 = ["any"];
 
     zones =
       lib.mapAttrs (_zoneName: zoneAttrs: {
@@ -161,6 +178,14 @@ in {
       };
   };
 
+  services.resolved.settings.Resolve = {
+    DNS = ["127.0.0.1" "::1"];
+    Domains = [
+      config.networking.domain
+      "internal.${config.networking.domain}"
+    ];
+  };
+
   sops.secrets =
     lib.mkIf config.services.bind.enable
     (lib.genAttrs bindSecrets (_: {
@@ -168,17 +193,15 @@ in {
       sopsFile = "${self}/hosts/secrets/bind.yaml";
     }));
 
-  # These are required in 24.11, but part of the definition in unstable (20250405)
+  security.acme.certs.${certFQDN}.reloadServices = ["bind"];
+
   systemd.services.bind = lib.mkIf config.services.bind.enable {
-    serviceConfig = {
-      AmbientCapabilities = "CAP_NET_BIND_SERVICE";
-      CapabilityBoundingSet = "CAP_NET_BIND_SERVICE";
-      ConfigurationDirectory = "bind";
-      RuntimeDirectory = "named";
-      RuntimeDirectoryPreserve = "yes";
-      User = "named";
-    };
+    serviceConfig.LoadCredential = [
+      "key.pem:${config.security.acme.certs.${certFQDN}.directory}/key.pem"
+      "fullchain.pem:${config.security.acme.certs.${certFQDN}.directory}/fullchain.pem"
+    ];
     restartTriggers = builtins.map (secret: builtins.getAttr "sopsFileHash" (builtins.getAttr secret config.sops.secrets)) bindSecrets;
+    wants = ["acme-${certFQDN}.service"];
   };
 
   systemd.tmpfiles.settings = lib.mkIf config.services.bind.enable {

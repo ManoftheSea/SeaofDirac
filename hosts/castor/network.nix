@@ -44,6 +44,7 @@ _: {
           IPv6AcceptRA = true;
           LinkLocalAddressing = "ipv6";
           MulticastDNS = true;
+          NTP = ["fe80::1"];
         };
         dhcpV6Config.UseDelegatedPrefix = false;
         ipv6AcceptRAConfig.Token = ["::3"];

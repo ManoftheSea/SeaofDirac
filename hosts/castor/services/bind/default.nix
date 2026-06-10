@@ -35,7 +35,6 @@ in {
     checkConfig = false; # Can't check with secrets under sops
     extraOptions = ''
       response-policy {
-        zone "local.rpz";
         zone "blocklist.rpz";
       };
 

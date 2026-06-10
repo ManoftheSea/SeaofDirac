@@ -50,6 +50,7 @@
   };
 
   security.polkit.enable = true;
+  systemd.enableStrictShellChecks = true;
 
   zramSwap.enable = true;
 }

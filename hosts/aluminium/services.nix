@@ -14,7 +14,6 @@
       enable = true;
       drivers = [pkgs.epson-escpr2];
     };
-    resolved.enable = true;
     udev.extraRules = ''
       # Elecom Mouse
       ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="056e", ATTR{idProduct}=="00fe", ATTR{power/autosuspend}="-1"

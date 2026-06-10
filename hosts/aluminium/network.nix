@@ -12,4 +12,12 @@
     hostName = "aluminium";
     nftables.enable = true;
   };
+
+  services.resolved = {
+    enable = true;
+    settings.Resolve = {
+      DNSSEC = "allow-downgrade";
+      DNSOverTLS = "opportunistic";
+    };
+  };
 }

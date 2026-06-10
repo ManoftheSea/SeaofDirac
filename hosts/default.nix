@@ -103,44 +103,7 @@ in {
       ../users/root.nix
     ];
   };
-  pollux = lib.nixosSystem {
-    system = "aarch64-linux";
-    specialArgs = inputs;
-    modules = [
-      ./pollux
-      disko.nixosModules.disko
-      sops-nix.nixosModules.sops
-      ./common/core/base.nix
-      ./common/core/flakes.nix
-      ./common/hardware/efi.nix
-      ./common/server/base.nix
-      ./common/server/harden-network.nix
-      ./common/server/security.nix
-      ./common/acme.nix
-      ./common/impermanence.nix
-      ../users/root.nix
-    ];
-  };
   un100d-01 = lib.nixosSystem {
-    system = "x86_64-linux";
-    specialArgs = inputs;
-    modules = [
-      disko.nixosModules.disko
-      sops-nix.nixosModules.sops
-      ./un100d-01
-      {nixpkgs.overlays = builtins.attrValues self.overlays;}
-      ./common/core/base.nix
-      ./common/core/flakes.nix
-      ./common/hardware/efi.nix
-      ./common/server/harden-network.nix
-      ./common/server/security.nix
-      ./common/acme.nix
-      ./common/impermanence.nix
-      ./common/usbguard.nix
-      ../users/root.nix
-    ];
-  };
-  un100d-02 = lib.nixosSystem {
     system = "x86_64-linux";
     specialArgs = inputs;
     modules = [

@@ -1,2 +1,3 @@
 *\.json diff=sopsdiffer
 secrets\.yaml diff=sopsdiffer
+bind\.yaml diff=sopsdiffer

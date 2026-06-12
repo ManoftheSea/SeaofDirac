@@ -50,7 +50,7 @@ in {
       listen-on port 853 tls internal-tls-policy {${mkAddrList config.services.bind.listenOn}};
       listen-on-v6 port 443 tls internal-tls-policy http default {${mkAddrList config.services.bind.listenOnIpv6}};
       listen-on-v6 port 853 tls internal-tls-policy {${mkAddrList config.services.bind.listenOnIpv6}};
-      query-source-v6 address 2601:5cc:4a02:b620::3;
+      query-source-v6 address 2601:5cc:4a85:dfe0::3;
     '';
     extraConfig = ''
       tls internal-tls-policy {
@@ -69,112 +69,114 @@ in {
     listenOn = ["any"];
     listenOnIpv6 = ["any"];
 
-    zones =
-      lib.mapAttrs (_zoneName: zoneAttrs: {
-        inherit (zoneAttrs) file;
+    zones = lib.mapAttrs (_zoneName: zoneAttrs:
+      {
         master = true;
         slaves = ["trusted"]; # Acts as allow-transfer, doesn't notify
-      }) {
-        "internal.${domain}" = {
-          file = "${zonefilesDir}/internal.${domain}.db";
-          extraConfig = ''
-            update-policy {
-              grant aluminium zonesub any;
-            };
-          '';
-        };
-        "ddns.internal.${domain}" = {
-          file = "${zonefilesDir}/ddns.internal.${domain}.db";
-          extraConfig = ''
-            update-policy {
-              grant aluminium zonesub any;
-              grant ddns.castor.seaofdirac.org. zonesub any;
-              grant ddns.pollux.seaofdirac.org. zonesub any;
-            };
-          '';
-        };
-        "iot.${domain}" = {
-          file = "${zonefilesDir}/iot.${domain}.db";
-          extraConfig = ''
-            update-policy {
-              grant aluminium zonesub any;
-            };
-          '';
-        };
-        # IPv6 reverse zones
-        "c.5.0.1.0.6.2.ip6.arpa" = {
-          file = "${zonefilesDir}/2601.5c-pd-reverse.db";
-          extraConfig = ''
-            update-policy {
-              grant aluminium zonesub any;
-            };
-          '';
-        };
-        "d.f.ip6.arpa" = {
-          file = "${zonefilesDir}/ula.db";
-          extraConfig = ''
-            update-policy {
-              grant aluminium zonesub any;
-            };
-          '';
-        };
-        # IPv4 reverse zones
-        "168.192.in-addr.arpa" = {
-          file = "${zonefilesDir}/192.168.db";
-          extraConfig = ''
-            update-policy {
-              grant aluminium zonesub any;
-            };
-          '';
-        };
-        "101.168.192.in-addr.arpa" = {
-          file = "${zonefilesDir}/192.168.101.db";
-          extraConfig = ''
-            update-policy {
-              grant aluminium zonesub any;
-              grant ddns.castor.seaofdirac.org. zonesub any;
-              grant ddns.pollux.seaofdirac.org. zonesub any;
-            };
-          '';
-        };
-        "102.168.192.in-addr.arpa" = {
-          file = "${zonefilesDir}/192.168.102.db";
-          extraConfig = ''
-            update-policy {
-              grant aluminium zonesub any;
-              grant ddns.castor.seaofdirac.org. zonesub any;
-              grant ddns.pollux.seaofdirac.org. zonesub any;
-            };
-          '';
-        };
-        "20.172.in-addr.arpa" = {
-          file = "${zonefilesDir}/172.20.db";
-          extraConfig = ''
-            update-policy {
-              grant aluminium zonesub any;
-            };
-          '';
-        };
-        "21.172.in-addr.arpa" = {
-          file = "${zonefilesDir}/172.21.db";
-          extraConfig = ''
-            update-policy {
-              grant aluminium zonesub any;
-            };
-          '';
-        };
-        "10.in-addr.arpa" = {
-          file = "${zonefilesDir}/10.db";
-          extraConfig = ''
-            update-policy {
-              grant aluminium zonesub any;
-            };
-          '';
-        };
-        # Utility zones
-        "blocklist.rpz".file = "${zonefilesDir}/blocklist.rpz";
-        "local.rpz".file = "${zonefilesDir}/local.rpz";
+      }
+      // zoneAttrs) {
+      "internal.${domain}" = {
+        file = "${zonefilesDir}/internal.${domain}.db";
+        extraConfig = ''
+          update-policy {
+            grant aluminium zonesub any;
+          };
+        '';
       };
+      "ddns.internal.${domain}" = {
+        file = "${zonefilesDir}/ddns.internal.${domain}.db";
+        extraConfig = ''
+          update-policy {
+            grant aluminium zonesub any;
+            grant ddns.castor.seaofdirac.org. zonesub any;
+            grant ddns.pollux.seaofdirac.org. zonesub any;
+          };
+        '';
+      };
+      "iot.${domain}" = {
+        file = "${zonefilesDir}/iot.${domain}.db";
+        extraConfig = ''
+          update-policy {
+            grant aluminium zonesub any;
+          };
+        '';
+      };
+      # IPv6 reverse zones
+      "c.5.0.1.0.6.2.ip6.arpa" = {
+        file = "${zonefilesDir}/2601.5c-pd-reverse.db";
+        extraConfig = ''
+          update-policy {
+            grant aluminium zonesub any;
+            grant ddns.castor.seaofdirac.org. zonesub any;
+          };
+        '';
+      };
+      "d.f.ip6.arpa" = {
+        file = "${zonefilesDir}/ula.db";
+        extraConfig = ''
+          update-policy {
+            grant aluminium zonesub any;
+            grant ddns.castor.seaofdirac.org. zonesub any;
+          };
+        '';
+      };
+      # IPv4 reverse zones
+      "168.192.in-addr.arpa" = {
+        file = "${zonefilesDir}/192.168.db";
+        extraConfig = ''
+          update-policy {
+            grant aluminium zonesub any;
+          };
+        '';
+      };
+      "101.168.192.in-addr.arpa" = {
+        file = "${zonefilesDir}/192.168.101.db";
+        extraConfig = ''
+          update-policy {
+            grant aluminium zonesub any;
+            grant ddns.castor.seaofdirac.org. zonesub any;
+            grant ddns.pollux.seaofdirac.org. zonesub any;
+          };
+        '';
+      };
+      "102.168.192.in-addr.arpa" = {
+        file = "${zonefilesDir}/192.168.102.db";
+        extraConfig = ''
+          update-policy {
+            grant aluminium zonesub any;
+            grant ddns.castor.seaofdirac.org. zonesub any;
+            grant ddns.pollux.seaofdirac.org. zonesub any;
+          };
+        '';
+      };
+      "20.172.in-addr.arpa" = {
+        file = "${zonefilesDir}/172.20.db";
+        extraConfig = ''
+          update-policy {
+            grant aluminium zonesub any;
+          };
+        '';
+      };
+      "21.172.in-addr.arpa" = {
+        file = "${zonefilesDir}/172.21.db";
+        extraConfig = ''
+          update-policy {
+            grant aluminium zonesub any;
+          };
+        '';
+      };
+      "10.in-addr.arpa" = {
+        file = "${zonefilesDir}/10.db";
+        extraConfig = ''
+          update-policy {
+            grant aluminium zonesub any;
+          };
+        '';
+      };
+      # Utility zones
+      "blocklist.rpz".file = "${zonefilesDir}/blocklist.rpz";
+      "local.rpz".file = "${zonefilesDir}/local.rpz";
+    };
   };
 
   services.resolved.settings.Resolve = {

@@ -16,8 +16,12 @@
   services.resolved = {
     enable = true;
     settings.Resolve = {
-      DNSSEC = "allow-downgrade";
+      #DNSSEC = "allow-downgrade";
       DNSOverTLS = "opportunistic";
+      NegativeTrustAnchors = [
+        "internal.seaofdirac.org"
+        "b.9.f.f.4.6.0.0.ipv6.arpa"
+      ];
     };
   };
 }

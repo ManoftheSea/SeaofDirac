@@ -2,7 +2,7 @@
   imports = [
     ./bind
     ./kea
-    ./oxidized
+    #./oxidized
     ./postgresql.nix
   ];
 

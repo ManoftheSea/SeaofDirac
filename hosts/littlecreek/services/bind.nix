@@ -51,6 +51,7 @@ in {
             update-policy {
                 grant aluminium zonesub any;
                 grant gravity.seaofdirac.org. name gravity.seaofdirac.org. ANY;
+                grant strongforce.seaofdirac.org. name strongforce.seaofdirac.org. ANY;
 
                 grant castor.seaofdirac.org. name _acme-challenge.castor.internal.seaofdirac.org. TXT;
                 grant interserver-s01.seaofdirac.org name _acme-challenge.grafana.seaofdirac.org. TXT;
@@ -70,6 +71,7 @@ in {
               "castor"
               "crunchbits"
               "gravity"
+              "strongforce"
               "interserver-c01"
               "interserver-s01"
               "littlecreek"

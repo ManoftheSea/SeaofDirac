@@ -50,7 +50,6 @@ in {
       listen-on port 853 tls internal-tls-policy {${mkAddrList config.services.bind.listenOn}};
       listen-on-v6 port 443 tls internal-tls-policy http default {${mkAddrList config.services.bind.listenOnIpv6}};
       listen-on-v6 port 853 tls internal-tls-policy {${mkAddrList config.services.bind.listenOnIpv6}};
-      query-source-v6 address 2601:5cc:4a85:dfe0::3;
     '';
     extraConfig = ''
       tls internal-tls-policy {

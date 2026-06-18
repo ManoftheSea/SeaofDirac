@@ -12,7 +12,7 @@ in {
     enable = true;
     authentication = ''
       host netbox netbox 192.168.200.0/24 scram-sha-256
-      host netbox netbox 2601:5cc:4a01:6fa0::/64 scram-sha-256
+      host netbox netbox fd8d:5837:3e25:beef::/64 scram-sha-256
     '';
     enableTCPIP = true; # listen on external ports
     package = pkgs.postgresql_16;

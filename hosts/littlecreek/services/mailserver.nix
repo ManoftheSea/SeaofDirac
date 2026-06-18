@@ -8,6 +8,7 @@ in {
   mailserver = {
     inherit (config.networking) fqdn;
     enable = true;
+    enableSubmission = true;
 
     accounts = {
       "derek@seaofdirac.org" = {

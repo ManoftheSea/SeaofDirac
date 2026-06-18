@@ -1,5 +1,6 @@
 _: {
   imports = [
+    ./ddclient.nix
     ./factorio-headless.nix
     ./postgresql.nix
     ./vector.nix

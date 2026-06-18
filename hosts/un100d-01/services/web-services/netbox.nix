@@ -11,6 +11,11 @@ in {
   security.acme.certs."${fqdn}".extraDomainNames = ["netbox.${domain}"];
 
   services = {
+    ddclient = {
+      enable = true;
+      domains = ["netbox.${domain}"];
+    };
+
     netbox = {
       enable = true;
       apiTokenPeppersFile = config.sops.secrets."netbox/peppers".path;

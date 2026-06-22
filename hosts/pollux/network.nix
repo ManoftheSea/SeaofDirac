@@ -38,7 +38,7 @@ _: {
           MulticastDNS = true;
         };
         dhcpV6Config.UseDelegatedPrefix = false;
-        ipv6AcceptRAConfig.Token = ["::3" "::4"];
+        ipv6AcceptRAConfig.Token = ["::4"];
       };
       lan = {
         matchConfig.Name = "lan*";

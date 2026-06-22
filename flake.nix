@@ -83,7 +83,6 @@
             ! builtins.elem n [
               # filter out system that don't deploy
               "aluminium"
-              "pollux"
               "un100d-02"
             ])
           self.nixosConfigurations)
